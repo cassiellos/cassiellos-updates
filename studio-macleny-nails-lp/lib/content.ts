@@ -8,6 +8,7 @@
  */
 
 import type { CtaLocation, TrackedService } from "./analytics";
+import { formatAddress, hasConfirmedAddress } from "./site-config";
 
 /* -------------------------------------------------------------------------- */
 /* HERO                                                                        */
@@ -378,7 +379,7 @@ export const faqSection = {
  * Este mesmo array alimenta a renderizacao e o FAQPage JSON-LD, entao nao
  * existe pergunta no schema que a visitante nao veja na pagina.
  */
-export const faqItems: FaqItem[] = [
+const faqBase: FaqItem[] = [
   {
     id: "danifica-unhas-naturais",
     question: "O alongamento pode danificar minhas unhas naturais?",
@@ -413,7 +414,7 @@ export const faqItems: FaqItem[] = [
     id: "higiene-e-seguranca",
     question: "Como funciona a higiene e a segurança dos materiais utilizados?",
     answer:
-      "Segurança não deve ser um detalhe invisível. O atendimento deve seguir protocolos de higiene, organização dos instrumentos e uso adequado dos materiais em cada etapa, para que você tenha segurança durante todo o procedimento.",
+      "Segurança não é um detalhe invisível. O atendimento segue protocolos de higiene, organização dos instrumentos e uso adequado dos materiais em cada etapa, para que você tenha segurança durante todo o procedimento.",
   },
   {
     id: "duracao-do-atendimento",
@@ -441,6 +442,21 @@ export const faqItems: FaqItem[] = [
       "Essa é justamente uma das bases da experiência Macleny. A proposta é fugir do atendimento em série e criar um momento em que você tenha tempo, atenção e orientação voltados para o seu resultado.",
   },
 ];
+
+/**
+ * A pergunta de localizacao so entra com o endereco confirmado, e le o dado de
+ * `siteConfig` em vez de repeti-lo aqui — assim o endereco vive em um lugar so.
+ */
+export const faqItems: FaqItem[] = hasConfirmedAddress()
+  ? [
+      ...faqBase,
+      {
+        id: "endereco",
+        question: "Onde fica o Studio Macleny Nails?",
+        answer: `O atendimento acontece em ${formatAddress()}. Os detalhes de acesso são combinados na confirmação do agendamento.`,
+      },
+    ]
+  : faqBase;
 
 /* -------------------------------------------------------------------------- */
 /* CTA FINAL                                                                   */
