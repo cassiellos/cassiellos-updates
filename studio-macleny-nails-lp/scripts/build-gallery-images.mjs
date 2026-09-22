@@ -18,11 +18,18 @@ import path from "node:path";
 
 import sharp from "sharp";
 
-/** Proporcao e tamanho de cada slot, na ordem em que aparecem na galeria. */
+/**
+ * Proporcao, tamanho e ancoragem do recorte de cada slot, na ordem em que
+ * aparecem na galeria.
+ *
+ * `position` "attention" deixa o sharp escolher a regiao de maior saliencia.
+ * Quando isso corta as pontas das unhas — que sao o assunto da foto — vale
+ * ancorar o recorte manualmente.
+ */
 const SLOTS = [
-  { file: "editorial-01.webp", width: 1000, height: 1250 }, // 4:5, coluna 5
-  { file: "editorial-02.webp", width: 1400, height: 1120 }, // 5:4, coluna 7
-  { file: "editorial-03.webp", width: 1000, height: 1000 }, // 1:1, coluna 6
+  { file: "editorial-01.webp", width: 1000, height: 1250, position: "attention" }, // 4:5, coluna 5
+  { file: "editorial-02.webp", width: 1400, height: 1120, position: "bottom" }, // 5:4, coluna 7
+  { file: "editorial-03.webp", width: 1000, height: 1000, position: "attention" }, // 1:1, coluna 6
 ];
 
 const OUT_DIR = path.join(process.cwd(), "public", "images");
@@ -42,7 +49,7 @@ for (const [i, slot] of SLOTS.entries()) {
     .rotate()
     .resize(slot.width, slot.height, {
       fit: "cover",
-      position: "attention",
+      position: slot.position,
       kernel: "lanczos3",
     })
     .webp({ quality: 86, effort: 6 })

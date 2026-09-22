@@ -212,7 +212,7 @@ export const gallery: EditorialImage[] = [
   {
     id: "editorial-02",
     src: "/images/editorial-02.webp",
-    alt: "Unhas amendoadas em laranja fosco e nude com glitter dourado e desenho floral, apoiadas sobre um livro aberto.",
+    alt: "Unhas amendoadas em animal print, vermelho fosco e nude acetinado, apoiadas sobre um livro aberto.",
     ratio: "landscape",
     span: 7,
     isPlaceholder: false,
