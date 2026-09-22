@@ -39,7 +39,7 @@ export default function Services() {
           <div className="lg:col-span-6 lg:col-start-7">
             <SectionReveal delay={120}>
               <div className="relative">
-                <div className="relative aspect-[5/4] w-full overflow-hidden rounded-[1.75rem] bg-espresso-soft">
+                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.75rem] bg-espresso-soft">
                   <Image
                     src={servicesSection.image.src}
                     alt={servicesSection.image.alt}
@@ -77,7 +77,7 @@ export default function Services() {
                     .filter(Boolean)
                     .join(" ")}
                 >
-                  <figure className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.5rem] bg-ivory-deep sm:aspect-[5/4]">
+                  <figure className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.5rem] bg-ivory-deep">
                     <Image
                       src={service.image}
                       alt={service.imageAlt}

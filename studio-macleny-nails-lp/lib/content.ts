@@ -107,7 +107,7 @@ export const servicesSection = {
   aside: "Detalhes que realçam histórias",
   image: {
     src: "/images/services-intro.webp",
-    alt: "Mãos em repouso com unhas de acabamento nude, em composição editorial de tons quentes.",
+    alt: "Mãos em repouso sobre bancada de mármore, com unhas amendoadas de acabamento nude e joias douradas.",
   },
   helperTitle: "Não sabe qual atendimento escolher?",
   helperBody:
@@ -139,7 +139,7 @@ export const services: Service[] = [
     highlight: "Estrutura, equilíbrio e acabamento impecável em cada detalhe.",
     imageCaption: "Beleza com propósito",
     image: "/images/service-alongamentos.webp",
-    imageAlt: "Unhas alongadas com acabamento nude acetinado, fotografadas em close.",
+    imageAlt: "Mão com unhas alongadas em formato amendoado e acabamento nude acetinado, apoiada em bancada de mármore.",
     cta: "Quero encontrar meu alongamento ideal",
     whatsappMessage:
       "Olá! Vim pelo site da Studio Macleny Nails e gostaria de encontrar o alongamento ideal para as minhas unhas.",
@@ -166,7 +166,7 @@ export const services: Service[] = [
     highlight: "Cuidado contínuo para prolongar a beleza do seu resultado.",
     imageCaption: "Cuidado hoje. Beleza sempre.",
     image: "/images/service-manutencao.webp",
-    imageAlt: "Mãos apoiadas em bancada clara durante atendimento de manutenção de unhas.",
+    imageAlt: "Atendimento em andamento: mãos com luvas trabalham a cutícula de uma cliente apoiada em toalha.",
     cta: "Quero cuidar das minhas unhas",
     whatsappMessage:
       "Olá! Vim pelo site da Studio Macleny Nails e gostaria de agendar a manutenção das minhas unhas.",
@@ -195,7 +195,7 @@ export const services: Service[] = [
     highlight: "Do clássico ao exclusivo, um design criado para combinar com você.",
     imageCaption: "Arte que revela quem você é",
     image: "/images/service-nail-art.webp",
-    imageAlt: "Unhas com desenho autoral em traços finos e acabamento acetinado.",
+    imageAlt: "Unhas amendoadas com nail art em tons de marrom e nude, com flores em relevo e traços dourados.",
     cta: "Quero escolher meu design",
     whatsappMessage:
       "Olá! Vim pelo site da Studio Macleny Nails e gostaria de escolher um design de nail art.",
@@ -223,7 +223,7 @@ export const services: Service[] = [
       "Um momento reservado para você — do primeiro detalhe ao acabamento final.",
     imageCaption: "Mais que unhas, um momento para você",
     image: "/images/service-experiencia.webp",
-    imageAlt: "Bancada do studio com bebida quente, toalha e flores em luz suave.",
+    imageAlt: "Bancada do studio em mármore, com toalha enrolada, taça, vela acesa, orquídeas e instrumentos organizados.",
     cta: "Quero viver a Experiência Macleny",
     whatsappMessage:
       "Olá! Vim pelo site da Studio Macleny Nails e gostaria de conhecer a Experiência Macleny.",
