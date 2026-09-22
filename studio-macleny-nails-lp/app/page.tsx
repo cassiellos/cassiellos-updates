@@ -1,4 +1,3 @@
-import Benefits from "@/components/Benefits";
 import EditorialGallery from "@/components/EditorialGallery";
 import FAQ from "@/components/FAQ";
 import FinalCTA from "@/components/FinalCTA";
@@ -18,7 +17,6 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <Benefits />
       <Services />
       <MaclenyExperience />
       <EditorialGallery />

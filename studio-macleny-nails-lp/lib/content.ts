@@ -30,51 +30,6 @@ export const hero = {
 } as const;
 
 /* -------------------------------------------------------------------------- */
-/* PILARES                                                                     */
-/* -------------------------------------------------------------------------- */
-
-export type Pillar = {
-  id: string;
-  index: string;
-  title: string;
-  description: string;
-};
-
-export const pillarsSection = {
-  eyebrow: "O padrão Macleny",
-  title: "Excelência feita para cada mulher.",
-} as const;
-
-export const pillars: Pillar[] = [
-  {
-    id: "excelencia",
-    index: "01",
-    title: "Excelência",
-    description:
-      "Técnica, precisão e consistência em cada detalhe do atendimento.",
-  },
-  {
-    id: "individualidade",
-    index: "02",
-    title: "Individualidade",
-    description: "Escuta e orientação para um resultado coerente com você.",
-  },
-  {
-    id: "confianca",
-    index: "03",
-    title: "Confiança",
-    description:
-      "Clareza, cuidado e previsibilidade do primeiro contato ao acompanhamento.",
-  },
-  {
-    id: "sofisticacao",
-    index: "04",
-    title: "Sofisticação",
-    description: "Uma experiência organizada, acolhedora e sem excessos.",
-  },
-];
-
-/* -------------------------------------------------------------------------- */
 /* SERVICOS                                                                    */
 /* -------------------------------------------------------------------------- */
 

@@ -51,7 +51,10 @@ Status de todo o bloco: `DOSSIÊ (via briefing)`.
 ### A.3 Pilares
 
 `01 Excelência` · `02 Individualidade` · `03 Confiança` · `04 Sofisticação`
-— renderizados em `components/Benefits.tsx`, texto em `lib/content.ts`.
+Os quatro pilares permanecem como direcao estrategica da marca, mas **nao sao
+mais uma secao da landing page**: o bloco "O padrao Macleny" foi removido a
+pedido da cliente. O territorio continua expresso na copy do hero, da jornada e
+dos cards de servico.
 
 ### A.4 Personalidade e arquétipos
 
