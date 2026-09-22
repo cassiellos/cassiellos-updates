@@ -8,7 +8,6 @@
  */
 
 import type { CtaLocation, TrackedService } from "./analytics";
-import { hasConfirmedAddress, hasWhatsApp } from "./site-config";
 
 /* -------------------------------------------------------------------------- */
 /* HERO                                                                        */
@@ -375,53 +374,73 @@ export const faqSection = {
  * Somente perguntas com resposta CONFIRMADA entram aqui.
  * Nao criar perguntas sobre atraso, cancelamento, sinal, garantia, reparo ou
  * devolucao ate existirem politicas oficiais.
+ *
+ * Este mesmo array alimenta a renderizacao e o FAQPage JSON-LD, entao nao
+ * existe pergunta no schema que a visitante nao veja na pagina.
  */
-const faqBase: FaqItem[] = [
+export const faqItems: FaqItem[] = [
   {
-    id: "como-funciona",
-    question: "Como funciona o atendimento na Macleny?",
+    id: "danifica-unhas-naturais",
+    question: "O alongamento pode danificar minhas unhas naturais?",
     answer:
-      "A experiência começa com escuta e orientação. A proposta é entender sua rotina, preferências e histórico antes de indicar o caminho mais adequado para o atendimento.",
+      "Quando a técnica é escolhida corretamente e a aplicação, manutenção e remoção são feitas com cuidado, o objetivo é preservar ao máximo a integridade das suas unhas naturais. Antes de qualquer procedimento, avaliamos suas unhas para indicar a opção mais adequada para você.",
   },
   {
-    id: "qual-servico",
-    question: "Como sei qual serviço escolher?",
+    id: "qual-tecnica",
+    question: "Como saber qual técnica é a mais indicada para as minhas unhas?",
     answer:
-      "Conte pelo WhatsApp o que você busca. Quando necessário, a orientação acontece antes da confirmação do agendamento para que o atendimento faça sentido para você.",
+      "Você não precisa chegar sabendo a diferença entre gel, fibra, F1, soft gel ou outras técnicas. Entendemos sua rotina, suas preferências e o resultado que deseja para recomendar a solução que faça mais sentido para suas unhas.",
+  },
+  {
+    id: "resultado-esperado",
+    question: "Como vocês garantem que o resultado fique do jeito que eu quero?",
+    answer:
+      "O atendimento começa antes da técnica. Alinhamos formato, comprimento, estilo e referências para entender exatamente o resultado que você espera. A partir disso, adaptamos a proposta às suas mãos e à sua individualidade.",
+  },
+  {
+    id: "duracao-e-manutencao",
+    question: "Quanto tempo o alongamento dura e quando devo fazer manutenção?",
+    answer:
+      "A durabilidade varia conforme a técnica, o crescimento das suas unhas e a sua rotina. Ao final do atendimento, você recebe uma orientação personalizada sobre o período ideal para sua próxima manutenção.",
+  },
+  {
+    id: "unha-quebrada",
+    question: "E se uma unha quebrar ou apresentar algum problema antes da manutenção?",
+    answer:
+      "Entre em contato conosco assim que perceber qualquer alteração. Avaliamos o que aconteceu e orientamos a melhor solução para preservar o resultado e evitar que um pequeno problema comprometa as demais unhas.",
+  },
+  {
+    id: "higiene-e-seguranca",
+    question: "Como funciona a higiene e a segurança dos materiais utilizados?",
+    answer:
+      "Segurança não deve ser um detalhe invisível. O atendimento deve seguir protocolos de higiene, organização dos instrumentos e uso adequado dos materiais em cada etapa, para que você tenha segurança durante todo o procedimento.",
+  },
+  {
+    id: "duracao-do-atendimento",
+    question: "Quanto tempo dura o atendimento?",
+    answer:
+      "O tempo varia de acordo com o serviço e o nível de personalização escolhido. No momento do agendamento, você recebe uma estimativa para conseguir organizar sua rotina com tranquilidade, sem transformar seu atendimento em algo apressado.",
+  },
+  {
+    id: "valor-do-atendimento",
+    question:
+      "Por que o atendimento da Macleny tem um valor diferente de outros serviços de nail designer?",
+    answer:
+      "Porque você não está contratando apenas uma aplicação. O atendimento reúne escuta, recomendação, técnica, personalização, tempo reservado e uma experiência pensada nos detalhes para entregar um resultado coerente com você.",
+  },
+  {
+    id: "saber-o-que-quero",
+    question: "Preciso saber exatamente o que quero antes de agendar?",
+    answer:
+      "Não. Você pode trazer uma referência, escolher entre inspirações ou simplesmente nos contar o que gosta. A partir disso, ajudamos você a encontrar formato, comprimento, cor e design que combinem com seu estilo.",
+  },
+  {
+    id: "atendimento-individualizado",
+    question: "O atendimento é individualizado?",
+    answer:
+      "Essa é justamente uma das bases da experiência Macleny. A proposta é fugir do atendimento em série e criar um momento em que você tenha tempo, atenção e orientação voltados para o seu resultado.",
   },
 ];
-
-const faqWhatsApp: FaqItem = {
-  id: "agendar-whatsapp",
-  question: "Posso agendar pelo WhatsApp?",
-  answer:
-    "Sim. Use os botões desta página para iniciar o contato e alinhar disponibilidade e detalhes do atendimento.",
-};
-
-/**
- * PENDENTE: so entra quando o endereco oficial estiver confirmado em
- * `siteConfig.business.address`. A resposta e montada no componente para nao
- * duplicar o endereco em dois lugares.
- */
-export const faqAddressQuestion = "Onde fica o Studio Macleny Nails?";
-
-export function getFaqItems(addressLine: string): FaqItem[] {
-  const items = [...faqBase];
-
-  if (hasWhatsApp) {
-    items.push(faqWhatsApp);
-  }
-
-  if (hasConfirmedAddress() && addressLine) {
-    items.push({
-      id: "endereco",
-      question: faqAddressQuestion,
-      answer: `O atendimento acontece em ${addressLine}. Os detalhes de acesso são combinados na confirmação do agendamento.`,
-    });
-  }
-
-  return items;
-}
 
 /* -------------------------------------------------------------------------- */
 /* CTA FINAL                                                                   */

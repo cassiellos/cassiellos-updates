@@ -8,12 +8,11 @@ import Hero from "@/components/Hero";
 import JsonLd from "@/components/JsonLd";
 import MaclenyExperience from "@/components/MaclenyExperience";
 import Services from "@/components/Services";
-import { getFaqItems } from "@/lib/content";
-import { addressLine, buildFaqJsonLd } from "@/lib/seo";
+import { faqItems } from "@/lib/content";
+import { buildFaqJsonLd } from "@/lib/seo";
 
 export default function HomePage() {
   // O MESMO array alimenta a renderizacao e o FAQPage JSON-LD.
-  const faqItems = getFaqItems(addressLine);
   const faqJsonLd = buildFaqJsonLd(faqItems);
 
   return (
