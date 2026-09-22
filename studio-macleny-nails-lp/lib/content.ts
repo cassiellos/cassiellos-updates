@@ -233,11 +233,11 @@ export const gallery: EditorialImage[] = [
 /* -------------------------------------------------------------------------- */
 
 export const founder = {
-  eyebrow: "Founder / Nail Specialist",
-  titleLines: ["Jheniffer é a origem.", "Macleny é a evolução."],
+  eyebrow: "FUNDADORA / NAIL SPECIALIST",
+  titleLines: ["A experiência de Jheniffer.", "A assinatura Macleny."],
   body: [
-    "Uma trajetória construída com técnica, escuta e cuidado ganha uma marca preparada para transformar essa experiência em um padrão reconhecível.",
-    "Jheniffer permanece como a origem técnica e humana da Macleny: o atendimento continua sendo conduzido pela mesma atenção que deu nome ao trabalho.",
+    "Anos de prática e especialização deram origem a um padrão próprio de execução e cuidado.",
+    "Cada atendimento preserva aquilo que tornou seu trabalho reconhecível: técnica, atenção e acabamento impecável.",
   ],
   image: {
     src: "/images/founder.webp",
