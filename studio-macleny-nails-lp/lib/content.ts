@@ -205,10 +205,10 @@ export const services: Service[] = [
     id: "experiencia",
     index: "04",
     title: "Experiência Macleny",
-    lead: "Seu horário deixa de ser apenas um atendimento.",
+    lead: "Aqui, fazer as unhas também é ter um momento seu.",
     description: [
-      "Aqui, você não encontra uma experiência apressada ou impessoal. Seu momento é preparado para que você possa desacelerar, ser atendida com atenção e aproveitar cada detalhe enquanto cuidamos das suas unhas.",
-      "Do atendimento personalizado aos pequenos mimos, bebidas e cuidados especiais, tudo é pensado para que você se sinta bem recebida do início ao fim. Para ocasiões especiais, como noivas e eventos, a experiência pode ser ainda mais personalizada.",
+      "Você desfruta de um espaço reservado, tranquilo e pensado para que possa desacelerar, relaxar e aproveitar seu momento com total privacidade e conforto.",
+      "Cada atendimento pode ser personalizado de acordo com as suas preferências, com bebidas, comidinhas, pequenos mimos e cuidados especiais. Aproveite sua experiência de bem-estar, exclusividade e pausa, um momento verdadeiramente seu.",
     ],
     includes: [
       "Spa das mãos e pés",
