@@ -4,9 +4,9 @@ import SectionReveal from "./SectionReveal";
 import { gallery, gallerySection } from "@/lib/content";
 
 const ratioClass = {
-  portrait: "aspect-[3/4]",
-  landscape: "aspect-[4/3]",
-  wide: "aspect-[16/10]",
+  portrait: "aspect-[4/5]",
+  landscape: "aspect-[5/4]",
+  square: "aspect-square",
 } as const;
 
 const spanClass = {
@@ -45,7 +45,7 @@ export default function EditorialGallery() {
                 "group",
                 spanClass[item.span],
                 item.start ? startClass[item.start] : "",
-                item.ratio === "wide" ? "sm:col-span-2" : "",
+                item.ratio === "square" ? "sm:col-span-2" : "",
               ]
                 .filter(Boolean)
                 .join(" ")}

@@ -186,7 +186,7 @@ export type EditorialImage = {
   src: string;
   alt: string;
   /** Proporcao da moldura. */
-  ratio: "portrait" | "landscape" | "wide";
+  ratio: "portrait" | "landscape" | "square";
   /** Colunas ocupadas no grid de 12 (desktop) e coluna inicial opcional. */
   span: 5 | 6 | 7;
   start?: 2 | 3 | 4;
@@ -197,35 +197,34 @@ export type EditorialImage = {
 export const gallerySection = {
   eyebrow: "Resultados",
   title: "Precisão que aparece nos detalhes.",
-  body:
-    "Registros do trabalho e do ambiente. As imagens finais serão substituídas pela fotografia oficial do studio.",
+  body: "Registros de atendimentos realizados no studio.",
 } as const;
 
 export const gallery: EditorialImage[] = [
   {
     id: "editorial-01",
     src: "/images/editorial-01.webp",
-    alt: "Macro de unhas com acabamento acetinado e reflexo suave.",
+    alt: "Unhas em formato bailarina com acabamento nude perolado e detalhe em branco, fotografadas sobre tecido claro.",
     ratio: "portrait",
     span: 5,
-    isPlaceholder: true,
+    isPlaceholder: false,
   },
   {
     id: "editorial-02",
     src: "/images/editorial-02.webp",
-    alt: "Mão apoiada em superfície de pedra clara ao lado de joia discreta.",
+    alt: "Unhas amendoadas em laranja fosco e nude com glitter dourado e desenho floral, apoiadas sobre um livro aberto.",
     ratio: "landscape",
     span: 7,
-    isPlaceholder: true,
+    isPlaceholder: false,
   },
   {
     id: "editorial-03",
     src: "/images/editorial-03.webp",
-    alt: "Detalhe de cutícula finalizada com acabamento preciso e pele natural.",
-    ratio: "wide",
+    alt: "Unhas amendoadas em verde fosco com nervuras e gotas em relevo, ao lado de um anel dourado sobre tecido branco.",
+    ratio: "square",
     span: 6,
     start: 4,
-    isPlaceholder: true,
+    isPlaceholder: false,
   },
 ];
 
