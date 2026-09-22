@@ -143,42 +143,36 @@ export const experienceSection = {
   },
 } as const;
 
-/**
- * Copy fornecida pela cliente. Contem afirmacoes verificaveis — volume da
- * galeria, formacao, anos de experiencia, existencia do app e itens de
- * cortesia. Conferir antes de anunciar: a politica de destino do Google Ads
- * cobra que o que a pagina promete corresponda ao que o negocio entrega.
- */
 export const experienceSteps: ExperienceStep[] = [
   {
     index: "01",
-    title: "Facilidade de Escolher",
+    title: "Facilidade para Escolher",
     description:
-      "Encontre o design perfeito para você em uma galeria com mais de 100 inspirações, ou envie sua própria referência.",
+      "Explore referências de nail design ou envie sua própria inspiração para criar algo alinhado ao seu estilo.",
   },
   {
     index: "02",
-    title: "Agendamento Rápido",
+    title: "Agendamento Fácil",
     description:
-      "É sua primeira vez conosco? Clique em qualquer botão e fale com nossa equipe pelo WhatsApp. Já é cliente? Faça seu agendamento diretamente pelo app da Macleny Nails.",
+      "Agende seu atendimento pelo WhatsApp de forma simples e rápida.",
   },
   {
     index: "03",
     title: "Uma Experiência Só Sua",
     description:
-      "Um espaço exclusivo, reservado só para você, com atendimento individual pela própria Macleny e uma experiência personalizada às suas preferências, incluindo bebidas e comidas escolhidas por você.",
+      "Um atendimento pensado nos seus detalhes, com ambiente exclusivo, bebidas, mimos e escolhas personalizadas para tornar sua experiência ainda mais especial.",
   },
   {
     index: "04",
-    title: "Técnica Refinada",
+    title: "Técnica e Cuidado em Cada Detalhe",
     description:
-      "Com sólida formação, anos de experiência e milhares de unhas realizadas, Macleny une técnica, precisão e cuidado para entregar um nail design de acabamento impecável.",
+      "Precisão, atenção e cuidado em cada etapa para entregar um acabamento sofisticado e alinhado ao seu estilo.",
   },
   {
     index: "05",
-    title: "Seu Cuidado Continua Aqui",
+    title: "Seu Cuidado Continua",
     description:
-      "Acompanhamento personalizado com Macleny para preservar a saúde, a beleza e a longevidade das suas unhas até a próxima manutenção.",
+      "Tenha acompanhamento e facilidade para organizar suas próximas manutenções e manter suas unhas sempre bem cuidadas.",
   },
 ];
 

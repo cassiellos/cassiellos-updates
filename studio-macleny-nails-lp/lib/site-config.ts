@@ -89,7 +89,7 @@ export const siteConfig: SiteConfig = {
   contact: {
     phoneDisplay: "", // PENDENTE
     phoneE164: "", // PENDENTE — formato: +5531999999999
-    whatsappNumber: "", // PENDENTE — apenas digitos, formato E.164 sem "+"
+    whatsappNumber: "5531988217033", // (31) 98821-7033
     email: "", // PENDENTE
     instagramHandle: "@maclenynails",
     instagramUrl: "https://www.instagram.com/maclenynails/",
