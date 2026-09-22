@@ -97,7 +97,7 @@ export const siteConfig: SiteConfig = {
 
   business: {
     legalName: "", // PENDENTE — razao social
-    cnpj: "", // PENDENTE
+    cnpj: "36.819.882/0001-69",
     address: {
       street: "", // PENDENTE
       number: "", // PENDENTE

@@ -44,6 +44,28 @@ function readStringField(source, field) {
   return match ? match[1] : null;
 }
 
+/**
+ * Valida um CNPJ pelos dois digitos verificadores. Pega erro de digitacao
+ * antes que o numero errado chegue ao rodape e a pagina de privacidade.
+ */
+function isValidCnpj(value) {
+  const d = value.replace(/\D/g, "");
+  if (d.length !== 14 || /^(\d)\1{13}$/.test(d)) return false;
+
+  const digit = (base, weights) => {
+    const sum = base
+      .split("")
+      .reduce((acc, char, i) => acc + Number(char) * weights[i], 0);
+    const rest = sum % 11;
+    return String(rest < 2 ? 0 : 11 - rest);
+  };
+
+  const first = digit(d.slice(0, 12), [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]);
+  const second = digit(d.slice(0, 12) + first, [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]);
+
+  return d.slice(12) === first + second;
+}
+
 function readBooleanField(source, field) {
   const match = source.match(new RegExp(`${field}\\s*:\\s*(true|false)`));
   return match ? match[1] === "true" : null;
@@ -121,7 +143,14 @@ if (phoneE164 && !/^\+\d{12,15}$/.test(phoneE164)) {
 
 if (!phoneDisplay) warn("Telefone de exibição não configurado (contact.phoneDisplay).");
 if (!email) warn("E-mail não configurado (contact.email).");
-if (!cnpj) warn("CNPJ não configurado (business.cnpj) — não inventar, deixar oculto.");
+if (!cnpj) {
+  warn("CNPJ não configurado (business.cnpj) — não inventar, deixar oculto.");
+} else if (!isValidCnpj(cnpj)) {
+  fail(
+    `business.cnpj "${cnpj}" não passa na checagem de dígitos verificadores. ` +
+      "Confirme o número com a cliente antes de publicar.",
+  );
+}
 if (!legalName) warn("Razão social não configurada (business.legalName).");
 
 if (!street || !postalCode) {

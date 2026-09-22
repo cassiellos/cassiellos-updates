@@ -43,7 +43,8 @@ export default function PrivacyPolicyPage() {
             <p className="mt-3 text-espresso-soft">
               Este site é operado pelo {siteConfig.brand.name}, studio
               especializado em unhas em {siteConfig.brand.city}/
-              {siteConfig.brand.state}.
+              {siteConfig.brand.state}
+              {siteConfig.business.cnpj ? `, inscrito no CNPJ ${siteConfig.business.cnpj}` : ""}.
             </p>
             {hasEmail ? (
               <p className="mt-3 text-espresso-soft">
