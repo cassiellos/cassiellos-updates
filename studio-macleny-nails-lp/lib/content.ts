@@ -246,7 +246,7 @@ export const founder = {
   ],
   image: {
     src: "/images/founder.webp",
-    alt: "Retrato editorial em ambiente de trabalho com luz natural suave.",
+    alt: "Jheniffer Macleny, fundadora do studio, em retrato editorial de perfil sobre fundo claro.",
   },
 } as const;
 
