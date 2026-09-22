@@ -5,7 +5,6 @@ import type { ReactNode } from "react";
 import { trackWhatsAppClick, type CtaLocation, type TrackedService } from "@/lib/analytics";
 import { siteConfig } from "@/lib/site-config";
 import { buildWhatsAppUrl, whatsappMessageFor } from "@/lib/whatsapp";
-import { whatsappMessages } from "@/lib/content";
 
 type Variant = "primary" | "secondary" | "on-dark" | "ghost-light" | "bare";
 
@@ -15,7 +14,7 @@ type WhatsAppButtonProps = {
   children: ReactNode;
   variant?: Variant;
   className?: string;
-  /** Mensagem customizada; por padrao usa a mensagem do servico. */
+  /** Mensagem customizada; por padrao usa a mensagem da posicao do botao. */
   message?: string;
   /**
    * Texto usado quando o WhatsApp ainda nao esta configurado e o CTA cai para
@@ -56,11 +55,7 @@ export default function WhatsAppButton({
   message,
   fallbackLabel = "Falar pelo Instagram",
 }: WhatsAppButtonProps) {
-  const resolvedMessage =
-    message ??
-    (service === "manutencao"
-      ? whatsappMessageFor("manutencao")
-      : whatsappMessages.general);
+  const resolvedMessage = message ?? whatsappMessageFor(location);
 
   const whatsappUrl = buildWhatsAppUrl(resolvedMessage);
   const classes = [variantClass[variant], className].filter(Boolean).join(" ");

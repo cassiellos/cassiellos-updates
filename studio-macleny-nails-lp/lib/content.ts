@@ -7,6 +7,7 @@
  *  - servicos nao confirmados permanecem `enabled: false` e NAO sao renderizados.
  */
 
+import type { CtaLocation } from "./analytics";
 import { hasConfirmedAddress, hasWhatsApp } from "./site-config";
 
 /* -------------------------------------------------------------------------- */
@@ -109,7 +110,7 @@ export const services: Service[] = [
       "Mãos apoiadas em bancada clara durante atendimento de manutenção de unhas.",
     cta: "Quero agendar minha manutenção",
     whatsappMessage:
-      "Olá! Conheci a Studio Macleny Nails pelo site e gostaria de informações para agendar uma manutenção.",
+      "Olá! Vim pelo site da Studio Macleny Nails e gostaria de agendar uma manutenção.",
     enabled: true,
   },
   // ------------------------------------------------------------------------
@@ -340,11 +341,34 @@ export const headerCta = "Agendar";
 /* MENSAGENS DE WHATSAPP                                                       */
 /* -------------------------------------------------------------------------- */
 
-export const whatsappMessages = {
-  general:
-    "Olá! Conheci a Studio Macleny Nails pelo site e gostaria de saber mais sobre os atendimentos.",
-  manutencao:
-    "Olá! Conheci a Studio Macleny Nails pelo site e gostaria de informações para agendar uma manutenção.",
-} as const;
-
-export type WhatsAppMessageKey = keyof typeof whatsappMessages;
+/**
+ * Uma mensagem por posicao de CTA.
+ *
+ * O objetivo e operacional: a Macleny consegue ver, pela propria mensagem,
+ * de onde a pessoa veio e em que ponto da leitura ela estava — sem precisar
+ * perguntar. Quem clica no hero acabou de chegar; quem clica no CTA final
+ * leu a pagina inteira; quem clica no bloco de orientacao esta em duvida.
+ *
+ * Um servico pode sobrescrever a mensagem da posicao pelo campo
+ * `whatsappMessage` em `services` (e o caso do card de Manutencao).
+ *
+ * O texto chega preenchido no campo de digitacao, mas continua editavel pela
+ * cliente antes do envio — isso e comportamento do WhatsApp, nao do site.
+ */
+export const whatsappMessages: Record<CtaLocation, string> = {
+  header:
+    "Olá! Vim pelo site da Studio Macleny Nails e gostaria de agendar um atendimento.",
+  hero: "Olá! Conheci a Studio Macleny Nails pelo site e gostaria de saber como agendar meu atendimento.",
+  services:
+    "Olá! Vim pelo site da Studio Macleny Nails e gostaria de agendar um atendimento.",
+  services_helper:
+    "Olá! Vim pelo site da Studio Macleny Nails e gostaria de uma orientação para escolher o atendimento mais adequado para mim.",
+  experience:
+    "Olá! Vim pelo site da Studio Macleny Nails e gostaria de entender melhor como funciona o atendimento.",
+  final_cta:
+    "Olá! Vim pelo site da Studio Macleny Nails e gostaria de conversar sobre o meu atendimento.",
+  floating:
+    "Olá! Estou no site da Studio Macleny Nails e gostaria de falar sobre um atendimento.",
+  footer:
+    "Olá! Vim pelo site da Studio Macleny Nails e gostaria de mais informações sobre os atendimentos.",
+};

@@ -3,7 +3,8 @@
  */
 
 import { siteConfig } from "./site-config";
-import { whatsappMessages, type WhatsAppMessageKey } from "./content";
+import type { CtaLocation } from "./analytics";
+import { whatsappMessages } from "./content";
 
 /**
  * Monta a URL de conversa. Retorna null enquanto o numero nao estiver
@@ -16,6 +17,7 @@ export function buildWhatsAppUrl(message: string): string | null {
   return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
 }
 
-export function whatsappMessageFor(key: WhatsAppMessageKey): string {
-  return whatsappMessages[key];
+/** Mensagem padrao para a posicao do botao na pagina. */
+export function whatsappMessageFor(location: CtaLocation): string {
+  return whatsappMessages[location];
 }

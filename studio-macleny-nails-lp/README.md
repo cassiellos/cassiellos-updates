@@ -126,6 +126,7 @@ repositório** (o GitHub só lê workflows da raiz).
 | Endereço | `lib/site-config.ts` | `business.address` |
 | Horários | `lib/site-config.ts` | `business.openingHours` |
 | Copy | `lib/content.ts` | seção correspondente |
+| Mensagens do WhatsApp | `lib/content.ts` | `whatsappMessages` (uma por posição de CTA) |
 | Serviços | `lib/content.ts` | array `services` |
 | FAQ | `lib/content.ts` | `faqBase` / `getFaqItems` |
 | Logo | `public/brand/` | + `assets.officialBrandFiles: true` |

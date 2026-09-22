@@ -17,7 +17,7 @@ import { whatsappMessages } from "@/lib/content";
  */
 export default function Footer() {
   const year = new Date().getFullYear();
-  const whatsappUrl = buildWhatsAppUrl(whatsappMessages.general);
+  const whatsappUrl = buildWhatsAppUrl(whatsappMessages.footer);
 
   return (
     <footer className="border-t border-line bg-ivory">
