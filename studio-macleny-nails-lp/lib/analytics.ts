@@ -21,7 +21,12 @@ export type CtaLocation =
   | "footer"
   | "floating";
 
-export type TrackedService = "general" | "manutencao";
+export type TrackedService =
+  | "general"
+  | "alongamentos"
+  | "manutencao"
+  | "nail-art"
+  | "experiencia";
 
 export type WhatsAppClickPayload = {
   event: "whatsapp_click";

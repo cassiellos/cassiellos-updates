@@ -239,8 +239,12 @@ if (officialBrandFiles === true) {
 
 const requiredImages = [
   "hero.webp",
-  "maintenance.webp",
   "experience.webp",
+  "services-intro.webp",
+  "service-alongamentos.webp",
+  "service-manutencao.webp",
+  "service-nail-art.webp",
+  "service-experiencia.webp",
   "founder.webp",
   "editorial-01.webp",
   "editorial-02.webp",

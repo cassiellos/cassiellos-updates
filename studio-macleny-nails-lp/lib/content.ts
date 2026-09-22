@@ -7,7 +7,7 @@
  *  - servicos nao confirmados permanecem `enabled: false` e NAO sao renderizados.
  */
 
-import type { CtaLocation } from "./analytics";
+import type { CtaLocation, TrackedService } from "./analytics";
 import { hasConfirmedAddress, hasWhatsApp } from "./site-config";
 
 /* -------------------------------------------------------------------------- */
@@ -79,9 +79,17 @@ export const pillars: Pillar[] = [
 /* -------------------------------------------------------------------------- */
 
 export type Service = {
-  id: string;
+  /** Usado tambem como chave de tracking (TrackedService). */
+  id: TrackedService;
+  index: string;
   title: string;
-  description: string;
+  lead: string;
+  description: string[];
+  /** Tecnicas e itens que o servico contempla. */
+  includes: string[];
+  highlight: string;
+  /** Legenda sobreposta a fotografia. */
+  imageCaption: string;
   image: string;
   imageAlt: string;
   cta: string;
@@ -91,8 +99,16 @@ export type Service = {
 };
 
 export const servicesSection = {
-  eyebrow: "Serviços",
-  title: "Especialização que respeita sua individualidade.",
+  eyebrow: "Serviços Macleny",
+  title: "Beleza pensada nos mínimos detalhes.",
+  body:
+    "Mais do que escolher uma técnica, aqui você escolhe como quer se sentir ao olhar para as suas mãos. Cada atendimento é personalizado para respeitar seu estilo, sua rotina e o resultado que você deseja.",
+  kicker: "Suas mãos, a sua melhor versão.",
+  aside: "Detalhes que realçam histórias",
+  image: {
+    src: "/images/services-intro.webp",
+    alt: "Mãos em repouso com unhas de acabamento nude, em composição editorial de tons quentes.",
+  },
   helperTitle: "Não sabe qual atendimento escolher?",
   helperBody:
     "Conte o que você busca pelo WhatsApp. A orientação começa antes da técnica.",
@@ -101,24 +117,118 @@ export const servicesSection = {
 
 export const services: Service[] = [
   {
-    id: "manutencao",
-    title: "Manutenção",
-    description:
-      "Um atendimento pensado para dar continuidade ao seu resultado com técnica, cuidado e orientação individual.",
-    image: "/images/maintenance.webp",
-    imageAlt:
-      "Mãos apoiadas em bancada clara durante atendimento de manutenção de unhas.",
-    cta: "Quero agendar minha manutenção",
+    id: "alongamentos",
+    index: "01",
+    title: "Alongamentos",
+    lead: "Unhas elegantes, proporcionais e feitas para você.",
+    description: [
+      "Nada de formatos padronizados. O alongamento é pensado de acordo com suas mãos, seu estilo e a estética que você deseja alcançar — com atenção ao formato, comprimento, acabamento e naturalidade do resultado.",
+      "Trabalhamos diferentes técnicas para encontrar a solução mais adequada para cada unha, desde construções delicadas até estruturas que exigem maior correção.",
+    ],
+    includes: [
+      "Gel",
+      "Fibra",
+      "Molde F1",
+      "Soft Gel",
+      "Polygel",
+      "Banho de Gel",
+      "Blindagem",
+      "Nivelamento",
+      "Correções de formato",
+    ],
+    highlight: "Estrutura, equilíbrio e acabamento impecável em cada detalhe.",
+    imageCaption: "Beleza com propósito",
+    image: "/images/service-alongamentos.webp",
+    imageAlt: "Unhas alongadas com acabamento nude acetinado, fotografadas em close.",
+    cta: "Quero encontrar meu alongamento ideal",
     whatsappMessage:
-      "Olá! Vim pelo site da Studio Macleny Nails e gostaria de agendar uma manutenção.",
+      "Olá! Vim pelo site da Studio Macleny Nails e gostaria de encontrar o alongamento ideal para as minhas unhas.",
     enabled: true,
   },
-  // ------------------------------------------------------------------------
-  // PENDENTE DE CONFIRMACAO DA CLIENTE.
-  // Os nomes abaixo aparecem em pesquisa de mercado, NAO como servicos
-  // declarados da Macleny. Mantenha `enabled: false` ate a confirmacao
-  // explicita, e so entao revise titulo, descricao e imagem.
-  // ------------------------------------------------------------------------
+  {
+    id: "manutencao",
+    index: "02",
+    title: "Manutenção & Cuidado",
+    lead: "Sua unha bonita hoje — e bem cuidada até o próximo atendimento.",
+    description: [
+      "Um resultado sofisticado não termina quando você sai do studio. Por isso, acompanhamos a evolução das suas unhas entre os atendimentos, observando estrutura, crescimento e necessidades específicas para preservar a aparência e o cuidado ao longo do tempo.",
+      "Manutenções realizadas no momento certo ajudam a manter o acabamento, corrigir pequenos imprevistos e evitar que você passe semanas com unhas que já não representam o resultado que deseja.",
+    ],
+    includes: [
+      "Manutenção de alongamentos",
+      "Reposição",
+      "Reparos",
+      "Remoção",
+      "Recuperação das unhas naturais",
+      "Hidratação",
+      "Acompanhamento entre manutenções",
+    ],
+    highlight: "Cuidado contínuo para prolongar a beleza do seu resultado.",
+    imageCaption: "Cuidado hoje. Beleza sempre.",
+    image: "/images/service-manutencao.webp",
+    imageAlt: "Mãos apoiadas em bancada clara durante atendimento de manutenção de unhas.",
+    cta: "Quero cuidar das minhas unhas",
+    whatsappMessage:
+      "Olá! Vim pelo site da Studio Macleny Nails e gostaria de agendar a manutenção das minhas unhas.",
+    enabled: true,
+  },
+  {
+    id: "nail-art",
+    index: "03",
+    title: "Nail Art",
+    lead: "Sua personalidade, traduzida em cada detalhe.",
+    description: [
+      "Minimalista, clássica, sofisticada ou marcante. Você pode escolher entre diferentes estilos e acabamentos ou trazer a sua própria referência. A partir dela, criamos uma composição personalizada para harmonizar com seu formato de unha, ocasião e estilo pessoal.",
+      "Porque uma nail art bonita não precisa apenas chamar atenção. Ela precisa parecer sua.",
+    ],
+    includes: [
+      "Esmaltação em gel",
+      "Francesinha",
+      "Baby Boomer",
+      "Cat Eye",
+      "Cromado",
+      "Encapsuladas",
+      "Pedrarias",
+      "Desenhos",
+      "Personalizações",
+    ],
+    highlight: "Do clássico ao exclusivo, um design criado para combinar com você.",
+    imageCaption: "Arte que revela quem você é",
+    image: "/images/service-nail-art.webp",
+    imageAlt: "Unhas com desenho autoral em traços finos e acabamento acetinado.",
+    cta: "Quero escolher meu design",
+    whatsappMessage:
+      "Olá! Vim pelo site da Studio Macleny Nails e gostaria de escolher um design de nail art.",
+    enabled: true,
+  },
+  {
+    id: "experiencia",
+    index: "04",
+    title: "Experiência Macleny",
+    lead: "Seu horário deixa de ser apenas um atendimento.",
+    description: [
+      "Aqui, você não encontra uma experiência apressada ou impessoal. Seu momento é preparado para que você possa desacelerar, ser atendida com atenção e aproveitar cada detalhe enquanto cuidamos das suas unhas.",
+      "Do atendimento personalizado aos pequenos mimos, bebidas e cuidados especiais, tudo é pensado para que você se sinta bem recebida do início ao fim. Para ocasiões especiais, como noivas e eventos, a experiência pode ser ainda mais personalizada.",
+    ],
+    includes: [
+      "Spa das mãos e pés",
+      "Hidratação",
+      "Atendimento individual",
+      "Escolha personalizada de designs",
+      "Mimos",
+      "Bebidas",
+      "Experiências para noivas e eventos",
+    ],
+    highlight:
+      "Um momento reservado para você — do primeiro detalhe ao acabamento final.",
+    imageCaption: "Mais que unhas, um momento para você",
+    image: "/images/service-experiencia.webp",
+    imageAlt: "Bancada do studio com bebida quente, toalha e flores em luz suave.",
+    cta: "Quero viver a Experiência Macleny",
+    whatsappMessage:
+      "Olá! Vim pelo site da Studio Macleny Nails e gostaria de conhecer a Experiência Macleny.",
+    enabled: true,
+  },
 ];
 
 export const enabledServices = services.filter((service) => service.enabled);
