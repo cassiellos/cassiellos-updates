@@ -120,10 +120,11 @@ export const services: Service[] = [
     id: "alongamentos",
     index: "01",
     title: "Alongamentos",
-    lead: "Unhas elegantes, proporcionais e feitas para você.",
+    lead: "Unhas harmônicas e feitas sob medida para você.",
     description: [
-      "Nada de formatos padronizados. O alongamento é pensado de acordo com suas mãos, seu estilo e a estética que você deseja alcançar — com atenção ao formato, comprimento, acabamento e naturalidade do resultado.",
-      "Trabalhamos diferentes técnicas para encontrar a solução mais adequada para cada unha, desde construções delicadas até estruturas que exigem maior correção.",
+      "Adeus ao alongamento padronizado. Cada detalhe é pensado de acordo com o formato das suas mãos, seu estilo pessoal e o resultado que você deseja alcançar.",
+      "Analisamos proporção, comprimento, curvatura, acabamento e naturalidade para criar unhas que valorizam a sua beleza sem exageros. Trabalhamos com diferentes técnicas para oferecer a solução ideal para cada unha, desde construções mais delicadas até estruturas que precisam de maior correção.",
+      "O resultado é um alongamento sofisticado, confortável e com aparência natural.",
     ],
     includes: [
       "Gel",
