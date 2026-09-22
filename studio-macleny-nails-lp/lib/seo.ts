@@ -99,6 +99,8 @@ export function buildBusinessJsonLd(): JsonLd {
   // projeto: nao faz sentido descrever um placeholder como ativo da marca.
   if (siteConfig.assets.officialBrandFiles) {
     data.logo = absoluteUrl(siteConfig.assets.logoPrimary);
+  } else if (siteConfig.assets.officialSymbol) {
+    data.logo = absoluteUrl(siteConfig.assets.logoSymbol);
   }
 
   if (siteConfig.assets.officialOgImage) {
@@ -122,7 +124,15 @@ export function buildBusinessJsonLd(): JsonLd {
     const a = siteConfig.business.address;
     data.address = {
       "@type": "PostalAddress",
-      streetAddress: [a.street, a.number, a.complement].filter(Boolean).join(", "),
+      // No Brasil o bairro integra o logradouro: PostalAddress nao tem campo
+      // proprio para ele, e omiti-lo empobrece o endereco para mapas e busca.
+      streetAddress: [
+        [a.street, a.number].filter(Boolean).join(", "),
+        a.complement,
+        a.neighborhood,
+      ]
+        .filter(Boolean)
+        .join(" - "),
       addressLocality: a.city,
       addressRegion: a.state,
       postalCode: a.postalCode,

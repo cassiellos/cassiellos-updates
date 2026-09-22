@@ -209,10 +209,19 @@ if (!gtmId && !adsId) {
 const officialBrandFiles = readBooleanField(configSource, "officialBrandFiles");
 const officialOgImage = readBooleanField(configSource, "officialOgImage");
 
+const officialSymbol = readBooleanField(configSource, "officialSymbol");
+
+if (officialSymbol === true && !existsSync(path.join(ROOT, "public/brand/logo-symbol.png"))) {
+  fail("assets.officialSymbol = true, mas public/brand/logo-symbol.png nao existe.");
+}
+
+if (officialSymbol !== true) {
+  warn("Simbolo oficial ausente (assets.officialSymbol = false).");
+}
+
 for (const asset of [
   "public/brand/logo-primary.svg",
   "public/brand/logo-horizontal.svg",
-  "public/brand/logo-symbol.svg",
 ]) {
   if (!existsSync(path.join(ROOT, asset))) {
     fail(`Asset de marca ausente: ${asset}`);

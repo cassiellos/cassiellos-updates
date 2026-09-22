@@ -9,12 +9,16 @@ type BrandMarkProps = {
 };
 
 /**
- * Assinatura da marca.
+ * Assinatura da marca: simbolo oficial + nomenclatura.
  *
- * IMPORTANTE: enquanto `siteConfig.assets.officialBrandFiles` for false, isto
- * NAO e a logo — e um fallback tipografico de interface, com MACLENY em maior
- * protagonismo e "Studio"/"Nails" como descritores, conforme a hierarquia do
- * dossie. O wordmark definitivo deve vir do arquivo oficial do rebranding.
+ * O simbolo (`public/brand/logo-symbol.png`) e o arquivo oficial do
+ * rebranding, extraido da arte original e mantido pixel a pixel — nada aqui
+ * redesenha a marca.
+ *
+ * A nomenclatura ao lado ainda e um fallback tipografico de interface,
+ * com MACLENY em maior protagonismo e "Studio"/"Nails" como descritores,
+ * conforme a hierarquia do dossie. Quando o lockup horizontal oficial chegar,
+ * marque `assets.officialBrandFiles: true` e ele substitui o conjunto.
  */
 export default function BrandMark({ tone = "light", className }: BrandMarkProps) {
   if (siteConfig.assets.officialBrandFiles) {
@@ -33,25 +37,36 @@ export default function BrandMark({ tone = "light", className }: BrandMarkProps)
   const descriptorColor = tone === "dark" ? "text-champagne" : "text-espresso-muted";
 
   return (
-    <span className={["inline-flex flex-col leading-none", className].filter(Boolean).join(" ")}>
+    <span className={["inline-flex items-center gap-3", className].filter(Boolean).join(" ")}>
       <span className="visually-hidden">{siteConfig.brand.name}</span>
-      <span
-        aria-hidden="true"
-        className={`text-[0.5rem] font-semibold uppercase tracking-[0.34em] ${descriptorColor}`}
-      >
-        Studio
-      </span>
-      <span
-        aria-hidden="true"
-        className="type-serif text-[1.5rem] uppercase tracking-[0.14em] sm:text-[1.7rem]"
-      >
-        {siteConfig.brand.wordmark}
-      </span>
-      <span
-        aria-hidden="true"
-        className={`text-[0.5rem] font-semibold uppercase tracking-[0.34em] ${descriptorColor}`}
-      >
-        Nails
+
+      {siteConfig.assets.officialSymbol ? (
+        <Image
+          src={siteConfig.assets.logoSymbol}
+          alt=""
+          aria-hidden="true"
+          width={372}
+          height={512}
+          priority
+          sizes="48px"
+          className="h-11 w-auto shrink-0 sm:h-12"
+        />
+      ) : null}
+
+      <span aria-hidden="true" className="inline-flex flex-col leading-none">
+        <span
+          className={`text-[0.5rem] font-semibold uppercase tracking-[0.34em] ${descriptorColor}`}
+        >
+          Studio
+        </span>
+        <span className="type-serif text-[1.5rem] uppercase tracking-[0.14em] sm:text-[1.7rem]">
+          {siteConfig.brand.wordmark}
+        </span>
+        <span
+          className={`text-[0.5rem] font-semibold uppercase tracking-[0.34em] ${descriptorColor}`}
+        >
+          Nails
+        </span>
       </span>
     </span>
   );

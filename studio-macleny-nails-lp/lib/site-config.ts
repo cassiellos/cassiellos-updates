@@ -54,6 +54,8 @@ export type SiteConfig = {
   assets: {
     /** false enquanto /public/brand contiver apenas placeholders do projeto. */
     officialBrandFiles: boolean;
+    /** true quando o simbolo oficial do rebranding ja esta no projeto. */
+    officialSymbol: boolean;
     /** false enquanto a imagem Open Graph for um placeholder gerado. */
     officialOgImage: boolean;
     logoPrimary: string;
@@ -99,13 +101,13 @@ export const siteConfig: SiteConfig = {
     legalName: "", // PENDENTE — razao social
     cnpj: "36.819.882/0001-69",
     address: {
-      street: "", // PENDENTE
-      number: "", // PENDENTE
+      street: "R. Faria Lobato",
+      number: "393",
       complement: "",
-      neighborhood: "", // PENDENTE
+      neighborhood: "Jardim Atlântico",
       city: "Belo Horizonte",
       state: "MG",
-      postalCode: "", // PENDENTE
+      postalCode: "31555-050",
       country: "BR",
     },
     openingHours: [], // PENDENTE — nao publicar horario sem confirmacao
@@ -124,10 +126,11 @@ export const siteConfig: SiteConfig = {
     // `officialBrandFiles: true`. Enquanto for false, a interface usa o
     // fallback tipografico e o JSON-LD nao emite `logo`.
     officialBrandFiles: false,
+    officialSymbol: true,
     officialOgImage: false,
     logoPrimary: "/brand/logo-primary.svg",
     logoHorizontal: "/brand/logo-horizontal.svg",
-    logoSymbol: "/brand/logo-symbol.svg",
+    logoSymbol: "/brand/logo-symbol.png",
     ogImage: "/images/og.webp",
   },
 };
@@ -143,6 +146,7 @@ export const hasPhone = siteConfig.contact.phoneDisplay.length > 0;
 export const hasEmail = siteConfig.contact.email.length > 0;
 
 export const hasOfficialBrandFiles = siteConfig.assets.officialBrandFiles;
+export const hasOfficialSymbol = siteConfig.assets.officialSymbol;
 
 export function hasConfirmedAddress(): boolean {
   const a = siteConfig.business.address;
