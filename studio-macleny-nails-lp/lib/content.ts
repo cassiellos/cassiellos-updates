@@ -136,48 +136,49 @@ export const experienceSection = {
   eyebrow: "Macleny Experience",
   title: "Seu atendimento começa antes da técnica.",
   body:
-    "Uma sequência pensada para que cada etapa tenha função: entender, orientar, executar e acompanhar.",
+    "Uma jornada pensada para unir praticidade, exclusividade e excelência — do primeiro contato ao cuidado contínuo.",
   image: {
     src: "/images/experience.webp",
     alt: "Bancada de atendimento com instrumentos organizados e luz suave.",
   },
 } as const;
 
+/**
+ * Copy fornecida pela cliente. Contem afirmacoes verificaveis — volume da
+ * galeria, formacao, anos de experiencia, existencia do app e itens de
+ * cortesia. Conferir antes de anunciar: a politica de destino do Google Ads
+ * cobra que o que a pagina promete corresponda ao que o negocio entrega.
+ */
 export const experienceSteps: ExperienceStep[] = [
   {
     index: "01",
-    title: "Receber",
-    description: "Reconhecimento, acolhimento e ambiente preparado.",
+    title: "Facilidade de Escolher",
+    description:
+      "Encontre o design perfeito para você em uma galeria com mais de 100 inspirações, ou envie sua própria referência.",
   },
   {
     index: "02",
-    title: "Ouvir",
-    description: "Entender rotina, desejo, histórico e preferências.",
+    title: "Agendamento Rápido",
+    description:
+      "É sua primeira vez conosco? Clique em qualquer botão e fale com nossa equipe pelo WhatsApp. Já é cliente? Faça seu agendamento diretamente pelo app da Macleny Nails.",
   },
   {
     index: "03",
-    title: "Orientar",
-    description: "Transformar desejo em recomendação clara e segura.",
+    title: "Uma Experiência Só Sua",
+    description:
+      "Um espaço exclusivo, reservado só para você, com atendimento individual pela própria Macleny e uma experiência personalizada às suas preferências, incluindo bebidas e comidas escolhidas por você.",
   },
   {
     index: "04",
-    title: "Criar",
-    description: "Personalizar a solução e a estética.",
+    title: "Técnica Refinada",
+    description:
+      "Com sólida formação, anos de experiência e milhares de unhas realizadas, Macleny une técnica, precisão e cuidado para entregar um nail design de acabamento impecável.",
   },
   {
     index: "05",
-    title: "Executar",
-    description: "Aplicar técnica, precisão e cuidado.",
-  },
-  {
-    index: "06",
-    title: "Revelar",
-    description: "Valorizar o resultado e orientar os próximos cuidados.",
-  },
-  {
-    index: "07",
-    title: "Acompanhar",
-    description: "Transformar a visita em relacionamento.",
+    title: "Seu Cuidado Continua Aqui",
+    description:
+      "Acompanhamento personalizado com Macleny para preservar a saúde, a beleza e a longevidade das suas unhas até a próxima manutenção.",
   },
 ];
 

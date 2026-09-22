@@ -52,7 +52,7 @@ export default function MaclenyExperience() {
                   key={step.index}
                   as="li"
                   delay={index * 70}
-                  className="relative grid grid-cols-[1.375rem_1fr] gap-5 pb-9 last:pb-0 sm:gap-7"
+                  className="relative grid grid-cols-[1.375rem_1fr] gap-5 pb-11 last:pb-0 sm:gap-7"
                 >
                   <span
                     aria-hidden="true"
@@ -61,7 +61,9 @@ export default function MaclenyExperience() {
                   <div>
                     <p className="eyebrow text-champagne">{step.index}</p>
                     <h3 className="type-serif type-h3 mt-2">{step.title}</h3>
-                    <p className="mt-2 text-ivory/70">{step.description}</p>
+                    <p className="mt-2.5 max-w-lg text-[0.9375rem] leading-relaxed text-ivory/70">
+                      {step.description}
+                    </p>
                   </div>
                 </SectionReveal>
               ))}
