@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-label="Imagem provisória">
+  <rect width="1200" height="900" fill="#EAE2D7"/>
+  <circle cx="960" cy="180" r="520" fill="none" stroke="#B8A597" stroke-width="1.25"/>
+  <text x="600" y="450" text-anchor="middle" font-family="Georgia, serif" font-size="72" fill="#7A401F" opacity="0.8">Imagem provisória</text>
+</svg>

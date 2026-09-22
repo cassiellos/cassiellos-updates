@@ -1,0 +1,359 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   STUDIO MACLENY NAILS — TOKENS
+   Cores preliminares do dossie v1.2. Ver docs/design-system.md para o status
+   de cada valor (nenhum deles deve ser tratado como brand book final).
+   ========================================================================== */
+
+@theme {
+  /* Paleta preliminar */
+  --color-ivory: #f4efe8;
+  --color-espresso: #1a1411;
+  --color-heritage: #7a401f;
+  --color-champagne: #c7b17e;
+  --color-taupe: #b8a597;
+
+  /* Derivados de implementacao digital (nao constam do dossie) */
+  --color-ivory-deep: #eae2d7;
+  --color-ivory-warm: #fbf8f4;
+  --color-espresso-soft: #3b312a;
+  --color-espresso-muted: #6a5c53;
+  --color-line: #d9cec1;
+
+  /* Tipografia */
+  --type-serif: var(--font-instrument-serif), ui-serif, Georgia, serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+
+  /* Motion */
+  --ease-macleny: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@layer base {
+  /* ==========================================================================
+     BASE
+     ========================================================================== */
+
+  :root {
+    color-scheme: light;
+    --header-height: 4.5rem;
+    --reveal-distance: 1.25rem;
+  }
+
+  * {
+    min-width: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Compensa o header fixo ao navegar por ancoras. */
+    scroll-padding-top: calc(var(--header-height) + 1.5rem);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-espresso);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    letter-spacing: 0.005em;
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-espresso);
+    color: var(--color-ivory);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-heritage);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Inversao de foco em superficies escuras. */
+  .on-espresso :focus-visible {
+    outline-color: var(--color-champagne);
+  }
+}
+
+@layer components {
+  /* ==========================================================================
+     LAYOUT
+     ========================================================================== */
+
+  .container-macleny {
+    width: 100%;
+    max-width: 80rem; /* 1280px */
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .container-macleny {
+      padding-inline: 2rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .container-macleny {
+      padding-inline: 3rem;
+    }
+  }
+
+  .section-space {
+    padding-block: clamp(4.5rem, 9vw, 9rem);
+  }
+
+  /* ==========================================================================
+     TIPOGRAFIA
+     ========================================================================== */
+
+  .type-serif {
+    font-family: var(--type-serif);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    line-height: 1.02;
+  }
+
+  .type-display {
+    font-size: clamp(2.75rem, 7vw, 6.25rem);
+  }
+
+  .type-h1 {
+    font-size: clamp(2.375rem, 5vw, 4.25rem);
+  }
+
+  .type-h2 {
+    font-size: clamp(2rem, 4.2vw, 3.75rem);
+  }
+
+  .type-h3 {
+    font-size: clamp(1.25rem, 2vw, 1.75rem);
+    line-height: 1.2;
+  }
+
+  .type-body-lg {
+    font-size: clamp(1.0625rem, 1.3vw, 1.1875rem);
+    line-height: 1.7;
+  }
+
+  .eyebrow {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+
+  /* ==========================================================================
+     COMPONENTES
+     ========================================================================== */
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    min-height: 3rem;
+    padding: 0.875rem 1.75rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+    text-align: center;
+    cursor: pointer;
+    transition:
+      transform 220ms var(--ease-macleny),
+      background-color 220ms var(--ease-macleny),
+      border-color 220ms var(--ease-macleny),
+      color 220ms var(--ease-macleny);
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn:active {
+    transform: translateY(0);
+  }
+
+  .btn-primary {
+    background-color: var(--color-espresso);
+    color: var(--color-ivory);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-heritage);
+  }
+
+  .btn-secondary {
+    background-color: transparent;
+    border-color: var(--color-line);
+    color: var(--color-espresso);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--color-espresso);
+    background-color: color-mix(in srgb, var(--color-taupe) 18%, transparent);
+  }
+
+  .btn-on-dark {
+    background-color: var(--color-champagne);
+    color: var(--color-espresso);
+  }
+
+  .btn-on-dark:hover {
+    background-color: var(--color-ivory);
+  }
+
+  .btn-ghost-light {
+    background-color: transparent;
+    border-color: color-mix(in srgb, var(--color-champagne) 45%, transparent);
+    color: var(--color-ivory);
+  }
+
+  .btn-ghost-light:hover {
+    border-color: var(--color-champagne);
+  }
+
+  .rule {
+    height: 1px;
+    background-color: var(--color-line);
+    border: 0;
+  }
+
+  .link-underline {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+  }
+
+  .link-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 1px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 260ms var(--ease-macleny);
+  }
+
+  .link-underline:hover::after,
+  .link-underline:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  /* Arco/elipse herdado do simbolo — elemento grafico proprietario. */
+  .arc {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid color-mix(in srgb, var(--color-heritage) 24%, transparent);
+    pointer-events: none;
+  }
+
+  .arc-champagne {
+    border-color: color-mix(in srgb, var(--color-champagne) 55%, transparent);
+  }
+
+  .arc-light {
+    border-color: color-mix(in srgb, var(--color-champagne) 30%, transparent);
+  }
+
+  /* ==========================================================================
+     MOTION
+     ========================================================================== */
+
+  /*
+   * O estado inicial escondido so e aplicado quando ha JavaScript (a classe `js`
+   * e adicionada ao <html> antes da pintura). Sem JS, o conteudo aparece normal.
+   */
+  .js [data-reveal="hidden"] {
+    opacity: 0;
+    transform: translateY(var(--reveal-distance));
+  }
+
+  .js [data-reveal] {
+    transition:
+      opacity 720ms var(--ease-macleny),
+      transform 720ms var(--ease-macleny);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .parallax-media {
+    will-change: transform;
+    transition: transform 120ms linear;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+
+    .js [data-reveal] {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    .parallax-media {
+      transform: none !important;
+      will-change: auto;
+    }
+
+    .btn:hover {
+      transform: none;
+    }
+  }
+
+  /* ==========================================================================
+     ACESSIBILIDADE
+     ========================================================================== */
+
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: 0.75rem;
+    z-index: 100;
+    transform: translateY(-160%);
+    background-color: var(--color-espresso);
+    color: var(--color-ivory);
+    padding: 0.75rem 1.25rem;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: transform 200ms var(--ease-macleny);
+  }
+
+  .skip-link:focus-visible {
+    transform: translateY(0);
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+}

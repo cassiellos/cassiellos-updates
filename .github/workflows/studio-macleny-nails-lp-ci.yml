@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    paths:
+      - "studio-macleny-nails-lp/**"
+      - ".github/workflows/ci.yml"
+  pull_request:
+    paths:
+      - "studio-macleny-nails-lp/**"
+      - ".github/workflows/ci.yml"
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: studio-macleny-nails-lp
+
+jobs:
+  verify:
+    name: Lint, typecheck e build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Configurar Node
+        uses: actions/setup-node@v5
+        with:
+          node-version-file: studio-macleny-nails-lp/.nvmrc
+          cache: npm
+          cache-dependency-path: studio-macleny-nails-lp/package-lock.json
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Validar configuração
+        run: npm run check:config
+
+      - name: Build
+        run: npm run build
