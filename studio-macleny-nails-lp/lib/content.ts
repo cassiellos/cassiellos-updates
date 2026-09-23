@@ -455,12 +455,30 @@ export const headerCta = "Agendar";
  * O texto chega preenchido no campo de digitacao, mas continua editavel pela
  * cliente antes do envio — isso e comportamento do WhatsApp, nao do site.
  */
+/**
+ * Mensagem de um chip de tecnica/item.
+ *
+ * Cada item dentro de um card de servico vira um CTA proprio, entao a cliente
+ * chega ao WhatsApp ja dizendo o que procura — e do lado de ca da conversa
+ * sabe-se exatamente qual tecnica gerou o contato.
+ */
+export function serviceItemMessage(item: string): string {
+  return `Olá! Vim pelo site da Studio Macleny Nails e gostaria de saber mais sobre os serviços de ${item}. 💅✨`;
+}
+
 export const whatsappMessages: Record<CtaLocation, string> = {
   header:
     "Olá! Vim pelo site da Studio Macleny Nails e gostaria de agendar um atendimento.",
   hero: "Olá! Conheci a Studio Macleny Nails pelo site e gostaria de saber como agendar meu atendimento.",
   services:
     "Olá! Vim pelo site da Studio Macleny Nails e gostaria de agendar um atendimento.",
+  /**
+   * Fallback da origem `service_item`. Na pratica cada chip passa a propria
+   * mensagem por `serviceItemMessage`; este texto so existiria se algum chip
+   * fosse renderizado sem mensagem.
+   */
+  service_item:
+    "Olá! Vim pelo site da Studio Macleny Nails e gostaria de saber mais sobre os serviços oferecidos. 💅✨",
   services_helper:
     "Olá! Vim pelo site da Studio Macleny Nails e gostaria de uma orientação para escolher o atendimento mais adequado para mim.",
   experience:

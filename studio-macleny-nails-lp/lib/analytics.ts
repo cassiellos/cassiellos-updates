@@ -15,6 +15,8 @@ export type CtaLocation =
   | "header"
   | "hero"
   | "services"
+  /** Chip de tecnica/item dentro de um card de servico. */
+  | "service_item"
   | "services_helper"
   | "experience"
   | "final_cta"

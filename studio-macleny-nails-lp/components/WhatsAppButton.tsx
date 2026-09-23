@@ -21,6 +21,12 @@ type WhatsAppButtonProps = {
    * o Instagram — canal ja confirmado da marca.
    */
   fallbackLabel?: ReactNode;
+  /**
+   * Exibe o icone do WhatsApp. Desligado nos CTAs que nao tem forma de botao
+   * — os chips de tecnica e o link do rodape — onde o icone descaracterizaria
+   * o elemento.
+   */
+  showGlyph?: boolean;
 };
 
 const variantClass: Record<Variant, string> = {
@@ -54,6 +60,7 @@ export default function WhatsAppButton({
   className,
   message,
   fallbackLabel = "Falar pelo Instagram",
+  showGlyph = true,
 }: WhatsAppButtonProps) {
   const resolvedMessage = message ?? whatsappMessageFor(location);
 
@@ -89,7 +96,7 @@ export default function WhatsAppButton({
       }
       onClick={() => trackWhatsAppClick(location, service)}
     >
-      <WhatsAppGlyph />
+      {showGlyph ? <WhatsAppGlyph /> : null}
       <span>{children}</span>
     </a>
   );

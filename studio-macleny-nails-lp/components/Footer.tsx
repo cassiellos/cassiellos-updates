@@ -9,6 +9,7 @@ import {
 } from "@/lib/site-config";
 import { addressLine } from "@/lib/seo";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
+import WhatsAppButton from "./WhatsAppButton";
 import { whatsappMessages } from "@/lib/content";
 
 /**
@@ -45,16 +46,22 @@ export default function Footer() {
                 </a>
               </li>
 
+              {/*
+                Passou a usar WhatsAppButton: como <a> cru, este link montava a
+                URL por fora da camada de tracking, entao uma conversa iniciada
+                pelo rodape nao era contabilizada. A aparencia nao muda —
+                `variant="bare"` nao aplica estilo de botao.
+              */}
               {hasWhatsApp && whatsappUrl ? (
                 <li>
-                  <a
-                    href={whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <WhatsAppButton
+                    location="footer"
+                    variant="bare"
+                    showGlyph={false}
                     className="link-underline"
                   >
                     WhatsApp
-                  </a>
+                  </WhatsAppButton>
                 </li>
               ) : null}
 

@@ -2,7 +2,7 @@ import Image from "next/image";
 
 import SectionReveal from "./SectionReveal";
 import WhatsAppButton from "./WhatsAppButton";
-import { enabledServices, servicesSection } from "@/lib/content";
+import { enabledServices, serviceItemMessage, servicesSection } from "@/lib/content";
 import { revealDelay } from "@/lib/motion";
 import { siteConfig } from "@/lib/site-config";
 
@@ -158,13 +158,26 @@ export default function Services() {
                   </SectionReveal>
 
                   <SectionReveal delay={revealDelay.detail} kind="quiet">
+                    {/*
+                      Cada tecnica e um CTA proprio: a cliente chega ao
+                      WhatsApp ja dizendo o que procura, e do lado de ca sabe-se
+                      qual tecnica gerou o contato. As classes de aparencia
+                      saem do <li> e vao para o <a>, de modo que o alvo de
+                      toque seja o chip inteiro e nao so o texto.
+                    */}
                     <ul className="mt-6 flex flex-wrap gap-2">
                       {service.includes.map((item) => (
-                        <li
-                          key={item}
-                          className="rounded-full border border-line px-3.5 py-1.5 text-[0.8125rem] text-espresso-soft"
-                        >
-                          {item}
+                        <li key={item}>
+                          <WhatsAppButton
+                            location="service_item"
+                            service={service.id}
+                            variant="bare"
+                            showGlyph={false}
+                            message={serviceItemMessage(item)}
+                            className="inline-block rounded-full border border-line px-3.5 py-1.5 text-[0.8125rem] text-espresso-soft transition-colors duration-[var(--dur-micro)] ease-[var(--ease-macleny)] hover:border-espresso hover:text-espresso"
+                          >
+                            {item}
+                          </WhatsAppButton>
                         </li>
                       ))}
                     </ul>
