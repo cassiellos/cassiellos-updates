@@ -8,7 +8,7 @@ import { siteConfig } from "@/lib/site-config";
 
 export default function Hero() {
   return (
-    <section id="topo" className="relative overflow-hidden pb-16 pt-[calc(var(--header-height)+1.5rem)] sm:pb-20 lg:pb-24 lg:pt-[calc(var(--header-height)+2.5rem)]">
+    <section id="topo" className="relative overflow-hidden pb-[17rem] pt-[calc(var(--header-height)+1.5rem)] sm:pb-[21rem] lg:pb-24 lg:pt-[calc(var(--header-height)+2.5rem)]">
       {/* Arcos herdados do simbolo — decorativos. */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <span className="arc arc-light -left-[32%] top-[-18%] h-[46rem] w-[46rem] sm:-left-[18%]" />
@@ -65,24 +65,29 @@ export default function Hero() {
         tem largura maxima. Nao usa ParallaxMedia: deslocar um elemento preso a
         inset-y-0 abriria vao no topo ou na base.
 
-        SO A PARTIR DE lg. Abaixo disso o hero e texto e CTA, sem foto.
+        No mobile ela nao empilha abaixo do texto — ancora no canto inferior
+        direito, dentro do espaco reservado pelo padding da secao. Assim o hero
+        mantem presenca sem empurrar os CTAs para fora da primeira tela, que
+        era o problema do empilhamento.
 
-        O `1px` no fim do `sizes` nao e enfeite. Como a imagem tem `priority`,
-        o Next emite um <link rel="preload"> no <head>, e preload acontece
-        ANTES do layout — esconder por CSS nao impediria o download. O que
-        decide qual candidato do srcset sera baixado e o `imagesizes` desse
-        preload, que espelha este `sizes`: abaixo de 1024px ele resolve para
-        1px e o navegador busca a menor variante existente, em vez da foto
-        inteira que nao seria exibida.
+        O texto fica POR CIMA: o container tem z-10 e esta figura nao tem
+        z-index. Na pratica eles nao se cruzam, porque o padding da base
+        reserva a faixa da foto — mas se a copy crescer, a leitura continua
+        garantida.
       */}
-      <figure className="pointer-events-none hidden lg:absolute lg:inset-y-0 lg:right-0 lg:block lg:w-1/2 lg:max-w-[46rem]">
+      <figure className="pointer-events-none absolute bottom-0 right-0 h-[16rem] w-[82%] sm:h-[20rem] sm:w-[70%] lg:inset-y-0 lg:h-auto lg:w-1/2 lg:max-w-[46rem]">
         <Image
           src={hero.image.src}
           alt={hero.image.alt}
           fill
           priority
-          sizes="(min-width: 1024px) min(50vw, 46rem), 1px"
-          className="object-cover object-top"
+          /*
+            Tres faixas, espelhando exatamente as tres larguras da figura
+            acima. Declarar 82vw em todos os tamanhos fazia o tablet buscar a
+            variante de 1920px para exibir 538px.
+          */
+          sizes="(min-width: 1024px) min(50vw, 46rem), (min-width: 640px) 70vw, 82vw"
+          className="object-contain object-right-bottom lg:object-cover lg:object-top"
         />
 
         <figcaption className="visually-hidden">
