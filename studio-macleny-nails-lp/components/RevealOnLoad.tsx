@@ -1,9 +1,13 @@
 import type { CSSProperties, ElementType, ReactNode } from "react";
 
+import type { RevealKind } from "@/lib/motion";
+
 type RevealOnLoadProps = {
   children: ReactNode;
   /** Atraso em ms para o stagger. Mantido curto: atrasa a pintura. */
   delay?: number;
+  /** Mesmo papel de `SectionReveal`: define o quanto o bloco se desloca. */
+  kind?: RevealKind;
   className?: string;
   as?: ElementType;
 };
@@ -24,6 +28,7 @@ type RevealOnLoadProps = {
 export default function RevealOnLoad({
   children,
   delay = 0,
+  kind = "lead",
   className,
   as,
 }: RevealOnLoadProps) {
@@ -33,6 +38,7 @@ export default function RevealOnLoad({
     <Component
       className={className}
       data-reveal="onload"
+      data-reveal-kind={kind}
       style={
         delay ? ({ "--reveal-delay": `${delay}ms` } as CSSProperties) : undefined
       }

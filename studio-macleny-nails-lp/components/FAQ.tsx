@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import SectionReveal from "./SectionReveal";
 import { faqSection, type FaqItem } from "@/lib/content";
+import { staggerDelay } from "@/lib/motion";
 
 type FAQProps = {
   items: FaqItem[];
@@ -19,8 +20,11 @@ export default function FAQ({ items }: FAQProps) {
       <div className="container-macleny">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-4">
-            <SectionReveal>
+            <SectionReveal kind="quiet">
               <p className="eyebrow text-heritage">{faqSection.eyebrow}</p>
+            </SectionReveal>
+
+            <SectionReveal>
               <h2 className="type-serif type-h2 mt-6 text-balance">
                 {faqSection.title}
               </h2>
@@ -38,7 +42,8 @@ export default function FAQ({ items }: FAQProps) {
                   <SectionReveal
                     key={item.id}
                     as="li"
-                    delay={index * 60}
+                    delay={staggerDelay(index, 60)}
+                    kind="support"
                     className="border-b border-line"
                   >
                     <h3>
@@ -48,28 +53,41 @@ export default function FAQ({ items }: FAQProps) {
                         aria-expanded={isOpen}
                         aria-controls={panelId}
                         onClick={() => setOpenId(isOpen ? null : item.id)}
-                        className="flex w-full items-start justify-between gap-6 py-6 text-left transition-colors hover:text-heritage"
+                        className="accordion-trigger flex w-full items-start justify-between gap-6 py-6 text-left transition-colors duration-[var(--dur-micro)] ease-[var(--ease-macleny)] hover:text-heritage"
                       >
                         <span className="type-serif text-[clamp(1.1875rem,2vw,1.5rem)] leading-snug">
                           {item.question}
                         </span>
+                        {/*
+                          O sinal nao troca de caractere: sao duas barras
+                          cruzadas e a vertical recolhe ao abrir. Trocar "+"
+                          por "−" reflui a caixa e produz um micro-salto.
+                        */}
                         <span
                           aria-hidden="true"
-                          className="mt-1 grid h-8 w-8 shrink-0 place-items-center rounded-full border border-line text-lg leading-none"
-                        >
-                          {isOpen ? "−" : "+"}
-                        </span>
+                          className="accordion-glyph mt-1 h-8 w-8 shrink-0 rounded-full border border-line transition-colors duration-[var(--dur-micro)] ease-[var(--ease-macleny)]"
+                        />
                       </button>
                     </h3>
 
+                    {/*
+                      `hidden` foi trocado por `inert`: um painel `hidden` nao
+                      pode ser animado, mas precisa continuar fora da ordem de
+                      foco e fora da arvore de acessibilidade quando fechado —
+                      que e exatamente o que `inert` faz. A altura anima por
+                      grid-template-rows, sem medicao em JavaScript.
+                    */}
                     <div
                       id={panelId}
                       role="region"
                       aria-labelledby={buttonId}
-                      hidden={!isOpen}
-                      className="pb-7 pr-12"
+                      inert={!isOpen}
+                      data-open={isOpen}
+                      className="accordion-panel"
                     >
-                      <p className="text-espresso-soft">{item.answer}</p>
+                      <div>
+                        <p className="pb-7 pr-12 text-espresso-soft">{item.answer}</p>
+                      </div>
                     </div>
                   </SectionReveal>
                 );

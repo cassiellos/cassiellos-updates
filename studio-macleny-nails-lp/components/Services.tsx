@@ -3,6 +3,7 @@ import Image from "next/image";
 import SectionReveal from "./SectionReveal";
 import WhatsAppButton from "./WhatsAppButton";
 import { enabledServices, servicesSection } from "@/lib/content";
+import { revealDelay } from "@/lib/motion";
 import { siteConfig } from "@/lib/site-config";
 
 export default function Services() {
@@ -18,14 +19,20 @@ export default function Services() {
 
         <div className="container-macleny relative grid items-center gap-10 py-16 lg:grid-cols-12 lg:gap-14 lg:py-24">
           <div className="lg:col-span-6">
-            <SectionReveal>
+            <SectionReveal kind="quiet">
               <p className="eyebrow flex items-center gap-3 text-champagne">
                 <span aria-hidden="true" className="h-px w-8 bg-champagne/50" />
                 {servicesSection.eyebrow}
               </p>
+            </SectionReveal>
+
+            <SectionReveal>
               <h2 className="type-serif type-h2 mt-6 text-balance">
                 {servicesSection.title}
               </h2>
+            </SectionReveal>
+
+            <SectionReveal delay={revealDelay.support} kind="support">
               <p className="type-body-lg mt-6 max-w-xl text-ivory/75">
                 {servicesSection.body}
               </p>
@@ -33,9 +40,9 @@ export default function Services() {
           </div>
 
           <div className="lg:col-span-6 lg:col-start-7">
-            <SectionReveal delay={120}>
+            <SectionReveal kind="media">
               <div className="relative">
-                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.75rem] bg-espresso-soft">
+                <div className="media-frame aspect-[4/3] w-full rounded-[1.75rem] bg-espresso-soft">
                   <Image
                     src={servicesSection.image.src}
                     alt={servicesSection.image.alt}
@@ -63,6 +70,7 @@ export default function Services() {
             >
               <div className="container-macleny grid items-center gap-8 py-14 lg:grid-cols-12 lg:gap-14 lg:py-20">
                 <SectionReveal
+                  kind="media"
                   className={[
                     "lg:col-span-5",
                     imageFirst ? "" : "lg:order-2 lg:col-start-8",
@@ -70,7 +78,7 @@ export default function Services() {
                     .filter(Boolean)
                     .join(" ")}
                 >
-                  <figure className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.5rem] bg-ivory-deep">
+                  <figure className="media-frame aspect-[4/3] w-full rounded-[1.5rem] bg-ivory-deep">
                     <Image
                       src={service.image}
                       alt={service.imageAlt}
@@ -110,59 +118,74 @@ export default function Services() {
                   </figure>
                 </SectionReveal>
 
-                <SectionReveal
-                  delay={90}
+                {/*
+                  Tres niveis de entrada, nao um bloco so: a numeracao e o
+                  titulo abrem, o corpo do texto vem logo atras e o CTA fecha.
+                  E o que faz o olho descer na ordem certa sem que a sequencia
+                  chegue a ser percebida como sequencia.
+                */}
+                <div
                   className={[
                     "lg:col-span-6",
                     imageFirst ? "lg:col-start-7" : "lg:order-1 lg:col-start-1",
                   ].join(" ")}
                 >
-                  <p className="eyebrow flex items-center gap-3 text-espresso-muted">
-                    {service.index}
-                    <span aria-hidden="true" className="h-px w-8 bg-line" />
-                  </p>
-
-                  <h3 className="type-serif mt-4 text-[clamp(1.875rem,3.2vw,2.75rem)] leading-[1.05]">
-                    {service.title}
-                  </h3>
-                  <p className="type-serif mt-3 text-[clamp(1.0625rem,1.6vw,1.375rem)] leading-snug text-espresso-soft">
-                    {service.lead}
-                  </p>
-
-                  {service.description.map((paragraph) => (
-                    <p
-                      key={paragraph.slice(0, 32)}
-                      className="mt-4 max-w-2xl text-espresso-soft"
-                    >
-                      {paragraph}
+                  <SectionReveal kind="quiet">
+                    <p className="eyebrow flex items-center gap-3 text-espresso-muted">
+                      {service.index}
+                      <span aria-hidden="true" className="h-px w-8 bg-line" />
                     </p>
-                  ))}
+                  </SectionReveal>
 
-                  <ul className="mt-6 flex flex-wrap gap-2">
-                    {service.includes.map((item) => (
-                      <li
-                        key={item}
-                        className="rounded-full border border-line px-3.5 py-1.5 text-[0.8125rem] text-espresso-soft"
+                  <SectionReveal>
+                    <h3 className="type-serif mt-4 text-[clamp(1.875rem,3.2vw,2.75rem)] leading-[1.05]">
+                      {service.title}
+                    </h3>
+                    <p className="type-serif mt-3 text-[clamp(1.0625rem,1.6vw,1.375rem)] leading-snug text-espresso-soft">
+                      {service.lead}
+                    </p>
+                  </SectionReveal>
+
+                  <SectionReveal delay={revealDelay.support} kind="support">
+                    {service.description.map((paragraph) => (
+                      <p
+                        key={paragraph.slice(0, 32)}
+                        className="mt-4 max-w-2xl text-espresso-soft"
                       >
-                        {item}
-                      </li>
+                        {paragraph}
+                      </p>
                     ))}
-                  </ul>
+                  </SectionReveal>
 
-                  <p className="type-serif mt-7 border-l border-champagne pl-4 text-[1.0625rem] italic leading-snug text-heritage">
-                    {service.highlight}
-                  </p>
+                  <SectionReveal delay={revealDelay.detail} kind="quiet">
+                    <ul className="mt-6 flex flex-wrap gap-2">
+                      {service.includes.map((item) => (
+                        <li
+                          key={item}
+                          className="rounded-full border border-line px-3.5 py-1.5 text-[0.8125rem] text-espresso-soft"
+                        >
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
 
-                  <WhatsAppButton
-                    location="services"
-                    service={service.id}
-                    variant="primary"
-                    className="mt-7"
-                    message={service.whatsappMessage}
-                  >
-                    {service.cta}
-                  </WhatsAppButton>
-                </SectionReveal>
+                    <p className="type-serif mt-7 border-l border-champagne pl-4 text-[1.0625rem] italic leading-snug text-heritage">
+                      {service.highlight}
+                    </p>
+                  </SectionReveal>
+
+                  <SectionReveal delay={revealDelay.cta} kind="support">
+                    <WhatsAppButton
+                      location="services"
+                      service={service.id}
+                      variant="primary"
+                      className="mt-7"
+                      message={service.whatsappMessage}
+                    >
+                      {service.cta}
+                    </WhatsAppButton>
+                  </SectionReveal>
+                </div>
               </div>
             </article>
           );
@@ -172,7 +195,7 @@ export default function Services() {
       {/* Faixa de assinatura e orientacao */}
       <div className="border-t border-line bg-ivory-warm">
         <div className="container-macleny py-10">
-          <SectionReveal>
+          <SectionReveal kind="support">
             <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
               <div className="max-w-xl">
                 <h3 className="type-serif type-h3">{servicesSection.helperTitle}</h3>

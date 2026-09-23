@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 
 import BrandMark from "./BrandMark";
 import WhatsAppButton from "./WhatsAppButton";
@@ -31,17 +31,25 @@ export default function Header() {
   return (
     <header
       className={[
-        "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
+        // `site-header` traz a transicao de fundo, borda, sombra e blur juntas.
+        // Antes so `transition-colors` estava declarado, entao borda e blur
+        // apareciam de um frame para o outro enquanto a cor viajava suave.
+        "site-header fixed inset-x-0 top-0 z-50",
         isScrolled || isMenuOpen
-          ? "border-b border-line bg-ivory/92 backdrop-blur-[6px]"
-          : "border-b border-transparent bg-transparent",
+          ? "border-b border-line bg-ivory/92 shadow-[0_1px_24px_-16px_rgba(26,20,17,0.5)] backdrop-blur-[6px]"
+          : "border-b border-transparent bg-transparent shadow-none",
       ].join(" ")}
       style={{ minHeight: "var(--header-height)" }}
     >
       <div className="container-macleny flex h-[var(--header-height)] items-center justify-between gap-4">
+        {/*
+          O logo tambem responde: uma queda minima de opacidade basta para o
+          usuario saber que a assinatura e clicavel, sem transformar a marca
+          num botao.
+        */}
         <a
           href="#topo"
-          className="shrink-0 py-2"
+          className="shrink-0 py-2 transition-opacity duration-[var(--dur-micro)] ease-[var(--ease-macleny)] hover:opacity-70"
           aria-label={`${"Studio Macleny Nails"} — ir para o início`}
         >
           <BrandMark />
@@ -52,7 +60,7 @@ export default function Header() {
             <a
               key={item.href}
               href={item.href}
-              className="link-underline text-sm font-medium text-espresso-soft transition-colors hover:text-espresso"
+              className="link-underline text-sm font-medium text-espresso-soft transition-colors duration-[var(--dur-micro)] ease-[var(--ease-macleny)] hover:text-espresso"
             >
               {item.label}
             </a>
@@ -81,34 +89,55 @@ export default function Header() {
         </div>
       </div>
 
+      {/*
+        Mesma troca feita no acordeao: `inert` no lugar de `hidden`, para o
+        painel poder abrir animado sem voltar a ficar acessivel por teclado
+        quando fechado. A borda superior so existe com o menu aberto — com o
+        painel colapsado ela virava um risco solto sob o header.
+      */}
       <div
         id="menu-mobile"
-        hidden={!isMenuOpen}
-        className="border-t border-line bg-ivory lg:hidden"
+        inert={!isMenuOpen}
+        data-open={isMenuOpen}
+        className={[
+          "menu-panel bg-ivory lg:hidden",
+          isMenuOpen ? "border-t border-line" : "border-t border-transparent",
+        ].join(" ")}
       >
-        <nav aria-label="Navegação principal (mobile)" className="container-macleny py-6">
-          <ul className="flex flex-col">
-            {navigation.map((item) => (
-              <li key={item.href} className="border-b border-line/70 last:border-b-0">
-                <a
-                  href={item.href}
-                  className="block py-4 type-serif text-2xl"
-                  onClick={() => setIsMenuOpen(false)}
+        <div>
+          <nav aria-label="Navegação principal (mobile)" className="container-macleny py-6">
+            <ul className="flex flex-col">
+              {navigation.map((item, index) => (
+                <li
+                  key={item.href}
+                  className="menu-item border-b border-line/70 last:border-b-0"
+                  style={{ "--menu-delay": `${60 + index * 45}ms` } as CSSProperties}
                 >
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
+                  <a
+                    href={item.href}
+                    className="block py-4 type-serif text-2xl"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
 
-          <WhatsAppButton
-            location="header"
-            variant="primary"
-            className="mt-6 w-full sm:hidden"
-          >
-            Agendar pelo WhatsApp
-          </WhatsAppButton>
-        </nav>
+            <div
+              className="menu-item"
+              style={{ "--menu-delay": `${60 + navigation.length * 45}ms` } as CSSProperties}
+            >
+              <WhatsAppButton
+                location="header"
+                variant="primary"
+                className="mt-6 w-full sm:hidden"
+              >
+                Agendar pelo WhatsApp
+              </WhatsAppButton>
+            </div>
+          </nav>
+        </div>
       </div>
     </header>
   );

@@ -255,12 +255,42 @@ Base 4/8px (escala padrão do Tailwind): 4 · 8 · 12 · 16 · 24 · 32 · 48 ·
 
 | Princípio | Aplicação |
 | --- | --- |
-| Reveal | fade + `translateY(1.25rem)`, 720ms, `cubic-bezier(.22,.61,.36,1)` |
-| Stagger | 60–90ms por item |
-| Parallax | máx. 18px, só em 2 imagens, só ≥1024px com ponteiro fino |
-| Botão | `translateY(-2px)` no hover, retorno no `:active` |
-| Header | troca de fundo/borda após 24px de scroll |
-| Acordeão | troca de estado imediata; a animação nunca é requisito de função |
+| Curva única | `--ease-macleny: cubic-bezier(.22, 1, .36, 1)` — saída longa |
+| Curva ida-e-volta | `--ease-macleny-inout: cubic-bezier(.65, 0, .35, 1)` |
+| Durações | `--dur-micro 320ms` · `--dur-state 440ms` · `--dur-enter 860ms` · `--dur-media 1200ms` |
+| Reveal | fade + `translateY`, `--dur-enter` |
+| Stagger | escada de `lib/motion.ts`, teto de 4 passos |
+| Parallax | 8px, só no retrato da fundadora, só ≥1024px com ponteiro fino |
+| Botão | `translateY(-2px)` + sombra no hover, volta em 110ms no `:active` |
+| Header | fundo, borda, sombra e blur transicionam juntos após 24px |
+| Acordeão | `grid-template-rows 0fr→1fr`, `--dur-state` |
+
+**Hierarquia pelo movimento.** O deslocamento do reveal depende do papel do
+elemento, não do tipo de tag — é isso que faz o olho entender a ordem de
+leitura sem perceber que há animação:
+
+| `data-reveal-kind` | Deslocamento | Quem usa |
+| --- | --- | --- |
+| `lead` | `--reveal-distance` (1.25rem) | título da seção |
+| `support` | metade (0.625rem) | corpo de texto, CTA, passos |
+| `quiet` | zero, só opacidade | eyebrow, numeração, chips |
+| `media` | distância cheia + zoom da foto | fotografia |
+
+No mobile as distâncias caem para 0.6875rem / 0.375rem e o zoom de 1.035 para
+1.018: tela menor e scroll mais rápido fazem o mesmo deslocamento parecer
+salto.
+
+**Fotografia.** `.media-frame` recorta a imagem; o container entra como
+qualquer bloco e a foto dentro dele assenta de `--media-zoom` para 1 em
+`--dur-media`. Como a moldura não se mexe, o efeito é de aproximação de
+câmera, não de card crescendo. `transform` é do reveal e `scale` é do hover —
+propriedades separadas de propósito, já que o Tailwind 4 emite `scale:` para
+as utilities de escala e as duas conviveriam mal numa só.
+
+**O que deliberadamente NÃO se move:** imagens de seções não clicáveis não
+ganham hover (sugeriria interação inexistente), não há animação palavra a
+palavra, não há smooth scroll por JavaScript (o nativo basta e não tira do
+usuário o controle da página) e o hero não tem reveal por scroll — ver abaixo.
 
 Proibido: bounce, spin, pulsação infinita, glow, partículas, animação de
 `top/left/width/height`. Só `transform` e `opacity`.

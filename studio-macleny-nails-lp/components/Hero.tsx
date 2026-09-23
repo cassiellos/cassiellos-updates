@@ -3,6 +3,7 @@ import Image from "next/image";
 import RevealOnLoad from "./RevealOnLoad";
 import WhatsAppButton from "./WhatsAppButton";
 import { hero } from "@/lib/content";
+import { heroDelay } from "@/lib/motion";
 import { siteConfig } from "@/lib/site-config";
 
 export default function Hero() {
@@ -18,11 +19,11 @@ export default function Hero() {
       <div className="container-macleny relative z-10">
         <div className="lg:grid lg:grid-cols-12">
           <div className="lg:col-span-6">
-            <RevealOnLoad>
+            <RevealOnLoad kind="quiet">
               <p className="eyebrow text-heritage">{hero.eyebrow}</p>
             </RevealOnLoad>
 
-            <RevealOnLoad delay={60}>
+            <RevealOnLoad delay={heroDelay.title}>
               <h1 className="type-serif type-h1 mt-5 text-balance">
                 {hero.titleLines.map((line, index) => (
                   <span key={line} className="block">
@@ -32,11 +33,11 @@ export default function Hero() {
               </h1>
             </RevealOnLoad>
 
-            <RevealOnLoad delay={110}>
+            <RevealOnLoad delay={heroDelay.body} kind="support">
               <p className="type-body-lg mt-6 max-w-lg text-espresso-soft">{hero.body}</p>
             </RevealOnLoad>
 
-            <RevealOnLoad delay={165}>
+            <RevealOnLoad delay={heroDelay.cta} kind="support">
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <WhatsAppButton location="hero" variant="primary">
                   {hero.primaryCta}
@@ -48,7 +49,7 @@ export default function Hero() {
               </div>
             </RevealOnLoad>
 
-            <RevealOnLoad delay={220}>
+            <RevealOnLoad delay={heroDelay.signature} kind="quiet">
               <p className="mt-6 text-sm italic text-espresso-muted">
                 {hero.signature}
               </p>

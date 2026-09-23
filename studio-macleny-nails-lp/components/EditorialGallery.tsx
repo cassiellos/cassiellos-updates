@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import SectionReveal from "./SectionReveal";
 import { gallery, gallerySection } from "@/lib/content";
+import { revealDelay, staggerDelay } from "@/lib/motion";
 
 const ratioClass = {
   portrait: "aspect-[4/5]",
@@ -27,20 +28,29 @@ export default function EditorialGallery() {
   return (
     <section id="resultados" className="section-space border-t border-line">
       <div className="container-macleny">
-        <SectionReveal className="max-w-3xl">
-          <p className="eyebrow text-heritage">{gallerySection.eyebrow}</p>
-          <h2 className="type-serif type-h2 mt-6 text-balance">
-            {gallerySection.title}
-          </h2>
-          <p className="type-body-lg mt-6 text-espresso-soft">{gallerySection.body}</p>
-        </SectionReveal>
+        <div className="max-w-3xl">
+          <SectionReveal kind="quiet">
+            <p className="eyebrow text-heritage">{gallerySection.eyebrow}</p>
+          </SectionReveal>
+
+          <SectionReveal>
+            <h2 className="type-serif type-h2 mt-6 text-balance">
+              {gallerySection.title}
+            </h2>
+          </SectionReveal>
+
+          <SectionReveal delay={revealDelay.support} kind="support">
+            <p className="type-body-lg mt-6 text-espresso-soft">{gallerySection.body}</p>
+          </SectionReveal>
+        </div>
 
         {/* Assimetria controlada: a terceira imagem deixa espaço negativo. */}
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:mt-16 lg:grid-cols-12 lg:gap-6">
           {gallery.map((item, index) => (
             <SectionReveal
               key={item.id}
-              delay={index * 90}
+              delay={staggerDelay(index, 90)}
+              kind="media"
               className={[
                 "group",
                 spanClass[item.span],
@@ -52,7 +62,7 @@ export default function EditorialGallery() {
             >
               <figure
                 className={[
-                  "relative w-full overflow-hidden rounded-[1.5rem] bg-ivory-deep",
+                  "media-frame w-full rounded-[1.5rem] bg-ivory-deep",
                   ratioClass[item.ratio],
                 ].join(" ")}
               >
@@ -62,7 +72,13 @@ export default function EditorialGallery() {
                   fill
                   loading="lazy"
                   sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 45vw"
-                  className="object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)] motion-safe:group-hover:scale-[1.02]"
+                  /*
+                    Sem utility de transicao aqui: a duracao e o easing do zoom
+                    vivem em `.media-frame img`, com o resto da linguagem. A
+                    utility de hover permanece porque o Tailwind 4 a emite como
+                    `scale:`, propriedade separada do `transform` do reveal.
+                  */
+                  className="object-cover object-center motion-safe:group-hover:scale-[1.02]"
                 />
               </figure>
             </SectionReveal>

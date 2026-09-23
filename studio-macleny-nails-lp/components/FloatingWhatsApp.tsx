@@ -24,7 +24,13 @@ export default function FloatingWhatsApp() {
   return (
     <div
       className={[
-        "fixed right-4 z-40 transition-all duration-300 sm:right-6",
+        /*
+          `transition-all` trocado por transform+opacity explicitos: num
+          elemento fixo, animar "todas as propriedades" poe o navegador para
+          vigiar tambem largura, cor e sombra a cada frame de scroll, sem
+          nenhuma delas mudar. A duracao vem dos tokens centrais.
+        */
+        "fixed right-4 z-40 transition-[transform,opacity] duration-[var(--dur-state)] ease-[var(--ease-macleny)] sm:right-6",
         isVisible
           ? "translate-y-0 opacity-100"
           : "pointer-events-none translate-y-3 opacity-0",
@@ -43,7 +49,7 @@ export default function FloatingWhatsApp() {
 
         <span
           role="tooltip"
-          className="pointer-events-none absolute bottom-1/2 right-[calc(100%+0.75rem)] hidden translate-y-1/2 whitespace-nowrap rounded-full bg-espresso px-3 py-1.5 text-xs text-ivory opacity-0 transition-opacity duration-200 group-hover:opacity-100 lg:block"
+          className="pointer-events-none absolute bottom-1/2 right-[calc(100%+0.75rem)] hidden translate-y-1/2 whitespace-nowrap rounded-full bg-espresso px-3 py-1.5 text-xs text-ivory opacity-0 transition-opacity duration-[var(--dur-micro)] ease-[var(--ease-macleny)] group-hover:opacity-100 lg:block"
         >
           Agendar pelo WhatsApp
         </span>

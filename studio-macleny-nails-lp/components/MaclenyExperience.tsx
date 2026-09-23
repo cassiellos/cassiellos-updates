@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import SectionReveal from "./SectionReveal";
 import { experienceSection, experienceSteps } from "@/lib/content";
+import { revealDelay, staggerDelay } from "@/lib/motion";
 
 export default function MaclenyExperience() {
   return (
@@ -16,11 +17,17 @@ export default function MaclenyExperience() {
       <div className="container-macleny relative">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
-            <SectionReveal>
+            <SectionReveal kind="quiet">
               <p className="eyebrow text-champagne">{experienceSection.eyebrow}</p>
+            </SectionReveal>
+
+            <SectionReveal>
               <h2 className="type-serif type-h2 mt-6 text-balance">
                 {experienceSection.title}
               </h2>
+            </SectionReveal>
+
+            <SectionReveal delay={revealDelay.support} kind="support">
               <p className="type-serif mt-5 max-w-lg text-[clamp(1.125rem,1.7vw,1.5rem)] leading-snug text-champagne">
                 {experienceSection.lead}
               </p>
@@ -29,8 +36,8 @@ export default function MaclenyExperience() {
               </p>
             </SectionReveal>
 
-            <SectionReveal delay={140} className="mt-10 hidden lg:block">
-              <div className="relative aspect-[5/4] w-full overflow-hidden rounded-[1.75rem] bg-espresso-soft">
+            <SectionReveal delay={revealDelay.detail} kind="media" className="mt-10 hidden lg:block">
+              <div className="media-frame aspect-[5/4] w-full rounded-[1.75rem] bg-espresso-soft">
                 <Image
                   src={experienceSection.image.src}
                   alt={experienceSection.image.alt}
@@ -54,7 +61,8 @@ export default function MaclenyExperience() {
                 <SectionReveal
                   key={step.index}
                   as="li"
-                  delay={index * 70}
+                  delay={staggerDelay(index)}
+                  kind="support"
                   className="relative grid grid-cols-[1.375rem_1fr] gap-5 pb-11 last:pb-0 sm:gap-7"
                 >
                   <span

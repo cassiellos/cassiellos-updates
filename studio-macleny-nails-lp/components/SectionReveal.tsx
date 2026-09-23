@@ -2,10 +2,18 @@
 
 import { useEffect, useRef, type ElementType, type ReactNode } from "react";
 
+import type { RevealKind } from "@/lib/motion";
+
 type SectionRevealProps = {
   children: ReactNode;
-  /** Atraso em ms para composicoes em stagger. */
+  /** Atraso em ms. Use a escada de `lib/motion.ts`, nao valores avulsos. */
   delay?: number;
+  /**
+   * Papel do bloco na leitura. Define quanto ele se desloca ao entrar:
+   * `lead` percorre a distancia cheia, `support` metade, `quiet` nao se
+   * desloca e `media` ainda aproxima a fotografia. Ver `[data-reveal-kind]`.
+   */
+  kind?: RevealKind;
   className?: string;
   as?: ElementType;
 };
@@ -23,6 +31,7 @@ type SectionRevealProps = {
 export default function SectionReveal({
   children,
   delay = 0,
+  kind = "lead",
   className,
   as,
 }: SectionRevealProps) {
@@ -55,7 +64,13 @@ export default function SectionReveal({
           }
         }
       },
-      { rootMargin: "0px 0px -12% 0px", threshold: 0.08 },
+      /*
+       * Dispara quando o topo do bloco entra de fato na area visual. O recuo
+       * de 10% na base evita disparar com o elemento ainda colado na borda;
+       * `threshold: 0` cobre blocos mais altos que a viewport, que nunca
+       * chegariam a uma fracao visivel.
+       */
+      { rootMargin: "0px 0px -10% 0px", threshold: 0 },
     );
 
     observer.observe(node);
@@ -67,6 +82,7 @@ export default function SectionReveal({
       ref={ref}
       className={className}
       data-reveal="hidden"
+      data-reveal-kind={kind}
       style={
         delay ? ({ "--reveal-delay": `${delay}ms` } as React.CSSProperties) : undefined
       }
