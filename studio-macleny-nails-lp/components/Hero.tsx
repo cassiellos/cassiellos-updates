@@ -8,7 +8,7 @@ import { siteConfig } from "@/lib/site-config";
 
 export default function Hero() {
   return (
-    <section id="topo" className="relative overflow-hidden pb-[13rem] pt-[calc(var(--header-height)+1.5rem)] sm:pb-[16rem] lg:pb-24 lg:pt-[calc(var(--header-height)+2.5rem)]">
+    <section id="topo" className="relative overflow-hidden pb-[10rem] pt-[calc(var(--header-height)+1.5rem)] sm:pb-[12rem] lg:pb-24 lg:pt-[calc(var(--header-height)+2.5rem)]">
       {/* Arcos herdados do simbolo — decorativos. */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <span className="arc arc-light -left-[32%] top-[-18%] h-[46rem] w-[46rem] sm:-left-[18%]" />
@@ -110,7 +110,7 @@ export default function Hero() {
         largura maxima de 32rem e sua ultima linha alcanca a faixa da foto.
         Nos celulares isso nao acontece porque a copy quebra antes.
       */}
-      <figure className="pointer-events-none absolute bottom-0 right-0 h-[23rem] w-full lg:inset-y-0 lg:h-auto lg:w-1/2 lg:max-w-[46rem]">
+      <figure className="pointer-events-none absolute bottom-0 right-0 h-[13rem] w-full sm:h-[15rem] lg:inset-y-0 lg:h-auto lg:w-1/2 lg:max-w-[46rem]">
         <Image
           src={hero.image.src}
           alt={hero.image.alt}
@@ -122,7 +122,7 @@ export default function Hero() {
             exato, em vez de uma fracao da viewport, evita o que acontecia
             antes: o tablet buscava a variante de 1920px para exibir 538px.
           */
-          sizes="(min-width: 1024px) min(50vw, 46rem), 361px"
+          sizes="(min-width: 1024px) min(50vw, 46rem), (min-width: 640px) 236px, 204px"
           className="object-contain object-right-bottom lg:object-cover lg:object-top"
         />
 
