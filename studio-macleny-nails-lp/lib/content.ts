@@ -178,7 +178,7 @@ export const services: Service[] = [
     ],
     highlight:
       "Um momento reservado para você — do primeiro detalhe ao acabamento final.",
-    imageCaption: "Mais que unhas, um momento para você",
+    imageCaption: "UM MOMENTO PRA VOCÊ",
     image: "/images/service-experiencia.webp",
     imageAlt: "Recepção do studio: bancada de mármore com taça, velas e flores, toalha bordada com a marca Macleny e a assinatura Studio Macleny Nails na parede.",
     cta: "Quero viver a Experiência Macleny",
