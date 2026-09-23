@@ -288,6 +288,31 @@
     transition-delay: var(--reveal-delay, 0ms);
   }
 
+  /*
+   * Reveal de entrada para o conteudo acima da dobra.
+   *
+   * Diferente do reveal por scroll acima, este NAO depende de JavaScript: a
+   * animacao comeca na primeira pintura. E o que mantem o LCP baixo — com o
+   * reveal por IntersectionObserver o texto do hero so aparecia depois da
+   * hidratacao. Por isso tambem nao ha o gate `.js`: sem JS a animacao roda
+   * igual e termina visivel (`both`).
+   */
+  [data-reveal="onload"] {
+    animation: macleny-reveal 640ms var(--ease-macleny) var(--reveal-delay, 0ms) both;
+  }
+
+  @keyframes macleny-reveal {
+    from {
+      opacity: 0;
+      transform: translateY(var(--reveal-distance));
+    }
+
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
   .parallax-media {
     will-change: transform;
     transition: transform 120ms linear;
@@ -310,6 +335,14 @@
     .js [data-reveal] {
       opacity: 1 !important;
       transform: none !important;
+    }
+
+    /*
+     * `animation-duration` ja e zerado no bloco global acima, mas o DELAY nao:
+     * com fill-mode `both` o elemento ficaria invisivel durante o atraso.
+     */
+    [data-reveal="onload"] {
+      animation: none !important;
     }
 
     .parallax-media {

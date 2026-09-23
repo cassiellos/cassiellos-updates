@@ -271,9 +271,18 @@ em estado React — zero re-render e nenhuma dependência extra. Isso é um desv
 consciente da sugestão de usar Framer Motion/Motion: o efeito necessário não
 justifica o peso da biblioteca.
 
-`prefers-reduced-motion: reduce` desliga parallax, zeros as transições e força
-todos os blocos a visíveis. Sem JavaScript, os blocos também permanecem visíveis
-(a classe `js` só é adicionada ao `<html>` quando há JS).
+**Acima da dobra o reveal não usa JavaScript.** `components/RevealOnLoad.tsx` é
+um Server Component que marca `data-reveal="onload"`; a animação é `@keyframes`
+puro, começa na primeira pintura e não espera hidratação. O motivo é de
+carregamento, não estético: com o reveal por `IntersectionObserver` no hero, o
+LCP do mobile ficava em 1128ms (o elemento era o parágrafo, invisível até a
+hidratação). Com a versão CSS, LCP = FCP = 120ms. Regra: `RevealOnLoad` para o
+que abre a página, `SectionReveal` para o que exige scroll.
+
+`prefers-reduced-motion: reduce` desliga parallax, zeros as transições, anula a
+animação de entrada e força todos os blocos a visíveis. Sem JavaScript, os
+blocos também permanecem visíveis (a classe `js` só é adicionada ao `<html>`
+quando há JS; o reveal de entrada não depende dela).
 
 ### B.8 Acessibilidade implementada
 

@@ -1,5 +1,3 @@
-"use client";
-
 import Script from "next/script";
 
 import { siteConfig } from "@/lib/site-config";
@@ -9,6 +7,9 @@ import { siteConfig } from "@/lib/site-config";
  *  - GTM configurado          -> apenas o container do GTM;
  *  - GTM ausente e Ads presente -> apenas o Google Tag (gtag.js).
  * Sem IDs configurados nao injeta nada e o site segue funcionando.
+ *
+ * Server Component de proposito: enquanto nao houver tag configurada, nada
+ * deste modulo — nem o next/script — entra no bundle do cliente.
  */
 export default function Analytics() {
   const { gtmId, googleAdsId } = siteConfig.analytics;

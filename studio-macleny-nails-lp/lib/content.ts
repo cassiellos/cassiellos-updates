@@ -25,7 +25,7 @@ export const hero = {
   signature: "Excelência técnica. Experiência individual.",
   image: {
     src: "/images/hero.webp",
-    alt: "Detalhe de unhas com acabamento neutro em composição editorial de tons quentes.",
+    alt: "Mulher com unhas alongadas em tom nude, mão apoiada junto ao rosto, em composição editorial de tons quentes.",
   },
 } as const;
 

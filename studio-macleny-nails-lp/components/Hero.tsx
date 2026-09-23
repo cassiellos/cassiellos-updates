@@ -1,7 +1,6 @@
 import Image from "next/image";
 
-import ParallaxMedia from "./ParallaxMedia";
-import SectionReveal from "./SectionReveal";
+import RevealOnLoad from "./RevealOnLoad";
 import WhatsAppButton from "./WhatsAppButton";
 import { hero } from "@/lib/content";
 import { siteConfig } from "@/lib/site-config";
@@ -15,14 +14,15 @@ export default function Hero() {
         <span className="arc -right-[38%] bottom-[-34%] h-[38rem] w-[38rem]" />
       </div>
 
-      <div className="container-macleny relative">
-        <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
+      {/* z-10: em lg a fotografia e irma posicionada e vem depois no DOM. */}
+      <div className="container-macleny relative z-10">
+        <div className="lg:grid lg:grid-cols-12">
           <div className="lg:col-span-6">
-            <SectionReveal>
+            <RevealOnLoad>
               <p className="eyebrow text-heritage">{hero.eyebrow}</p>
-            </SectionReveal>
+            </RevealOnLoad>
 
-            <SectionReveal delay={90}>
+            <RevealOnLoad delay={60}>
               <h1 className="type-serif type-h1 mt-5 text-balance">
                 {hero.titleLines.map((line, index) => (
                   <span key={line} className="block">
@@ -30,13 +30,13 @@ export default function Hero() {
                   </span>
                 ))}
               </h1>
-            </SectionReveal>
+            </RevealOnLoad>
 
-            <SectionReveal delay={170}>
+            <RevealOnLoad delay={110}>
               <p className="type-body-lg mt-6 max-w-lg text-espresso-soft">{hero.body}</p>
-            </SectionReveal>
+            </RevealOnLoad>
 
-            <SectionReveal delay={250}>
+            <RevealOnLoad delay={165}>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <WhatsAppButton location="hero" variant="primary">
                   {hero.primaryCta}
@@ -46,39 +46,40 @@ export default function Hero() {
                   {hero.secondaryCta}
                 </a>
               </div>
-            </SectionReveal>
+            </RevealOnLoad>
 
-            <SectionReveal delay={320}>
+            <RevealOnLoad delay={220}>
               <p className="mt-6 text-sm italic text-espresso-muted">
                 {hero.signature}
               </p>
-            </SectionReveal>
-          </div>
-
-          <div className="lg:col-span-6 lg:col-start-7">
-            <SectionReveal delay={120}>
-              <figure className="relative">
-                <ParallaxMedia strength={16}>
-                  <div className="relative aspect-[4/5] w-full overflow-hidden rounded-t-full rounded-b-[2rem] bg-ivory-deep sm:aspect-[5/6] lg:aspect-auto lg:h-[clamp(24rem,60vh,32rem)]">
-                    <Image
-                      src={hero.image.src}
-                      alt={hero.image.alt}
-                      fill
-                      priority
-                      sizes="(max-width: 1023px) 100vw, 52vw"
-                      className="object-cover object-center"
-                    />
-                  </div>
-                </ParallaxMedia>
-
-                <figcaption className="visually-hidden">
-                  Fotografia editorial do {siteConfig.brand.name}.
-                </figcaption>
-              </figure>
-            </SectionReveal>
+            </RevealOnLoad>
           </div>
         </div>
       </div>
+
+      {/*
+        A fotografia e um recorte com alfa: assenta direto sobre o Ivory, sem
+        moldura e sem emenda, deixando os arcos aparecerem por tras.
+
+        Ate lg ela fica no fluxo, abaixo do texto, sangrando de borda a borda.
+        A partir de lg vira painel sangrado na direita da viewport — por isso
+        mora FORA do container, que tem largura maxima. Nao usa ParallaxMedia:
+        deslocar um elemento preso a inset-y-0 abriria vao no topo ou na base.
+      */}
+      <figure className="pointer-events-none relative mt-10 h-[26rem] w-full sm:h-[32rem] lg:absolute lg:inset-y-0 lg:right-0 lg:mt-0 lg:h-auto lg:w-1/2 lg:max-w-[46rem]">
+        <Image
+          src={hero.image.src}
+          alt={hero.image.alt}
+          fill
+          priority
+          sizes="(min-width: 1024px) min(50vw, 46rem), 92vw"
+          className="object-cover object-top"
+        />
+
+        <figcaption className="visually-hidden">
+          Fotografia editorial do {siteConfig.brand.name}.
+        </figcaption>
+      </figure>
     </section>
   );
 }
