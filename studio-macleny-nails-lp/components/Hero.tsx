@@ -8,7 +8,7 @@ import { siteConfig } from "@/lib/site-config";
 
 export default function Hero() {
   return (
-    <section id="topo" className="relative overflow-hidden pb-[17rem] pt-[calc(var(--header-height)+1.5rem)] sm:pb-[21rem] lg:pb-24 lg:pt-[calc(var(--header-height)+2.5rem)]">
+    <section id="topo" className="relative overflow-hidden pb-[13rem] pt-[calc(var(--header-height)+1.5rem)] sm:pb-[16rem] lg:pb-24 lg:pt-[calc(var(--header-height)+2.5rem)]">
       {/* Arcos herdados do simbolo — decorativos. */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <span className="arc arc-light -left-[32%] top-[-18%] h-[46rem] w-[46rem] sm:-left-[18%]" />
@@ -43,14 +43,29 @@ export default function Hero() {
                   {hero.primaryCta}
                 </WhatsAppButton>
 
-                <a href={hero.secondaryHref} className="btn btn-secondary">
+                {/*
+                  O secundario ganha fundo Ivory ate lg. Ele e transparente por
+                  padrao, e sobre a fotografia do hero mobile a figura aparecia
+                  atraves do botao. O Ivory e a propria cor da pagina: onde nao
+                  ha foto atras, nada muda visualmente.
+                */}
+                <a
+                  href={hero.secondaryHref}
+                  className="btn btn-secondary bg-ivory lg:bg-transparent"
+                >
                   {hero.secondaryCta}
                 </a>
               </div>
             </RevealOnLoad>
 
             <RevealOnLoad delay={heroDelay.signature} kind="quiet">
-              <p className="mt-6 text-sm italic text-espresso-muted">
+              {/*
+                No mobile esta linha passa sobre a fotografia. Em Espresso
+                cheio ela se sustenta sobre pele e tecido claro; o tom `muted`
+                original so tem contraste suficiente sobre o Ivory, e volta a
+                partir de lg, onde nao ha foto atras dela.
+              */}
+              <p className="mt-6 text-sm italic text-espresso lg:text-espresso-muted">
                 {hero.signature}
               </p>
             </RevealOnLoad>
@@ -65,17 +80,37 @@ export default function Hero() {
         tem largura maxima. Nao usa ParallaxMedia: deslocar um elemento preso a
         inset-y-0 abriria vao no topo ou na base.
 
-        No mobile ela nao empilha abaixo do texto — ancora no canto inferior
-        direito, dentro do espaco reservado pelo padding da secao. Assim o hero
-        mantem presenca sem empurrar os CTAs para fora da primeira tela, que
-        era o problema do empilhamento.
+        No mobile ela nao e um bloco abaixo do texto: e FUNDO. Ancora no canto
+        inferior direito e sobe ate a altura dos CTAs, passando POR TRAS deles
+        e da assinatura. O botao primario, opaco, recorta a figura; o que
+        aparece e a faixa a direita dele, na calha do container. E dai que vem
+        a presenca sem custo de altura.
 
-        O texto fica POR CIMA: o container tem z-10 e esta figura nao tem
-        z-index. Na pratica eles nao se cruzam, porque o padding da base
-        reserva a faixa da foto — mas se a copy crescer, a leitura continua
-        garantida.
+        A ordem de pintura garante a leitura: o container tem z-10 e esta
+        figura nao tem z-index, entao texto e botoes ficam sempre por cima. O
+        padding da base e calibrado para a figura nao subir alem dos CTAs —
+        nenhum paragrafo chega a ter fotografia atras.
+
+        A ALTURA da caixa (23rem) e deliberadamente maior que o padding da
+        base (13rem). A diferenca — 10rem — e exatamente o quanto a figura
+        sobe acima do fim do conteudo, e por isso e a mesma em qualquer
+        largura de tela.
+
+        Dimensionar a caixa em vw nao funciona aqui: ela cresceria com a tela
+        enquanto o bloco de texto ENCOLHE (a copy reflui em menos linhas), e a
+        figura acabava invadindo o paragrafo nas larguras maiores. Ancorando
+        ao padding, a posicao relativa ao conteudo fica constante.
+
+        A largura e `w-full` so para o `object-contain` ser limitado pela
+        ALTURA — assim a imagem mede sempre 361x368, e o `sizes` pode declarar
+        esse valor exato em vez de uma fracao da viewport.
+
+        A partir de sm o padding sobe para 16rem, o que reduz a subida de 10
+        para 3rem. Motivo medido: entre 640 e 900px o paragrafo ainda usa a
+        largura maxima de 32rem e sua ultima linha alcanca a faixa da foto.
+        Nos celulares isso nao acontece porque a copy quebra antes.
       */}
-      <figure className="pointer-events-none absolute bottom-0 right-0 h-[16rem] w-[82%] sm:h-[20rem] sm:w-[70%] lg:inset-y-0 lg:h-auto lg:w-1/2 lg:max-w-[46rem]">
+      <figure className="pointer-events-none absolute bottom-0 right-0 h-[23rem] w-full lg:inset-y-0 lg:h-auto lg:w-1/2 lg:max-w-[46rem]">
         <Image
           src={hero.image.src}
           alt={hero.image.alt}
@@ -86,7 +121,7 @@ export default function Hero() {
             acima. Declarar 82vw em todos os tamanhos fazia o tablet buscar a
             variante de 1920px para exibir 538px.
           */
-          sizes="(min-width: 1024px) min(50vw, 46rem), (min-width: 640px) 70vw, 82vw"
+          sizes="(min-width: 1024px) min(50vw, 46rem), 361px"
           className="object-contain object-right-bottom lg:object-cover lg:object-top"
         />
 
