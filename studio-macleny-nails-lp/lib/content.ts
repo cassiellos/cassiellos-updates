@@ -106,7 +106,6 @@ export const services: Service[] = [
     title: "Manutenção",
     lead: "Sua unha bonita hoje até o próximo atendimento.",
     description: [
-      "Um resultado elegante não termina quando você sai do studio. Por isso, o cuidado continua entre uma visita e outra.",
       "Acompanhamos a evolução das suas unhas, observando crescimento, estrutura e necessidades específicas para manter a beleza, a resistência e a naturalidade do resultado ao longo do tempo. As manutenções feitas no momento certo preservam o acabamento, evitam desgastes desnecessários e corrigem pequenos detalhes antes que eles comprometam a aparência das unhas.",
       "Assim, você passa as semanas com unhas bem cuidadas, sofisticadas e sempre alinhadas à imagem que deseja transmitir.",
     ],
