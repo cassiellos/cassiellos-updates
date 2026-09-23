@@ -54,7 +54,7 @@ export type Service = {
 };
 
 export const servicesSection = {
-  eyebrow: "Serviços Macleny",
+  eyebrow: "Macleny Experience",
   title: "Beleza pensada nos mínimos detalhes.",
   body:
     "Mais do que escolher uma técnica, aqui você escolhe como quer se sentir ao olhar para as suas mãos. Cada atendimento é personalizado para respeitar seu estilo, sua rotina e o resultado que você deseja.",
