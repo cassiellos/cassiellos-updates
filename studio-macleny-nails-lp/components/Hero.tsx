@@ -48,6 +48,11 @@ export default function Hero() {
               </div>
             </SectionReveal>
 
+            <SectionReveal delay={320}>
+              <p className="mt-6 text-sm italic text-espresso-muted">
+                {hero.signature}
+              </p>
+            </SectionReveal>
           </div>
 
           <div className="lg:col-span-6 lg:col-start-7">
