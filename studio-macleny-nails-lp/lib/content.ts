@@ -150,7 +150,7 @@ export const services: Service[] = [
       "Personalizações",
     ],
     highlight: "Do clássico ao exclusivo, um design criado para combinar com você.",
-    imageCaption: "Arte que revela quem você é",
+    imageCaption: "Todas estas fotos foram produzidas no Studio Macleny",
     image: "/images/service-nail-art-designs.png",
     imageAlt: "Composição de diferentes estilos de nail art, com unhas clássicas, francesinhas, cromadas e decoradas.",
     cta: "Quero escolher meu design",
