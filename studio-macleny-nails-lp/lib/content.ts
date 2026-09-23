@@ -422,7 +422,7 @@ export const faqItems: FaqItem[] = hasConfirmedAddress()
 export const finalCta = {
   eyebrow: "Studio Macleny Nails",
   title: "Seu cuidado pode começar com uma conversa.",
-  body: "Conte o que você busca. A Macleny cuida do atendimento a partir daí.",
+  body: "Conte o que busca. A Macleny cuida do próximo passo.",
   cta: "Agendar pelo WhatsApp",
 } as const;
 
