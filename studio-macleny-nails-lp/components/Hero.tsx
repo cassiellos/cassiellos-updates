@@ -8,7 +8,7 @@ import { siteConfig } from "@/lib/site-config";
 
 export default function Hero() {
   return (
-    <section id="topo" className="relative overflow-hidden pb-[10rem] pt-[calc(var(--header-height)+1.5rem)] sm:pb-[12rem] lg:pb-24 lg:pt-[calc(var(--header-height)+2.5rem)]">
+    <section id="topo" className="relative overflow-hidden pb-[14rem] pt-[calc(var(--header-height)+1.5rem)] sm:pb-[16rem] lg:pb-24 lg:pt-[calc(var(--header-height)+2.5rem)]">
       {/* Arcos herdados do simbolo — decorativos. */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <span className="arc arc-light -left-[32%] top-[-18%] h-[46rem] w-[46rem] sm:-left-[18%]" />
@@ -105,12 +105,16 @@ export default function Hero() {
         ALTURA — assim a imagem mede sempre 361x368, e o `sizes` pode declarar
         esse valor exato em vez de uma fracao da viewport.
 
-        A partir de sm o padding sobe para 16rem, o que reduz a subida de 10
-        para 3rem. Motivo medido: entre 640 e 900px o paragrafo ainda usa a
-        largura maxima de 32rem e sua ultima linha alcanca a faixa da foto.
-        Nos celulares isso nao acontece porque a copy quebra antes.
+O DEGRADE por tras da imagem reproduz uma coisa medida na referencia: la a
+        fotografia nao termina seca na silhueta, ela mantem um halo do proprio
+        fundo que desvanece. No canto inferior direito o tom medido e
+        (244,236,229) contra (246,240,233) do Ivory da pagina — diferenca de 2
+        a 4 por canal, quase invisivel isolada, mas e ela que faz a figura
+        parecer assentada e nao colada. O gradiente parte desse tom e chega a
+        transparente a 70%. So abaixo de lg: no desktop a foto sangra a
+        viewport inteira e nao precisa de halo.
       */}
-      <figure className="pointer-events-none absolute bottom-0 right-0 h-[13rem] w-full sm:h-[15rem] lg:inset-y-0 lg:h-auto lg:w-1/2 lg:max-w-[46rem]">
+      <figure className="pointer-events-none absolute bottom-0 right-0 h-[17rem] w-full bg-[radial-gradient(135%_115%_at_100%_100%,rgba(233,224,211,0.92)_0%,rgba(243,237,229,0.5)_42%,rgba(244,239,232,0)_70%)] sm:h-[19rem] lg:inset-y-0 lg:h-auto lg:w-1/2 lg:max-w-[46rem] lg:bg-none">
         <Image
           src={hero.image.src}
           alt={hero.image.alt}
@@ -122,7 +126,7 @@ export default function Hero() {
             exato, em vez de uma fracao da viewport, evita o que acontecia
             antes: o tablet buscava a variante de 1920px para exibir 538px.
           */
-          sizes="(min-width: 1024px) min(50vw, 46rem), (min-width: 640px) 236px, 204px"
+          sizes="(min-width: 1024px) min(50vw, 46rem), (min-width: 640px) 298px, 267px"
           className="object-contain object-right-bottom lg:object-cover lg:object-top"
         />
 
