@@ -149,8 +149,8 @@ export const services: Service[] = [
       "Personalizações",
     ],
     highlight: "Do clássico ao exclusivo, um design criado para combinar com você.",
-    imageCaption: "Todas estas fotos foram produzidas no Studio Macleny",
-    image: "/images/service-nail-art-designs.png",
+    imageCaption: "Fotos produzidas no Studio Macleny",
+    image: "/images/service-nail-art.webp",
     imageAlt: "Composição de diferentes estilos de nail art, com unhas clássicas, francesinhas, cromadas e decoradas.",
     cta: "Quero escolher meu design",
     whatsappMessage:
@@ -177,7 +177,7 @@ export const services: Service[] = [
     ],
     highlight:
       "Um momento reservado para você — do primeiro detalhe ao acabamento final.",
-    imageCaption: "UM MOMENTO PRA VOCÊ",
+    imageCaption: "Um momento pra você",
     image: "/images/service-experiencia.webp",
     imageAlt: "Recepção do studio: bancada de mármore com taça, velas e flores, toalha bordada com a marca Macleny e a assinatura Studio Macleny Nails na parede.",
     cta: "Quero viver a Experiência Macleny",

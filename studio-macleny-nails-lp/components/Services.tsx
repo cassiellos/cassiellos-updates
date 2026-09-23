@@ -80,19 +80,33 @@ export default function Services() {
                       className="object-cover object-center"
                     />
                     {/*
-                      Veu escuro na base: garante que a legenda continue legivel
-                      qualquer que seja a fotografia colocada no slot, clara ou
-                      escura. Sem ele, o texto some em fotos de fundo claro.
+                      Veu e legenda so existem quando ha texto. Sem essa guarda,
+                      um card de legenda vazia ainda ganhava a faixa escura na
+                      base da foto, sem nada para justificar.
                     */}
-                    <span
-                      aria-hidden="true"
-                      className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-espresso/70 to-transparent"
-                    />
-                    <figcaption className="absolute bottom-5 left-5 right-5">
-                      <span className="eyebrow block max-w-[11rem] text-ivory">
-                        {service.imageCaption}
-                      </span>
-                    </figcaption>
+                    {service.imageCaption ? (
+                      <>
+                        {/*
+                          Veu escuro na base: mantem a legenda legivel sobre
+                          qualquer fotografia, clara ou escura.
+                        */}
+                        <span
+                          aria-hidden="true"
+                          className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-espresso/70 to-transparent"
+                        />
+                        <figcaption className="absolute bottom-5 left-5 right-5">
+                          {/*
+                            Sem largura maxima artificial: a legenda ocupa a
+                            linha inteira e so quebra quando precisa. `balance`
+                            distribui as linhas por igual em vez de deixar uma
+                            palavra orfa na ultima.
+                          */}
+                          <span className="eyebrow block text-balance text-ivory">
+                            {service.imageCaption}
+                          </span>
+                        </figcaption>
+                      </>
+                    ) : null}
                   </figure>
                 </SectionReveal>
 

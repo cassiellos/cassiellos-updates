@@ -24,7 +24,14 @@ const SLOTS = [
   { file: "services-intro.webp", width: 1400, height: 1050 },
   { file: "service-alongamentos.webp", width: 1400, height: 1050 },
   { file: "service-manutencao.webp", width: 1400, height: 1050 },
-  { file: "service-nail-art.webp", width: 1400, height: 1050 },
+  {
+    file: "service-nail-art.webp",
+    width: 1400,
+    height: 1050,
+    // Origem em retrato. A colagem e uma grade repetida, entao qualquer altura
+    // serve; 25% mantem as fileiras inteiras, sem cortar designs pela metade.
+    focusY: 0.25,
+  },
   {
     file: "service-experiencia.webp",
     width: 1400,
