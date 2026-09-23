@@ -91,10 +91,11 @@ export default function Hero() {
         padding da base e calibrado para a figura nao subir alem dos CTAs —
         nenhum paragrafo chega a ter fotografia atras.
 
-        A ALTURA da caixa (23rem) e deliberadamente maior que o padding da
-        base (13rem). A diferenca — 10rem — e exatamente o quanto a figura
-        sobe acima do fim do conteudo, e por isso e a mesma em qualquer
-        largura de tela.
+        A ALTURA da caixa (17rem) e deliberadamente maior que o padding da
+        base (14rem). A diferenca — 3rem — e exatamente o quanto a figura sobe
+        acima do fim do conteudo, e por isso e a mesma em qualquer largura de
+        tela. A partir de sm as duas sobem juntas (19rem e 16rem), mantendo a
+        mesma diferenca.
 
         Dimensionar a caixa em vw nao funciona aqui: ela cresceria com a tela
         enquanto o bloco de texto ENCOLHE (a copy reflui em menos linhas), e a
@@ -102,12 +103,13 @@ export default function Hero() {
         ao padding, a posicao relativa ao conteudo fica constante.
 
         A largura e `w-full` so para o `object-contain` ser limitado pela
-        ALTURA — assim a imagem mede sempre 361x368, e o `sizes` pode declarar
-        esse valor exato em vez de uma fracao da viewport.
+        ALTURA — assim a imagem mede sempre 267x272 (298x304 a partir de sm),
+        e o `sizes` pode declarar esses valores exatos em vez de uma fracao da
+        viewport.
 
-O DEGRADE por tras da imagem reproduz uma coisa medida na referencia: la a
-        fotografia nao termina seca na silhueta, ela mantem um halo do proprio
-        fundo que desvanece. No canto inferior direito o tom medido e
+        O DEGRADE por tras da imagem reproduz uma coisa medida na referencia:
+        la a fotografia nao termina seca na silhueta, ela mantem um halo do
+        proprio fundo que desvanece. No canto inferior direito o tom medido e
         (244,236,229) contra (246,240,233) do Ivory da pagina — diferenca de 2
         a 4 por canal, quase invisivel isolada, mas e ela que faz a figura
         parecer assentada e nao colada. O gradiente parte desse tom e chega a
@@ -121,10 +123,11 @@ O DEGRADE por tras da imagem reproduz uma coisa medida na referencia: la a
           fill
           priority
           /*
-            Abaixo de lg a imagem mede sempre 361px, porque a caixa tem altura
-            fixa e o `object-contain` e limitado por ela. Declarar esse valor
-            exato, em vez de uma fracao da viewport, evita o que acontecia
-            antes: o tablet buscava a variante de 1920px para exibir 538px.
+            Abaixo de lg a imagem tem largura fixa (267px, 298px a partir de
+            sm), porque a caixa tem altura fixa e o `object-contain` e
+            limitado por ela. Declarar esses valores exatos, em vez de uma
+            fracao da viewport, evita o que acontecia antes: o tablet buscava
+            a variante de 1920px para exibir 538px.
           */
           sizes="(min-width: 1024px) min(50vw, 46rem), (min-width: 640px) 298px, 267px"
           className="object-contain object-right-bottom lg:object-cover lg:object-top"
