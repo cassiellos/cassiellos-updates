@@ -18,7 +18,7 @@ export const hero = {
   eyebrow: "Studio Macleny Nails • Belo Horizonte",
   titleLines: ["Unhas elegantes,", "duráveis e naturalmente suas."],
   body:
-    "Seu atendimento é pensado a partir de você — do seu estilo, da sua rotina e do resultado que deseja. Técnica, precisão e cuidado se unem para entregar unhas sofisticadas, proporcionais e personalizadas, em uma experiência individual do início ao fim.",
+    "Seu atendimento é pensado a partir de você, do seu estilo, da sua rotina e do resultado que deseja. Técnica, precisão e cuidado se unem para entregar unhas sofisticadas, proporcionais e personalizadas, em uma experiência individual do início ao fim.",
   primaryCta: "Reservar meu horário",
   secondaryCta: "Conhecer a experiência Macleny",
   secondaryHref: "#experiencia",
