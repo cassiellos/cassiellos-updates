@@ -117,9 +117,10 @@ export default function Hero() {
           fill
           priority
           /*
-            Tres faixas, espelhando exatamente as tres larguras da figura
-            acima. Declarar 82vw em todos os tamanhos fazia o tablet buscar a
-            variante de 1920px para exibir 538px.
+            Abaixo de lg a imagem mede sempre 361px, porque a caixa tem altura
+            fixa e o `object-contain` e limitado por ela. Declarar esse valor
+            exato, em vez de uma fracao da viewport, evita o que acontecia
+            antes: o tablet buscava a variante de 1920px para exibir 538px.
           */
           sizes="(min-width: 1024px) min(50vw, 46rem), 361px"
           className="object-contain object-right-bottom lg:object-cover lg:object-top"
