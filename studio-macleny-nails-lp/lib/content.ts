@@ -103,7 +103,7 @@ export const services: Service[] = [
   {
     id: "manutencao",
     index: "02",
-    title: "Manutenção & Cuidado",
+    title: "Manutenção",
     lead: "Sua unha bonita hoje até o próximo atendimento.",
     description: [
       "Um resultado elegante não termina quando você sai do studio. Por isso, o cuidado continua entre uma visita e outra.",
