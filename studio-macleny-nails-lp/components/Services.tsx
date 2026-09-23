@@ -49,9 +49,6 @@ export default function Services() {
                     className="object-cover object-center"
                   />
                 </div>
-                <p className="eyebrow mt-5 max-w-[12rem] text-champagne">
-                  {servicesSection.aside}
-                </p>
               </div>
             </SectionReveal>
           </div>

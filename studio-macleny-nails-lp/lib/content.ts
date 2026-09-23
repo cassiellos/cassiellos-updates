@@ -59,7 +59,6 @@ export const servicesSection = {
   body:
     "Mais do que escolher uma técnica, aqui você escolhe como quer se sentir ao olhar para as suas mãos. Cada atendimento é personalizado para respeitar seu estilo, sua rotina e o resultado que você deseja.",
   kicker: "Suas mãos, a sua melhor versão.",
-  aside: "Detalhes que realçam histórias",
   image: {
     src: "/images/services-intro.webp",
     alt: "Mãos em repouso sobre bancada de mármore, com unhas amendoadas de acabamento nude e joias douradas.",
