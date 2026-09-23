@@ -151,8 +151,8 @@ export const services: Service[] = [
     ],
     highlight: "Do clássico ao exclusivo, um design criado para combinar com você.",
     imageCaption: "Arte que revela quem você é",
-    image: "/images/service-nail-art.webp",
-    imageAlt: "Unhas amendoadas com nail art em tons de marrom e nude, com flores em relevo e traços dourados.",
+    image: "/images/service-nail-art-designs.png",
+    imageAlt: "Composição de diferentes estilos de nail art, com unhas clássicas, francesinhas, cromadas e decoradas.",
     cta: "Quero escolher meu design",
     whatsappMessage:
       "Olá! Vim pelo site da Studio Macleny Nails e gostaria de escolher um design de nail art.",
