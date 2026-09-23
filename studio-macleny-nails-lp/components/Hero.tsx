@@ -60,20 +60,28 @@ export default function Hero() {
 
       {/*
         A fotografia e um recorte com alfa: assenta direto sobre o Ivory, sem
-        moldura e sem emenda, deixando os arcos aparecerem por tras.
+        moldura e sem emenda, deixando os arcos aparecerem por tras. E painel
+        sangrado na direita da viewport — por isso mora FORA do container, que
+        tem largura maxima. Nao usa ParallaxMedia: deslocar um elemento preso a
+        inset-y-0 abriria vao no topo ou na base.
 
-        Ate lg ela fica no fluxo, abaixo do texto, sangrando de borda a borda.
-        A partir de lg vira painel sangrado na direita da viewport — por isso
-        mora FORA do container, que tem largura maxima. Nao usa ParallaxMedia:
-        deslocar um elemento preso a inset-y-0 abriria vao no topo ou na base.
+        SO A PARTIR DE lg. Abaixo disso o hero e texto e CTA, sem foto.
+
+        O `1px` no fim do `sizes` nao e enfeite. Como a imagem tem `priority`,
+        o Next emite um <link rel="preload"> no <head>, e preload acontece
+        ANTES do layout — esconder por CSS nao impediria o download. O que
+        decide qual candidato do srcset sera baixado e o `imagesizes` desse
+        preload, que espelha este `sizes`: abaixo de 1024px ele resolve para
+        1px e o navegador busca a menor variante existente, em vez da foto
+        inteira que nao seria exibida.
       */}
-      <figure className="pointer-events-none relative mt-10 h-[26rem] w-full sm:h-[32rem] lg:absolute lg:inset-y-0 lg:right-0 lg:mt-0 lg:h-auto lg:w-1/2 lg:max-w-[46rem]">
+      <figure className="pointer-events-none hidden lg:absolute lg:inset-y-0 lg:right-0 lg:block lg:w-1/2 lg:max-w-[46rem]">
         <Image
           src={hero.image.src}
           alt={hero.image.alt}
           fill
           priority
-          sizes="(min-width: 1024px) min(50vw, 46rem), 92vw"
+          sizes="(min-width: 1024px) min(50vw, 46rem), 1px"
           className="object-cover object-top"
         />
 
