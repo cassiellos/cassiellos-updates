@@ -206,7 +206,7 @@ export const experienceSection = {
     "Um ecossistema de cuidado, praticidade e excelência para quem deseja unhas impecáveis sem abrir mão de conforto, atenção e acompanhamento personalizado.",
   image: {
     src: "/images/experience.webp",
-    alt: "Bancada de atendimento com instrumentos organizados e luz suave.",
+    alt: "Profissional de luvas finalizando as unhas de uma cliente em bancada de mármore, sob luz quente.",
   },
 } as const;
 
