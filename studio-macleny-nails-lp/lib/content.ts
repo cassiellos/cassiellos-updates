@@ -16,13 +16,13 @@ import { formatAddress, hasConfirmedAddress } from "./site-config";
 
 export const hero = {
   eyebrow: "Studio Macleny Nails • Belo Horizonte",
-  titleLines: ["Excelência técnica.", "Experiência individual."],
+  titleLines: ["Unhas elegantes,", "duráveis e naturalmente suas."],
   body:
-    "Seu atendimento começa entendendo o que funciona para você. Técnica, escuta e personalização se encontram em uma experiência de unhas pensada nos detalhes.",
-  primaryCta: "Agendar pelo WhatsApp",
-  secondaryCta: "Conhecer a experiência",
+    "Seu atendimento é pensado a partir de você, do seu estilo, da sua rotina e do resultado que deseja. Técnica, precisão e cuidado se unem para entregar unhas sofisticadas, proporcionais e personalizadas, em uma experiência individual do início ao fim.",
+  primaryCta: "Reservar meu horário",
+  secondaryCta: "Conhecer a experiência Macleny",
   secondaryHref: "#experiencia",
-  signature: "Founded by Jheniffer Macleny",
+  signature: "Excelência técnica. Experiência individual.",
   image: {
     src: "/images/hero.webp",
     alt: "Detalhe de unhas com acabamento neutro em composição editorial de tons quentes.",
@@ -92,7 +92,7 @@ export const services: Service[] = [
       "Correções de formato",
     ],
     highlight: "Estrutura, equilíbrio e acabamento impecável em cada detalhe.",
-    imageCaption: "Beleza com propósito",
+    imageCaption: "",
     image: "/images/service-alongamentos.webp",
     imageAlt: "Mão com unhas alongadas em formato amendoado e acabamento nude acetinado, apoiada em bancada de mármore.",
     cta: "Quero encontrar meu alongamento ideal",
@@ -120,7 +120,7 @@ export const services: Service[] = [
       "Acompanhamento entre manutenções",
     ],
     highlight: "Cuidado contínuo para prolongar a beleza do seu resultado.",
-    imageCaption: "Cuidado hoje. Beleza sempre.",
+    imageCaption: "",
     image: "/images/service-manutencao.webp",
     imageAlt: "Atendimento em andamento: mãos com luvas trabalham a cutícula de uma cliente apoiada em toalha.",
     cta: "Quero cuidar das minhas unhas",
@@ -149,9 +149,9 @@ export const services: Service[] = [
       "Personalizações",
     ],
     highlight: "Do clássico ao exclusivo, um design criado para combinar com você.",
-    imageCaption: "Arte que revela quem você é",
-    image: "/images/service-nail-art.webp",
-    imageAlt: "Unhas amendoadas com nail art em tons de marrom e nude, com flores em relevo e traços dourados.",
+    imageCaption: "Todas estas fotos foram produzidas no Studio Macleny",
+    image: "/images/service-nail-art-designs.png",
+    imageAlt: "Composição de diferentes estilos de nail art, com unhas clássicas, francesinhas, cromadas e decoradas.",
     cta: "Quero escolher meu design",
     whatsappMessage:
       "Olá! Vim pelo site da Studio Macleny Nails e gostaria de escolher um design de nail art.",
@@ -177,7 +177,7 @@ export const services: Service[] = [
     ],
     highlight:
       "Um momento reservado para você — do primeiro detalhe ao acabamento final.",
-    imageCaption: "Mais que unhas, um momento para você",
+    imageCaption: "UM MOMENTO PRA VOCÊ",
     image: "/images/service-experiencia.webp",
     imageAlt: "Recepção do studio: bancada de mármore com taça, velas e flores, toalha bordada com a marca Macleny e a assinatura Studio Macleny Nails na parede.",
     cta: "Quero viver a Experiência Macleny",
@@ -421,7 +421,7 @@ export const faqItems: FaqItem[] = hasConfirmedAddress()
 export const finalCta = {
   eyebrow: "Studio Macleny Nails",
   title: "Seu cuidado pode começar com uma conversa.",
-  body: "Conte o que você busca. A Macleny cuida do atendimento a partir daí.",
+  body: "Conte o que busca. A Macleny cuida do próximo passo.",
   cta: "Agendar pelo WhatsApp",
 } as const;
 

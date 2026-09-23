@@ -29,10 +29,6 @@ export default function Services() {
               <p className="type-body-lg mt-6 max-w-xl text-ivory/75">
                 {servicesSection.body}
               </p>
-              <p className="eyebrow mt-8 flex items-center gap-3 text-ivory/60">
-                <span aria-hidden="true" className="h-px w-8 bg-ivory/30" />
-                {servicesSection.kicker}
-              </p>
             </SectionReveal>
           </div>
 
