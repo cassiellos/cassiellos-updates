@@ -202,9 +202,10 @@ export type ExperienceStep = {
 
 export const experienceSection = {
   eyebrow: "Macleny Experience",
-  title: "Seu atendimento começa antes da técnica.",
+  title: "O que acontece quando você escolhe o Studio Macleny Nails?",
+  lead: "Sua beleza ganha mais do que um horário na agenda.",
   body:
-    "Uma jornada pensada para unir praticidade, exclusividade e excelência — do primeiro contato ao cuidado contínuo.",
+    "Um ecossistema de cuidado, praticidade e excelência para quem deseja unhas impecáveis sem abrir mão de conforto, atenção e acompanhamento personalizado.",
   image: {
     src: "/images/experience.webp",
     alt: "Bancada de atendimento com instrumentos organizados e luz suave.",

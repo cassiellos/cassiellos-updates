@@ -21,7 +21,10 @@ export default function MaclenyExperience() {
               <h2 className="type-serif type-h2 mt-6 text-balance">
                 {experienceSection.title}
               </h2>
-              <p className="type-body-lg mt-6 max-w-lg text-ivory/75">
+              <p className="type-serif mt-5 max-w-lg text-[clamp(1.125rem,1.7vw,1.5rem)] leading-snug text-champagne">
+                {experienceSection.lead}
+              </p>
+              <p className="type-body-lg mt-5 max-w-lg text-ivory/75">
                 {experienceSection.body}
               </p>
             </SectionReveal>
