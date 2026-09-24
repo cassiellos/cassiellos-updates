@@ -15,7 +15,7 @@ export default function Services() {
   if (enabledServices.length === 0) return null;
 
   return (
-    <section id="servicos">
+    <section>
       {/* Faixa de abertura, em Espresso */}
       <div className="on-espresso relative overflow-hidden bg-espresso text-ivory">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0">
@@ -111,6 +111,25 @@ export default function Services() {
           detalhe discreto e permanece legivel.
         */}
         <div className="container-macleny py-20 sm:py-24 lg:py-32">
+          {/*
+            Alvo do "Servicos" do menu.
+
+            A ancora ficava na <section>, que comeca na faixa Espresso — quem
+            clicava em Servicos caia na Curadoria, um capitulo antes. Ela vem
+            para ca, colada no rotulo, para a pagina parar exatamente onde o
+            capitulo 02 abre.
+
+            O span existe para a rolagem nao herdar o padding do container: com
+            o id no <div>, o topo do alvo ficava 80px (128 no desktop) acima do
+            rotulo e a tela parava num vazio.
+
+            Sem `scroll-mt` aqui: o `html` ja declara
+            `scroll-padding-top: calc(var(--header-height) + 1.5rem)`, e as
+            duas coisas se somam. Com as duas, o rotulo parava 200px abaixo do
+            topo em vez de 97px.
+          */}
+          <span id="servicos" aria-hidden="true" className="block" />
+
           <SectionReveal kind="quiet">
             <p className="eyebrow flex items-center gap-3 text-heritage max-sm:gap-2.5">
               <span aria-hidden="true" className="h-px w-8 bg-heritage/40 max-sm:w-6" />
