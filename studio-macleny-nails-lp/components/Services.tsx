@@ -146,9 +146,9 @@ export default function Services() {
                 </SectionReveal>
 
                 {/*
-                  Tres niveis de entrada, nao um bloco so: a numeracao e o
-                  titulo abrem, o corpo do texto vem logo atras e o CTA fecha.
-                  E o que faz o olho descer na ordem certa sem que a sequencia
+                  Tres niveis de entrada, nao um bloco so: o fio e o titulo
+                  abrem, o corpo do texto vem logo atras e o CTA fecha. E o
+                  que faz o olho descer na ordem certa sem que a sequencia
                   chegue a ser percebida como sequencia.
                 */}
                 <div
@@ -157,10 +157,20 @@ export default function Services() {
                     imageFirst ? "lg:col-start-7" : "lg:order-1 lg:col-start-1",
                   ].join(" ")}
                 >
+                  {/*
+                    A numeracao 01..04 saiu a pedido da cliente, que vai
+                    redefinir o criterio. O dado continua em `content.ts`
+                    (`Service.index`), so nao e mais exibido — apagar o
+                    numero e apagar o campo sao coisas diferentes, e o
+                    segundo perderia a informacao.
+
+                    O fio de 1px ficou: ele nao era suporte do numero, e a
+                    marca que abre o bloco de texto e mantem o ritmo vertical
+                    do card. Sem ele o titulo encostaria na fotografia.
+                  */}
                   <SectionReveal kind="quiet">
-                    <p className="eyebrow flex items-center gap-3 text-espresso-muted">
-                      {service.index}
-                      <span aria-hidden="true" className="h-px w-8 bg-line" />
+                    <p aria-hidden="true" className="eyebrow flex items-center text-espresso-muted">
+                      <span className="h-px w-8 bg-line" />
                     </p>
                   </SectionReveal>
 

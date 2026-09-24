@@ -36,6 +36,10 @@ export const hero = {
 export type Service = {
   /** Usado tambem como chave de tracking (TrackedService). */
   id: TrackedService;
+/**
+   * Numeracao do card. NAO esta sendo exibida: a cliente pediu para remover
+   * ate definir o criterio. O dado fica para quando ela voltar ao assunto.
+   */
   index: string;
   title: string;
   lead: string;
