@@ -46,6 +46,11 @@ export type Service = {
   description: string[];
   /** Tecnicas e itens que o servico contempla. */
   includes: string[];
+  /**
+   * Frase em italico que ficava antes do CTA. NAO esta sendo exibida: a
+   * cliente apontou que ela repetia beneficios ja ditos no proprio card e
+   * roubava espaco da acao principal. O texto fica guardado aqui.
+   */
   highlight: string;
   /** Legenda sobreposta a fotografia. */
   imageCaption: string;
@@ -76,6 +81,8 @@ export const servicesSection = {
     src: "/images/services-intro.webp",
     alt: "Mãos em repouso sobre bancada de mármore, com unhas amendoadas de acabamento nude e joias douradas.",
   },
+  /** Rotulo acima da lista de tecnicas, em todos os cards. */
+  includesLabel: "Técnicas disponíveis",
   helperTitle: "Não sabe qual atendimento escolher?",
   helperBody:
     "Conte o que você busca pelo WhatsApp. A orientação começa antes da técnica.",
@@ -122,7 +129,7 @@ export const services: Service[] = [
     imageCaption: "",
     image: "/images/service-alongamentos.webp",
     imageAlt: "Mão com unhas alongadas em formato amendoado e acabamento nude acetinado, apoiada em bancada de mármore.",
-    cta: "Quero encontrar meu alongamento ideal",
+    cta: "Encontrar meu alongamento ideal",
     whatsappMessage:
       "Olá! Vim pelo site da Studio Macleny Nails e gostaria de encontrar o alongamento ideal para as minhas unhas.",
     enabled: true,
@@ -148,7 +155,7 @@ export const services: Service[] = [
     imageCaption: "",
     image: "/images/service-manutencao.webp",
     imageAlt: "Atendimento em andamento: mãos com luvas trabalham a cutícula de uma cliente apoiada em toalha.",
-    cta: "Quero cuidar das minhas unhas",
+    cta: "Cuidar das minhas unhas",
     whatsappMessage:
       "Olá! Vim pelo site da Studio Macleny Nails e gostaria de agendar a manutenção das minhas unhas.",
     enabled: true,
@@ -176,7 +183,7 @@ export const services: Service[] = [
     imageCaption: "Fotos produzidas no Studio Macleny",
     image: "/images/service-nail-art.webp",
     imageAlt: "Composição de diferentes estilos de nail art, com unhas clássicas, francesinhas, cromadas e decoradas.",
-    cta: "Quero escolher meu design",
+    cta: "Escolher meu design",
     whatsappMessage:
       "Olá! Vim pelo site da Studio Macleny Nails e gostaria de escolher um design de nail art.",
     enabled: true,
@@ -204,7 +211,7 @@ export const services: Service[] = [
     imageCaption: "Um momento pra você",
     image: "/images/service-experiencia.webp",
     imageAlt: "Recepção do studio: bancada de mármore com taça, velas e flores, toalha bordada com a marca Macleny e a assinatura Studio Macleny Nails na parede.",
-    cta: "Quero viver a Experiência Macleny",
+    cta: "Viver a Experiência Macleny",
     whatsappMessage:
       "Olá! Vim pelo site da Studio Macleny Nails e gostaria de conhecer a Experiência Macleny.",
     enabled: true,

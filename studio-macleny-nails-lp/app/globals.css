@@ -387,6 +387,23 @@
     transform-origin: left;
   }
 
+  /*
+   * Tecnicas de cada servico. Sao links de texto, mas continuam sendo alvos
+   * de toque: o padding vertical leva a altura de ~22px para ~34px, acima do
+   * minimo de 24px da WCAG 2.2.
+   *
+   * O traco precisa subir junto. `.link-underline` o ancora em `bottom: -2px`
+   * da caixa de padding — com o padding novo ele ficaria 8px abaixo do texto,
+   * solto. Aqui ele volta para rente a letra.
+   */
+  .technique-link {
+    padding-block: 0.375rem;
+  }
+
+  .technique-link::after {
+    bottom: 0.25rem;
+  }
+
   /* Arco/elipse herdado do simbolo — elemento grafico proprietario. */
   .arc {
     position: absolute;

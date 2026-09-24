@@ -267,13 +267,27 @@ export default function Services() {
 
                   <SectionReveal delay={revealDelay.detail} kind="quiet">
                     {/*
-                      Cada tecnica e um CTA proprio: a cliente chega ao
-                      WhatsApp ja dizendo o que procura, e do lado de ca sabe-se
-                      qual tecnica gerou o contato. As classes de aparencia
-                      saem do <li> e vao para o <a>, de modo que o alvo de
-                      toque seja o chip inteiro e nao so o texto.
+                      As tecnicas eram chips com borda. Oito pilulas seguidas
+                      pesavam como uma segunda barra de botoes e disputavam a
+                      atencao com o CTA — que e a unica acao que o card
+                      realmente pede. Agora sao links de texto sob um rotulo,
+                      com o mesmo realce de 1px do menu no hover.
+
+                      O que NAO mudou: cada tecnica continua sendo um CTA
+                      proprio de WhatsApp, com mensagem personalizada e
+                      rastreio por `service_item`. A cliente chega ao WhatsApp
+                      ja dizendo o que procura, e do lado de ca sabe-se qual
+                      tecnica gerou o contato.
+
+                      A frase em italico que vinha aqui saiu: ela repetia
+                      beneficios ja ditos no card e ocupava justamente o
+                      espaco que valoriza a acao principal.
                     */}
-                    <ul className="mt-6 flex flex-wrap gap-2">
+                    <p className="eyebrow mt-8 text-espresso-muted">
+                      {servicesSection.includesLabel}
+                    </p>
+
+                    <ul className="mt-3 flex flex-wrap gap-x-5">
                       {service.includes.map((item) => (
                         <li key={item}>
                           <WhatsAppButton
@@ -282,17 +296,13 @@ export default function Services() {
                             variant="bare"
                             showGlyph={false}
                             message={serviceItemMessage(item)}
-                            className="inline-block rounded-full border border-line px-3.5 py-1.5 text-[0.8125rem] text-espresso-soft transition-colors duration-[var(--dur-micro)] ease-[var(--ease-macleny)] hover:border-espresso hover:text-espresso"
+                            className="link-underline technique-link text-[0.9375rem] text-espresso-soft transition-colors duration-[var(--dur-micro)] ease-[var(--ease-macleny)] hover:text-espresso"
                           >
                             {item}
                           </WhatsAppButton>
                         </li>
                       ))}
                     </ul>
-
-                    <p className="type-serif mt-7 border-l border-champagne pl-4 text-[1.0625rem] italic leading-snug text-heritage">
-                      {service.highlight}
-                    </p>
                   </SectionReveal>
 
                   <SectionReveal delay={revealDelay.cta} kind="support">
