@@ -159,8 +159,7 @@ export const services: Service[] = [
     title: "Nail Art",
     lead: "Sua personalidade, traduzida em cada detalhe.",
     description: [
-      "Minimalista, clássica, sofisticada ou marcante. Você pode escolher entre diferentes estilos e acabamentos ou trazer a sua própria referência. A partir dela, criamos uma composição personalizada para harmonizar com seu formato de unha, ocasião e estilo pessoal.",
-      "Porque uma nail art bonita não precisa apenas chamar atenção. Ela precisa parecer sua.",
+      "Sua nail art, sua assinatura. Escolha entre nossas criações ou traga sua própria referência: cada composição é adaptada ao formato das suas unhas, à ocasião e ao seu estilo pessoal, criando um resultado exclusivo, harmonioso e sofisticado.",
     ],
     includes: [
       "Esmaltação em gel",
