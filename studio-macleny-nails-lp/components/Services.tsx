@@ -2,7 +2,12 @@ import Image from "next/image";
 
 import SectionReveal from "./SectionReveal";
 import WhatsAppButton from "./WhatsAppButton";
-import { enabledServices, serviceItemMessage, servicesSection } from "@/lib/content";
+import {
+  enabledServices,
+  serviceItemMessage,
+  servicesChapter,
+  servicesSection,
+} from "@/lib/content";
 import { revealDelay } from "@/lib/motion";
 import { siteConfig } from "@/lib/site-config";
 
@@ -22,13 +27,16 @@ export default function Services() {
             <SectionReveal kind="quiet">
               {/*
                 No celular o champagne recua: o detalhe premium deve ser
-                percebido DEPOIS do conteudo, nao antes. O indice editorial
-                so existe nesta faixa — ver o aviso no commit sobre ele
-                coincidir com o "01" do primeiro card logo abaixo.
+                percebido DEPOIS do conteudo, nao antes.
+
+                O indice vale nas duas telas. Ele so fazia sentido sozinho
+                enquanto era um numero solto; agora forma par com o "02" do
+                capitulo seguinte, e sem ele no desktop a sequencia comecaria
+                no meio.
               */}
               <p className="eyebrow flex items-center gap-3 text-champagne max-sm:gap-2.5 max-sm:text-champagne/70">
                 <span aria-hidden="true" className="h-px w-8 bg-champagne/50 max-sm:w-6 max-sm:bg-champagne/30" />
-                <span className="hidden max-sm:inline">{servicesSection.index} —</span>
+                <span>{servicesSection.index} —</span>
                 {servicesSection.eyebrow}
               </p>
             </SectionReveal>
@@ -87,6 +95,45 @@ export default function Services() {
 
       {/* Cards de servico */}
       <div className="bg-ivory-warm">
+        {/*
+          Abertura do capitulo 02.
+
+          Ela existe para a transicao nao ser um corte seco: a faixa Espresso
+          encerra a curadoria e, sem nada no meio, a pessoa caia direto na
+          fotografia do primeiro card sem saber que um capitulo novo comecou.
+
+          O bloco e so texto de proposito. A fotografia que vem logo abaixo e
+          a do primeiro card, e ela ja faz o papel de imagem editorial da
+          abertura — repetir uma foto aqui so afastaria o titulo dos cards.
+
+          Heritage, e nao champagne: sobre o Ivory o champagne fica em torno
+          de 1,9:1, muito abaixo do minimo AA. O marrom da a mesma leitura de
+          detalhe discreto e permanece legivel.
+        */}
+        <div className="container-macleny py-20 sm:py-24 lg:py-32">
+          <SectionReveal kind="quiet">
+            <p className="eyebrow flex items-center gap-3 text-heritage max-sm:gap-2.5">
+              <span aria-hidden="true" className="h-px w-8 bg-heritage/40 max-sm:w-6" />
+              <span>{servicesChapter.index} —</span>
+              {servicesChapter.eyebrow}
+            </p>
+          </SectionReveal>
+
+          <SectionReveal>
+            <h2 className="type-serif type-h2 mt-6 max-w-[18ch] text-balance">
+              {servicesChapter.title}
+            </h2>
+          </SectionReveal>
+
+          <SectionReveal delay={revealDelay.support} kind="support">
+            {/* Mesmo tratamento do apoio da faixa Espresso, para os dois
+                capitulos terem a mesma voz no celular. */}
+            <p className="type-body-lg mt-6 max-w-xl text-espresso-muted max-sm:mt-[3.5rem] max-sm:max-w-[20rem] max-sm:text-sm max-sm:leading-[1.8]">
+              {servicesChapter.body}
+            </p>
+          </SectionReveal>
+        </div>
+
         {enabledServices.map((service, index) => {
           const imageFirst = index % 2 === 0;
 

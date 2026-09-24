@@ -75,6 +75,22 @@ export const servicesSection = {
   helperCta: "Falar com a Macleny",
 } as const;
 
+/**
+ * Capitulo 02: a virada da Curadoria para os servicos.
+ *
+ * A faixa Espresso fecha a ideia de curadoria e esta abertura apresenta o
+ * capitulo seguinte, para a pessoa chegar nos cards ja sabendo o que vai
+ * encontrar. O titulo e o mesmo que abria a secao antes de ela virar
+ * "Curadoria Personalizada" — ele nao se perdeu, mudou de posto.
+ */
+export const servicesChapter = {
+  index: "02",
+  eyebrow: "Serviços Macleny",
+  title: "Beleza pensada nos mínimos detalhes.",
+  body:
+    "Cada técnica é escolhida de acordo com suas unhas, seu estilo e o resultado que deseja alcançar.",
+} as const;
+
 export const services: Service[] = [
   {
     id: "alongamentos",
