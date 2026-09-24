@@ -95,7 +95,7 @@ export const servicesChapter = {
   eyebrow: "Serviços Macleny",
   title: "Beleza pensada nos mínimos detalhes.",
   body:
-    "Cada técnica é escolhida de acordo com suas unhas, seu estilo e o resultado que deseja alcançar.",
+    "Conheça os serviços do Studio Macleny Nails e descubra a técnica ideal para valorizar suas unhas, seu estilo e o resultado que você deseja.",
 } as const;
 
 export const services: Service[] = [
