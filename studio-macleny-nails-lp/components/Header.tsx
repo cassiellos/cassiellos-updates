@@ -79,7 +79,7 @@ export default function Header() {
 
           <button
             type="button"
-            className="btn btn-secondary min-h-11 px-4 py-2 text-sm lg:hidden"
+            className="btn btn-secondary menu-toggle lg:hidden"
             aria-expanded={isMenuOpen}
             aria-controls="menu-mobile"
             onClick={() => setIsMenuOpen((open) => !open)}

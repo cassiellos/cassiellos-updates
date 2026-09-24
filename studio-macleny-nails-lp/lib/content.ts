@@ -22,7 +22,7 @@ export const hero = {
   primaryCta: "Reservar meu horário",
   secondaryCta: "Conhecer a experiência Macleny",
   secondaryHref: "#experiencia",
-  signature: "Excelência técnica. Experiência individual.",
+  signature: "Excelência técnica · Experiência individual",
   image: {
     src: "/images/hero.webp",
     alt: "Mulher de blazer claro com unhas alongadas em tom nude, mão apoiada junto ao rosto, em composição editorial de tons quentes.",

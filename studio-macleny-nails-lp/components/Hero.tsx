@@ -67,25 +67,40 @@ export default function Hero() {
                   {hero.primaryCta}
                 </WhatsAppButton>
 
-                {/* No celular, o CSS deixa a fotografia aparecer sob a borda. */}
-                <a
-                  href={hero.secondaryHref}
-                  className="btn btn-secondary bg-ivory lg:bg-transparent"
-                >
-                  {hero.secondaryCta}
+                {/*
+                  No celular este CTA deixa de ser botao e vira link com seta
+                  (ver `.hero-secondary` no CSS): dois blocos do mesmo peso
+                  disputavam a mesma decisao e nenhum lia como A acao.
+
+                  O fundo Ivory saiu das utilities e foi para o CSS. Ele so
+                  faz sentido de 640 a 1023, faixa em que a fotografia passa
+                  por tras do botao — abaixo disso nao ha mais botao.
+                */}
+                <a href={hero.secondaryHref} className="btn btn-secondary hero-secondary">
+                  <span>{hero.secondaryCta}</span>
+                  <span aria-hidden="true" className="hero-secondary-arrow">
+                    &rarr;
+                  </span>
                 </a>
               </div>
             </RevealOnLoad>
 
             <RevealOnLoad delay={heroDelay.signature} kind="quiet">
               {/*
-                Espresso cheio ate lg: no celular a fotografia e o fundo do
-                hero inteiro, e esta linha cruza pele e tecido claro. Medido em
-                `muted` sobre a foto: 3,97:1 em 320px — abaixo do minimo AA de
-                4,5:1. A partir de lg ela volta ao tom discreto, porque ali o
-                fundo e o Ivory chapado.
+                Corpo e italico moram no CSS, nao em utilities. Com
+                `text-sm italic` aqui, a camada utilities do Tailwind vencia
+                `.hero-signature` e o tratamento do celular simplesmente nao
+                acontecia — o mesmo conflito de camadas que ja havia ancorado
+                a fotografia do hero no topo. So a COR continua em utility,
+                porque ela muda por faixa e nao disputa com o CSS.
+
+                A cor tambem e por faixa: Espresso cheio ate lg porque no
+                celular a fotografia e o fundo do hero inteiro e esta linha
+                cruza pele e tecido claro (medido em `muted` sobre a foto:
+                3,97:1 em 320px, abaixo do minimo AA de 4,5:1). A partir de lg
+                o fundo e Ivory chapado e ela volta ao tom discreto.
               */}
-              <p className="hero-signature text-sm italic text-espresso lg:text-espresso-muted">
+              <p className="hero-signature text-espresso lg:text-espresso-muted">
                 {hero.signature}
               </p>
             </RevealOnLoad>

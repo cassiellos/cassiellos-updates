@@ -15,6 +15,13 @@
   --color-taupe: #b8a597;
 
   /* Derivados de implementacao digital (nao constam do dossie) */
+  /*
+   * Espresso um ponto mais claro e mais quente, para o CTA no celular. O
+   * Espresso cheio, num bloco solido do tamanho de um botao, pesa demais ao
+   * lado de uma paleta delicada — le como preto puro. Mesma familia de
+   * matiz, so que respirando.
+   */
+  --color-espresso-warm: #211a16;
   --color-ivory-deep: #eae2d7;
   --color-ivory-warm: #fbf8f4;
   --color-espresso-soft: #3b312a;
@@ -97,10 +104,20 @@
     }
   }
 
-  /* Header mais baixo no celular, para o hero comecar mais cedo. */
   @media (max-width: 639px) {
     :root {
-      --header-height: 3.5rem;
+      /*
+       * 4rem, e nao 3,5rem: a marca estava perto demais da borda superior.
+       * O hero comeca a partir desta altura, entao o ganho vale para os dois.
+       */
+      --header-height: 4rem;
+
+      /*
+       * Mais respiro entre o identificador e a headline. O intervalo sozinho
+       * ja e um degrau de hierarquia: afastar o rotulo faz o titulo parecer
+       * mais importante sem mudar um corpo de fonte sequer.
+       */
+      --hero-gap-label: 1.125rem;
     }
   }
 
@@ -161,11 +178,17 @@
      LAYOUT
      ========================================================================== */
 
+  /*
+   * A margem lateral abaixo de 768px e 1,5rem, e nao 1,25rem, para dar ao
+   * conjunto a folga de papel editorial que a marca pede. Ela vive aqui, e
+   * nao so no header, porque o logo precisa continuar alinhado a headline do
+   * hero — mover so a marca quebraria a coluna.
+   */
   .container-macleny {
     width: 100%;
     max-width: 80rem; /* 1280px */
     margin-inline: auto;
-    padding-inline: 1.25rem;
+    padding-inline: 1.5rem;
   }
 
   @media (min-width: 768px) {
@@ -310,6 +333,23 @@
     border-color: var(--color-champagne);
   }
 
+  /*
+   * Botao "Menu".
+   *
+   * A geometria vive aqui e NAO em utilities do JSX. Com as duas fontes, as
+   * utilities do Tailwind venceriam estas regras (a camada utilities ganha de
+   * components) e o ajuste do celular nao teria efeito — o mesmo erro que ja
+   * havia ancorado a fotografia do hero no topo.
+   *
+   * Os valores base reproduzem exatamente o que existia antes
+   * (min-h-11 px-4 py-2 text-sm), para que de 640px para cima nada mude.
+   */
+  .menu-toggle {
+    min-height: 2.75rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+
   .rule {
     height: 1px;
     background-color: var(--color-line);
@@ -435,8 +475,26 @@
     align-items: flex-start;
   }
 
+  /*
+   * A seta so existe no celular, onde este CTA e um link. De 640px para cima
+   * ele volta a ser botao e a seta desaparece — declarada apenas dentro do
+   * media query ela vazava para o desktop, porque `display` nao tinha valor
+   * base nenhum para voltar.
+   */
+  .hero-secondary-arrow {
+    display: none;
+  }
+
   .hero-signature {
     margin-top: var(--hero-gap-footnote);
+    /*
+     * Reproduz o que antes vinha de `text-sm italic` no JSX. O line-height
+     * entra explicito porque `text-sm` tambem o definia (1,25rem): sem ele a
+     * linha herdava o 1,65 do body e o hero do desktop crescia 3px.
+     */
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-style: italic;
   }
 
   /*
@@ -453,8 +511,14 @@
   /* ---- Celular ---------------------------------------------------------- */
 
   @media (max-width: 639px) {
+    /*
+     * Mais altura para a fotografia ter espaco negativo em volta em vez de
+     * ficar espremida contra o bloco de texto. Com `cover`, altura maior
+     * tambem faz o recorte crescer, entao a mao e as unhas ganham presenca
+     * sem que o arquivo mude.
+     */
     .hero {
-      min-height: 43rem;
+      min-height: 46rem;
     }
 
     /* Os arcos ficam para o desktop: no celular a fotografia ja da o peso. */
@@ -479,25 +543,128 @@
       max-width: 19rem;
     }
 
-    .hero .hero-signature {
-      font-size: 0.75rem;
-    }
-
-    /*
-     * Alvo de toque preservado em 46px de altura. O botao encolheu em relacao
-     * ao padrao (3rem) para nao pesar demais na composicao, mas nao abaixo do
-     * confortavel para o polegar.
-     */
     .hero .hero-actions {
-      gap: 0.625rem;
+      gap: 0.25rem;
     }
 
-    .hero .hero-actions .btn {
-      min-height: 2.875rem;
-      padding: 0.75rem 1.375rem;
-      font-size: 0.9375rem;
+    /* ---- CTA unico e dominante ------------------------------------------
+     * So o primario tem forma de botao. O segundo CTA vira link, logo abaixo:
+     * dois blocos do mesmo tamanho disputavam a mesma decisao e nenhum dos
+     * dois lia como A acao.
+     */
+    .hero .hero-actions .btn-primary {
+      /*
+       * Preto quente no lugar do Espresso cheio, altura e peso menores e o
+       * icone reduzido. O conjunto tira do botao a cara de "WhatsApp
+       * comercial" e o aproxima de um agendamento de concierge.
+       *
+       * 2,75rem = 44px: e o menor alvo de toque confortavel para o polegar,
+       * entao a altura para de cair aqui.
+       */
+      background-color: var(--color-espresso-warm);
+      min-height: 2.75rem;
+      padding: 0.6875rem 1.5rem;
+      font-size: 0.90625rem;
+      font-weight: 500;
+      letter-spacing: 0.012em;
+      gap: 0.5rem;
     }
 
+    .hero .hero-actions .btn-primary svg {
+      width: 1rem;
+      height: 1rem;
+    }
+
+    /* ---- CTA secundario: link, nao botao --------------------------------- */
+    .hero .hero-actions .hero-secondary {
+      min-height: 2.75rem; /* alvo de toque preservado, sem moldura visivel */
+      padding: 0 0.25rem;
+      border: 0;
+      border-radius: 0;
+      background-color: transparent;
+      justify-content: flex-start;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-espresso-soft);
+    }
+
+    .hero .hero-actions .hero-secondary:hover {
+      transform: none;
+      background-color: transparent;
+      color: var(--color-espresso);
+    }
+
+    .hero-secondary-arrow {
+      display: inline-block;
+      font-size: 0.875rem;
+      line-height: 1;
+      transition: transform var(--dur-micro) var(--ease-macleny);
+    }
+
+    .hero .hero-actions .hero-secondary:hover .hero-secondary-arrow {
+      transform: translateX(3px);
+    }
+
+    /* ---- Assinatura ------------------------------------------------------
+     * Sem italico: ali ele lia como assinatura de campanha. Em versalete com
+     * tracking largo a linha vira legenda editorial.
+     *
+     * O fio de 1px acima e o unico elemento novo do conjunto. Ele nao decora:
+     * separa a acao do fecho, que e o trabalho que o italico vinha tentando
+     * fazer pelo desenho da letra.
+     */
+    .hero .hero-signature {
+      font-size: 0.625rem;
+      font-style: normal;
+      font-weight: 600;
+      /*
+       * 0,12em e o maior tracking que ainda deixa a linha inteira caber em
+       * 390px. Acima disso ela quebra e "INDIVIDUAL" fica sozinha na segunda
+       * linha. Abaixo de 360px a quebra e inevitavel, e por isso o `balance`:
+       * as duas linhas saem do mesmo tamanho em vez de uma orfa.
+       */
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      line-height: 1.6;
+      text-wrap: balance;
+    }
+
+    .hero .hero-signature::before {
+      content: "";
+      display: block;
+      width: 1.75rem;
+      height: 1px;
+      margin-bottom: 0.875rem;
+      background-color: var(--color-line);
+    }
+
+    /* ---- Menu mais discreto ----------------------------------------------
+     * O contorno passa a ser um fio, e nao uma borda: a navegacao nao deve
+     * competir com a marca ao lado. Em area, o botao encolhe ~18%.
+     */
+    .menu-toggle {
+      min-height: 2.25rem;
+      padding: 0.375rem 0.875rem;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      border-color: color-mix(in srgb, var(--color-line) 62%, transparent);
+    }
+  }
+
+  /*
+   * De 640 a 1023 a fotografia passa por tras do CTA secundario, entao ele
+   * precisa de fundo cheio para o texto nao cair sobre a imagem. Isso morava
+   * em utilities no JSX (`bg-ivory lg:bg-transparent`); mudou de lugar porque
+   * abaixo de 640 o elemento deixa de ser botao.
+   */
+  @media (min-width: 640px) and (max-width: 1023px) {
+    .hero-secondary {
+      background-color: var(--color-ivory);
+    }
   }
 
   /* ---- Fotografia do hero ----------------------------------------------
