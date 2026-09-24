@@ -161,7 +161,12 @@ export default function Services() {
               key={service.id}
               className="border-b border-line last:border-b-0"
             >
-              <div className="container-macleny grid items-center gap-8 py-14 lg:grid-cols-12 lg:gap-14 lg:py-20">
+              <div className={[
+                "container-macleny grid items-center lg:grid-cols-12 lg:gap-14",
+                service.id === "alongamentos"
+                  ? "gap-10 py-20 lg:py-24"
+                  : "gap-8 py-14 lg:py-20",
+              ].join(" ")}>
                 <SectionReveal
                   kind="media"
                   className={[
