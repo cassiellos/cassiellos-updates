@@ -55,9 +55,9 @@ export type Service = {
 
 export const servicesSection = {
   eyebrow: "Macleny Experience",
-  title: "Beleza pensada nos mínimos detalhes.",
+  title: "Curadoria Personalizada",
   body:
-    "Mais do que escolher uma técnica, aqui você escolhe como quer se sentir ao olhar para as suas mãos. Cada atendimento é personalizado para respeitar seu estilo, sua rotina e o resultado que você deseja.",
+    "Você não precisa chegar sabendo qual técnica escolher. Entendemos suas unhas, sua rotina e o resultado que deseja para indicar a solução mais adequada para você.",
   kicker: "Suas mãos, a sua melhor versão.",
   image: {
     src: "/images/services-intro.webp",
