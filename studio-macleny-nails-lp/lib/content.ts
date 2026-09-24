@@ -271,7 +271,7 @@ export const experienceSteps: ExperienceStep[] = [
     index: "04",
     title: "Técnica e Cuidado em Cada Detalhe",
     description:
-      "Precisão, atenção e cuidado em cada etapa para entregar um acabamento sofisticado e alinhado ao seu estilo.",
+      "Nada é padronizado. Cada estrutura é criada sob medida para harmonizar suas mãos, suas unhas e seu estilo, com precisão, proporção e sofisticação.",
   },
   {
     index: "05",
