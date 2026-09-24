@@ -54,10 +54,12 @@ export type Service = {
 };
 
 export const servicesSection = {
+  /** Indice editorial da faixa de abertura. So aparece no celular. */
+  index: "01",
   eyebrow: "Macleny Experience",
   title: "Curadoria Personalizada",
   body:
-    "Você não precisa chegar sabendo qual técnica escolher. Entendemos suas unhas, sua rotina e o resultado que deseja para indicar a solução mais adequada para você.",
+    "Você não precisa saber qual técnica escolher. Entendemos suas unhas, sua rotina e o resultado que deseja para indicar o cuidado ideal para você.",
   kicker: "Suas mãos, a sua melhor versão.",
   image: {
     src: "/images/services-intro.webp",

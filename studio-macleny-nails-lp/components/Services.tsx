@@ -20,8 +20,15 @@ export default function Services() {
         <div className="container-macleny relative grid items-center gap-10 py-16 lg:grid-cols-12 lg:gap-14 lg:py-24">
           <div className="lg:col-span-6">
             <SectionReveal kind="quiet">
-              <p className="eyebrow flex items-center gap-3 text-champagne">
-                <span aria-hidden="true" className="h-px w-8 bg-champagne/50" />
+              {/*
+                No celular o champagne recua: o detalhe premium deve ser
+                percebido DEPOIS do conteudo, nao antes. O indice editorial
+                so existe nesta faixa — ver o aviso no commit sobre ele
+                coincidir com o "01" do primeiro card logo abaixo.
+              */}
+              <p className="eyebrow flex items-center gap-3 text-champagne max-sm:gap-2.5 max-sm:text-champagne/70">
+                <span aria-hidden="true" className="h-px w-8 bg-champagne/50 max-sm:w-6 max-sm:bg-champagne/30" />
+                <span className="hidden max-sm:inline">{servicesSection.index} —</span>
                 {servicesSection.eyebrow}
               </p>
             </SectionReveal>
@@ -33,7 +40,18 @@ export default function Services() {
             </SectionReveal>
 
             <SectionReveal delay={revealDelay.support} kind="support">
-              <p className="type-body-lg mt-6 max-w-xl text-ivory/75">
+              {/*
+                Celular: corpo 17 -> 14px (-18%), entrelinha 1,7 -> 1,8 e
+                medida mais curta. O apoio estava disputando atencao com o
+                titulo; o silencio entre os dois e o que faz a serifada virar
+                protagonista. O respiro de 52px abaixo do titulo faz o mesmo
+                trabalho — por isso ele esta aqui e nao no `mt-6` do h2.
+
+                Sao utilities, e nao CSS: a geometria deste bloco ja vive toda
+                em utilities, e dividi-la entre as duas fontes e o que ja
+                quebrou a assinatura do hero e a fotografia.
+              */}
+              <p className="type-body-lg mt-6 max-w-xl text-ivory/75 max-sm:mt-[3.5rem] max-sm:max-w-[20rem] max-sm:text-sm max-sm:leading-[1.8]">
                 {servicesSection.body}
               </p>
             </SectionReveal>
@@ -42,14 +60,23 @@ export default function Services() {
           <div className="lg:col-span-6 lg:col-start-7">
             <SectionReveal kind="media">
               <div className="relative">
-                <div className="media-frame aspect-[4/3] w-full rounded-[1.75rem] bg-espresso-soft">
+                {/*
+                  Celular: 4:3 -> 3:2 (12% menos altura) e raio 28 -> 16px. O
+                  arredondamento grande lia como card de aplicativo; o menor
+                  aproxima a moldura de uma fotografia impressa.
+
+                  O recorte sobe para 58% da altura: e onde as maos ficam
+                  centradas e sobra menos mesa embaixo, entao as unhas sao
+                  percebidas antes. Medido nas tres posicoes antes de fechar.
+                */}
+                <div className="media-frame aspect-[4/3] w-full rounded-[1.75rem] bg-espresso-soft max-sm:aspect-[3/2] max-sm:rounded-[1rem]">
                   <Image
                     src={servicesSection.image.src}
                     alt={servicesSection.image.alt}
                     fill
                     loading="lazy"
                     sizes="(max-width: 1023px) 100vw, 46vw"
-                    className="object-cover object-center"
+                    className="object-cover object-center max-sm:object-[50%_58%]"
                   />
                 </div>
               </div>
