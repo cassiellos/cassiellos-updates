@@ -1,63 +1,5 @@
 @import "tailwindcss";
 
-/* Composicao do Hero para celulares; tablet e desktop mantem o layout atual. */
-@media (max-width: 639px) {
-  :root { --header-height: 3.5rem; }
-  .site-header button[aria-controls="menu-mobile"] {
-    min-height: 2.5rem;
-    padding-inline: 1.25rem;
-  }
-
-  .hero {
-    min-height: 43rem;
-    padding-top: 5.125rem;
-    padding-bottom: 10rem;
-    background: #f6f0e9;
-  }
-
-  .hero .hero-arcs { display: none; }
-  .hero .hero-copy { width: 89%; }
-  .hero .eyebrow {
-    font-size: 0.65625rem;
-    letter-spacing: 0.19em;
-    white-space: nowrap;
-  }
-  .hero .type-h1 {
-    margin-top: 1rem;
-    font-size: clamp(2rem, 10vw, 3.25rem);
-    line-height: 0.97;
-    text-wrap: balance;
-  }
-  .hero .hero-body {
-    margin-top: 1rem;
-    font-size: 1rem;
-    line-height: 1.3;
-    letter-spacing: -0.005em;
-    color: #635e58;
-  }
-  .hero .hero-actions { margin-top: 1.375rem; gap: 0.5rem; }
-  .hero .hero-actions .btn {
-    min-height: 2.5rem;
-    padding: 0.625rem 0.5rem;
-    font-size: 0.9375rem;
-    font-weight: 500;
-    letter-spacing: -0.025em;
-  }
-  .hero .hero-actions .btn-secondary {
-    background: transparent;
-    border-color: #b8a597;
-  }
-  .hero .hero-signature {
-    margin-top: 1rem;
-    font-size: 0.75rem;
-    letter-spacing: -0.015em;
-    color: #706a62;
-    white-space: nowrap;
-  }
-  .hero .hero-photo { inset: 0; width: 100%; height: 100%; }
-  .hero .hero-photo img { object-fit: cover; object-position: right bottom; }
-}
-
 /* ==========================================================================
    STUDIO MACLENY NAILS — TOKENS
    Cores preliminares do dossie v1.2. Ver docs/design-system.md para o status
@@ -119,9 +61,47 @@
      * Deslocamentos do reveal. Sao pequenos de proposito: o movimento deve ser
      * percebido como o conteudo se assentando, nao como algo subindo na tela.
      */
+    /*
+     * RITMO DO HERO
+     *
+     * O espaco aqui nao e decorativo, ele CODIFICA O AGRUPAMENTO. Antes os
+     * quatro intervalos eram praticamente iguais (16/16/22/16px no celular),
+     * e espaco uniforme comunica que tudo tem a mesma importancia — por isso
+     * nada se destacava.
+     *
+     * A escada e: rotulo colado na headline (sao uma unidade so), respiro
+     * maior antes do apoio, e o MAIOR respiro antes da acao, para o CTA ser
+     * lido como consequencia da leitura e nao como mais uma linha. A
+     * assinatura fecha destacada, sem competir.
+     */
+    --hero-gap-label: 0.75rem; /* eyebrow -> headline */
+    --hero-gap-support: 1.5rem; /* headline -> texto de apoio */
+    --hero-gap-action: 2.25rem; /* apoio -> CTA (o maior) */
+    --hero-gap-footnote: 1.75rem; /* CTA -> assinatura */
+
     --reveal-distance: 1.25rem; /* conteudo principal */
     --reveal-distance-support: 0.625rem; /* apoio: entra menos que o titulo */
     --media-zoom: 1.035; /* aproximacao de camera da fotografia */
+  }
+
+  /*
+   * Em tela grande o ritmo do hero cresce junto com a tipografia: os mesmos
+   * intervalos proporcionais, em valores maiores.
+   */
+  @media (min-width: 1024px) {
+    :root {
+      --hero-gap-label: 1rem;
+      --hero-gap-support: 2rem;
+      --hero-gap-action: 3rem;
+      --hero-gap-footnote: 2.25rem;
+    }
+  }
+
+  /* Header mais baixo no celular, para o hero comecar mais cedo. */
+  @media (max-width: 639px) {
+    :root {
+      --header-height: 3.5rem;
+    }
   }
 
   /*
@@ -417,6 +397,166 @@
 
   [data-reveal-kind="quiet"] {
     --reveal-distance: 0rem;
+  }
+
+  /* ==========================================================================
+     HERO — hierarquia
+     ========================================================================== */
+
+  /*
+   * A hierarquia do hero e construida com as cinco ferramentas, nesta ordem
+   * de peso: ESPACO (a escada de --hero-gap-*), TAMANHO (a headline e ~2,4x
+   * o texto de apoio), CONTRASTE (headline em Espresso cheio, apoio em
+   * Espresso-muted, assinatura mais clara ainda), POSICAO (tudo alinhado a
+   * uma so margem, criando uma coluna de leitura) e PESO.
+   *
+   * As margens moram AQUI e nao em utilities no JSX. Com `mt-*` no componente
+   * e estas regras no CSS, as duas fontes brigavam pela mesma propriedade e a
+   * escada nao sobrevivia a nenhum ajuste.
+   */
+  .hero-title {
+    margin-top: var(--hero-gap-label);
+  }
+
+  .hero-body {
+    margin-top: var(--hero-gap-support);
+    color: var(--color-espresso-muted);
+  }
+
+  .hero-actions {
+    margin-top: var(--hero-gap-action);
+    /*
+     * `flex-start` e o que impede os botoes de esticarem ate a largura toda
+     * no celular. Um bloco preto de borda a borda vira a mancha mais pesada
+     * da tela e disputa atencao com a headline — exatamente o que a direcao
+     * pede para evitar. Dimensionados pelo conteudo, eles continuam sendo a
+     * acao evidente, sem dominar.
+     */
+    align-items: flex-start;
+  }
+
+  .hero-signature {
+    margin-top: var(--hero-gap-footnote);
+  }
+
+  /*
+   * Medida de leitura do apoio. Mais estreita que a headline de proposito: a
+   * diferenca de largura e por si so um degrau de hierarquia, alem de manter
+   * a linha num comprimento confortavel.
+   */
+  @media (min-width: 1024px) {
+    .hero-body {
+      max-width: 30rem;
+    }
+  }
+
+  /* ---- Celular ---------------------------------------------------------- */
+
+  @media (max-width: 639px) {
+    .hero {
+      min-height: 43rem;
+    }
+
+    /* Os arcos ficam para o desktop: no celular a fotografia ja da o peso. */
+    .hero .hero-arcs {
+      display: none;
+    }
+
+    .hero .eyebrow {
+      font-size: 0.65625rem;
+      letter-spacing: 0.19em;
+    }
+
+    .hero .type-h1 {
+      font-size: clamp(2rem, 10vw, 3.25rem);
+      line-height: 0.97;
+    }
+
+    .hero .hero-body {
+      font-size: 1rem;
+      line-height: 1.45;
+      /* Medida curta: o apoio nao deve alcancar a largura da headline. */
+      max-width: 19rem;
+    }
+
+    .hero .hero-signature {
+      font-size: 0.75rem;
+    }
+
+    /*
+     * Alvo de toque preservado em 46px de altura. O botao encolheu em relacao
+     * ao padrao (3rem) para nao pesar demais na composicao, mas nao abaixo do
+     * confortavel para o polegar.
+     */
+    .hero .hero-actions {
+      gap: 0.625rem;
+    }
+
+    .hero .hero-actions .btn {
+      min-height: 2.875rem;
+      padding: 0.75rem 1.375rem;
+      font-size: 0.9375rem;
+    }
+
+  }
+
+  /* ---- Fotografia do hero ----------------------------------------------
+     Tres enquadramentos, um por faixa de tela. Tudo em CSS de proposito: com
+     metade em utilities do JSX e metade aqui, as duas fontes disputavam as
+     mesmas propriedades e o resultado dependia da ordem das camadas.
+     ---------------------------------------------------------------------- */
+
+  .hero-photo {
+    position: absolute;
+  }
+
+  .hero-photo img {
+    object-fit: contain;
+    object-position: right bottom;
+  }
+
+  /* Ate 639: a fotografia E o fundo do hero. */
+  @media (max-width: 639px) {
+    .hero-photo {
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-photo img {
+      object-fit: cover;
+    }
+  }
+
+  /* 640 a 1023: bloco ancorado na base, com o halo que funde na pagina. */
+  @media (min-width: 640px) and (max-width: 1023px) {
+    .hero-photo {
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 19rem;
+      background: radial-gradient(
+        135% 115% at 100% 100%,
+        rgba(233, 224, 211, 0.92) 0%,
+        rgba(243, 237, 229, 0.5) 42%,
+        rgba(244, 239, 232, 0) 70%
+      );
+    }
+  }
+
+  /* 1024+: painel sangrado na direita da viewport. */
+  @media (min-width: 1024px) {
+    .hero-photo {
+      inset-block: 0;
+      right: 0;
+      width: 50%;
+      max-width: 46rem;
+    }
+
+    .hero-photo img {
+      object-fit: cover;
+      object-position: top;
+    }
   }
 
   /* ==========================================================================

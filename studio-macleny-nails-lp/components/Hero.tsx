@@ -14,7 +14,6 @@ export default function Hero() {
     loading: "eager",
     fetchPriority: "high",
     sizes: "(min-width: 1024px) min(50vw, 46rem), (min-width: 640px) 298px, 267px",
-    className: "object-contain object-right-bottom lg:object-cover lg:object-top",
   });
   const { props: mobileImage } = getImageProps({
     src: "/images/hero-mobile.webp",
@@ -40,7 +39,7 @@ export default function Hero() {
             </RevealOnLoad>
 
             <RevealOnLoad delay={heroDelay.title}>
-              <h1 className="type-serif type-h1 mt-5 text-balance">
+              <h1 className="hero-title type-serif type-h1 text-balance">
                 {hero.titleLines.map((line, index) => (
                   <span key={line} className="block">
                     {index === 1 ? <em className="not-italic text-heritage">{line}</em> : line}
@@ -57,13 +56,13 @@ export default function Hero() {
                 ja tinha pedido para remover, enquanto o desktop mostrava a
                 nova. Texto de conteudo nao mora em componente.
               */}
-              <p className="hero-body type-body-lg mt-6 max-w-lg text-espresso-soft">
+              <p className="hero-body type-body-lg">
                 {hero.body}
               </p>
             </RevealOnLoad>
 
             <RevealOnLoad delay={heroDelay.cta} kind="support">
-              <div className="hero-actions mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <div className="hero-actions flex flex-col gap-3 sm:flex-row sm:items-center">
                 <WhatsAppButton location="hero" variant="primary">
                   {hero.primaryCta}
                 </WhatsAppButton>
@@ -79,7 +78,14 @@ export default function Hero() {
             </RevealOnLoad>
 
             <RevealOnLoad delay={heroDelay.signature} kind="quiet">
-              <p className="hero-signature mt-6 text-sm italic text-espresso lg:text-espresso-muted">
+              {/*
+                Espresso cheio ate lg: no celular a fotografia e o fundo do
+                hero inteiro, e esta linha cruza pele e tecido claro. Medido em
+                `muted` sobre a foto: 3,97:1 em 320px — abaixo do minimo AA de
+                4,5:1. A partir de lg ela volta ao tom discreto, porque ali o
+                fundo e o Ivory chapado.
+              */}
+              <p className="hero-signature text-sm italic text-espresso lg:text-espresso-muted">
                 {hero.signature}
               </p>
             </RevealOnLoad>
@@ -88,7 +94,12 @@ export default function Hero() {
       </div>
 
       {/* Art direction: o navegador baixa apenas a imagem da sua faixa de tela. */}
-      <figure className="hero-photo pointer-events-none absolute bottom-0 right-0 h-[17rem] w-full bg-[radial-gradient(135%_115%_at_100%_100%,rgba(233,224,211,0.92)_0%,rgba(243,237,229,0.5)_42%,rgba(244,239,232,0)_70%)] sm:h-[19rem] lg:inset-y-0 lg:h-auto lg:w-1/2 lg:max-w-[46rem] lg:bg-none">
+      {/*
+        Geometria e object-fit vivem no CSS (`.hero-photo`), nao em utilities.
+        Com as duas fontes, as utilities do Tailwind venciam as regras em
+        @layer e a figura ancorava no topo em vez de cobrir a secao.
+      */}
+      <figure className="hero-photo pointer-events-none">
         <picture>
           <source media="(max-width: 639px)" srcSet={mobileImage.srcSet} sizes={mobileImage.sizes} />
           <img {...desktopImage} alt={hero.image.alt} />
