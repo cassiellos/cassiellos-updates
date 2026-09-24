@@ -18,7 +18,12 @@ export default function MaclenyExperience() {
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
             <SectionReveal kind="quiet">
-              <p className="eyebrow text-champagne">{experienceSection.eyebrow}</p>
+              {/* Mesma forma dos capitulos 01 e 02: fio, indice, rotulo. */}
+              <p className="eyebrow flex items-center gap-3 text-champagne max-sm:gap-2.5">
+                <span aria-hidden="true" className="h-px w-8 bg-champagne/50 max-sm:w-6 max-sm:bg-champagne/30" />
+                <span>{experienceSection.index} —</span>
+                {experienceSection.eyebrow}
+              </p>
             </SectionReveal>
 
             <SectionReveal>
@@ -67,11 +72,20 @@ export default function MaclenyExperience() {
                 >
                   <span
                     aria-hidden="true"
-                    className="mt-2 h-[0.4375rem] w-[0.4375rem] translate-x-[0.46875rem] rounded-full bg-champagne"
+                    className="mt-[0.5625rem] h-[0.4375rem] w-[0.4375rem] translate-x-[0.46875rem] rounded-full bg-champagne"
                   />
+                  {/*
+                    A numeracao 01..05 do passo saiu pelo mesmo motivo da dos
+                    cards de servico: com a secao virando "03 — Macleny
+                    Experience", um "03" no sobretitulo e outro na lista a
+                    poucos pixels leriam como erro. O dado continua em
+                    `content.ts` ate a cliente definir o criterio.
+
+                    Nao ficou buraco: o ponto champagne a esquerda ja era o
+                    marcador do item, e agora ele alinha com o titulo.
+                  */}
                   <div>
-                    <p className="eyebrow text-champagne">{step.index}</p>
-                    <h3 className="type-serif type-h3 mt-2">{step.title}</h3>
+                    <h3 className="type-serif type-h3">{step.title}</h3>
                     <p className="mt-2.5 max-w-lg text-[0.9375rem] leading-relaxed text-ivory/70">
                       {step.description}
                     </p>

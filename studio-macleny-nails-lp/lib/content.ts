@@ -58,9 +58,16 @@ export type Service = {
 };
 
 export const servicesSection = {
-  /** Indice editorial da faixa de abertura. So aparece no celular. */
+  /**
+   * Capitulo 01.
+   *
+   * O rotulo era "Macleny Experience", herdado de quando esta faixa era a
+   * abertura dos servicos. Depois ela virou "Curadoria Personalizada" e o
+   * nome ficou descolado do conteudo — e, pior, identico ao da secao
+   * Experiencia (capitulo 03), que e a que de fato se chama assim.
+   */
   index: "01",
-  eyebrow: "Macleny Experience",
+  eyebrow: "Curadoria Macleny",
   title: "Curadoria Personalizada",
   body:
     "Você não precisa saber qual técnica escolher. Entendemos suas unhas, sua rotina e o resultado que deseja para indicar o cuidado ideal para você.",
@@ -215,12 +222,18 @@ export const enabledServices = services.filter((service) => service.enabled);
 /* -------------------------------------------------------------------------- */
 
 export type ExperienceStep = {
+  /**
+   * Numeracao do passo. NAO esta sendo exibida, pelo mesmo motivo da dos
+   * cards de servico: colidia com o "03" do sobretitulo da secao.
+   */
   index: string;
   title: string;
   description: string;
 };
 
 export const experienceSection = {
+  /** Capitulo 03, fechando a sequencia aberta pela Curadoria. */
+  index: "03",
   eyebrow: "Macleny Experience",
   title: "O que acontece quando você escolhe o Studio Macleny Nails?",
   lead: "Sua beleza ganha mais do que um horário na agenda.",
