@@ -50,7 +50,16 @@ export default function Hero() {
             </RevealOnLoad>
 
             <RevealOnLoad delay={heroDelay.body} kind="support">
-              <p className="hero-body type-body-lg mt-6 max-w-lg text-espresso-soft"><span className="sm:hidden">Seu atendimento é pensado a partir de você, do seu estilo, da sua rotina e do resultado que deseja. Técnica, precisão e cuidado se unem para entregar unhas sofisticadas, proporcionais e personalizadas, em uma experiência individual do início ao fim.</span><span className="hidden sm:inline">{hero.body}</span></p>
+              {/*
+                Uma copy so, vinda de `lib/content.ts`, em todas as larguras.
+                Havia aqui uma versao ANTIGA do texto escrita a mao e exibida
+                apenas abaixo de sm — o celular mostrava uma copy que a cliente
+                ja tinha pedido para remover, enquanto o desktop mostrava a
+                nova. Texto de conteudo nao mora em componente.
+              */}
+              <p className="hero-body type-body-lg mt-6 max-w-lg text-espresso-soft">
+                {hero.body}
+              </p>
             </RevealOnLoad>
 
             <RevealOnLoad delay={heroDelay.cta} kind="support">
