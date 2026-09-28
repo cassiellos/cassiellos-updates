@@ -340,8 +340,9 @@ export const founder = {
   eyebrow: "FUNDADORA / NAIL SPECIALIST",
   titleLines: ["A experiência de Jheniffer.", "A assinatura Macleny."],
   body: [
-    "Anos de prática e especialização deram origem a um padrão próprio de execução e cuidado.",
-    "Cada atendimento preserva aquilo que tornou seu trabalho reconhecível: técnica, atenção e acabamento impecável.",
+    "Minha paixão pelas unhas nasceu ainda cedo, inspirada pela minha avó, Maria de Lourdes, que era manicure. Ao lado da minha mãe, Welida, ela me ensinou valores que hoje fazem parte de tudo o que entrego: cuidado, dedicação e excelência. Aos 15 anos, comecei a escrever minha própria história e, após anos de prática e especialização, desenvolvi um olhar único para cada detalhe, unindo técnica, delicadeza e um acabamento impecável.",
+    "Para mim, beleza vai muito além das unhas. É sobre como você se sente ao se olhar. Por isso, cada atendimento é pensado para que você se sinta única, valorizada e verdadeiramente cuidada. Aqui, você não é apenas uma cliente.",
+    "Você é uma Deusa e merece uma experiência à sua altura.",
   ],
   image: {
     src: "/images/founder.webp",
