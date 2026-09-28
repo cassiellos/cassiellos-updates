@@ -1,0 +1,358 @@
+import Image from "next/image";
+
+import SectionReveal from "./SectionReveal";
+import WhatsAppButton from "./WhatsAppButton";
+import {
+  enabledServices,
+  serviceItemMessage,
+  servicesChapter,
+  servicesSection,
+} from "@/lib/content";
+import { revealDelay } from "@/lib/motion";
+import { siteConfig } from "@/lib/site-config";
+
+export default function Services() {
+  if (enabledServices.length === 0) return null;
+
+  return (
+    <section>
+      {/* Faixa de abertura, em Espresso */}
+      <div className="on-espresso relative overflow-hidden bg-espresso text-ivory">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+          <span className="arc arc-champagne -right-[18%] top-[-46%] h-[42rem] w-[42rem] opacity-45" />
+        </div>
+
+        <div className="container-macleny relative grid items-center gap-10 py-16 lg:grid-cols-12 lg:gap-14 lg:py-24">
+          <div className="lg:col-span-6">
+            <SectionReveal kind="quiet">
+              {/*
+                No celular o champagne recua: o detalhe premium deve ser
+                percebido DEPOIS do conteudo, nao antes.
+
+                O indice vale nas duas telas. Ele so fazia sentido sozinho
+                enquanto era um numero solto; agora forma par com o "02" do
+                capitulo seguinte, e sem ele no desktop a sequencia comecaria
+                no meio.
+              */}
+              <p className="eyebrow flex items-center gap-3 text-champagne max-sm:gap-2.5 max-sm:text-champagne/70">
+                <span aria-hidden="true" className="h-px w-8 bg-champagne/50 max-sm:w-6 max-sm:bg-champagne/30" />
+                <span>{servicesSection.index} —</span>
+                {servicesSection.eyebrow}
+              </p>
+            </SectionReveal>
+
+            <SectionReveal>
+              <h2 className="type-serif type-h2 mt-6 text-balance">
+                {servicesSection.title}
+              </h2>
+            </SectionReveal>
+
+            <SectionReveal delay={revealDelay.support} kind="support">
+              {/*
+                Celular: corpo 17 -> 14px (-18%), entrelinha 1,7 -> 1,8 e
+                medida mais curta. O apoio estava disputando atencao com o
+                titulo; o silencio entre os dois e o que faz a serifada virar
+                protagonista. O respiro de 52px abaixo do titulo faz o mesmo
+                trabalho — por isso ele esta aqui e nao no `mt-6` do h2.
+
+                Sao utilities, e nao CSS: a geometria deste bloco ja vive toda
+                em utilities, e dividi-la entre as duas fontes e o que ja
+                quebrou a assinatura do hero e a fotografia.
+              */}
+              <p className="type-body-lg mt-6 max-w-xl text-ivory/75 max-sm:mt-[3.5rem] max-sm:max-w-[20rem] max-sm:text-sm max-sm:leading-[1.8]">
+                {servicesSection.body}
+              </p>
+            </SectionReveal>
+          </div>
+
+          <div className="lg:col-span-6 lg:col-start-7">
+            <SectionReveal kind="media">
+              <div className="relative">
+                {/*
+                  Celular: 4:3 -> 3:2 (12% menos altura) e raio 28 -> 16px. O
+                  arredondamento grande lia como card de aplicativo; o menor
+                  aproxima a moldura de uma fotografia impressa.
+
+                  O recorte sobe para 58% da altura: e onde as maos ficam
+                  centradas e sobra menos mesa embaixo, entao as unhas sao
+                  percebidas antes. Medido nas tres posicoes antes de fechar.
+                */}
+                <div className="media-frame aspect-[4/3] w-full rounded-[1.75rem] bg-espresso-soft max-sm:aspect-[3/2] max-sm:rounded-[1rem]">
+                  <Image
+                    src={servicesSection.image.src}
+                    alt={servicesSection.image.alt}
+                    fill
+                    loading="lazy"
+                    sizes="(max-width: 1023px) 100vw, 46vw"
+                    className="object-cover object-center max-sm:object-[50%_58%]"
+                  />
+                </div>
+              </div>
+            </SectionReveal>
+          </div>
+        </div>
+      </div>
+
+      {/* Cards de servico */}
+      <div className="bg-ivory-warm">
+        {/*
+          Abertura do capitulo 02.
+
+          Ela existe para a transicao nao ser um corte seco: a faixa Espresso
+          encerra a curadoria e, sem nada no meio, a pessoa caia direto na
+          fotografia do primeiro card sem saber que um capitulo novo comecou.
+
+          O bloco e so texto de proposito. A fotografia que vem logo abaixo e
+          a do primeiro card, e ela ja faz o papel de imagem editorial da
+          abertura — repetir uma foto aqui so afastaria o titulo dos cards.
+
+          Heritage, e nao champagne: sobre o Ivory o champagne fica em torno
+          de 1,9:1, muito abaixo do minimo AA. O marrom da a mesma leitura de
+          detalhe discreto e permanece legivel.
+        */}
+        <div className="container-macleny py-20 sm:py-24 lg:py-32">
+          {/*
+            Alvo do "Servicos" do menu.
+
+            A ancora ficava na <section>, que comeca na faixa Espresso — quem
+            clicava em Servicos caia na Curadoria, um capitulo antes. Ela vem
+            para ca, colada no rotulo, para a pagina parar exatamente onde o
+            capitulo 02 abre.
+
+            O span existe para a rolagem nao herdar o padding do container: com
+            o id no <div>, o topo do alvo ficava 80px (128 no desktop) acima do
+            rotulo e a tela parava num vazio.
+
+            Sem `scroll-mt` aqui: o `html` ja declara
+            `scroll-padding-top: calc(var(--header-height) + 1.5rem)`, e as
+            duas coisas se somam. Com as duas, o rotulo parava 200px abaixo do
+            topo em vez de 97px.
+          */}
+          <span id="servicos" aria-hidden="true" className="block" />
+
+          <SectionReveal kind="quiet">
+            <p className="eyebrow flex items-center gap-3 text-heritage max-sm:gap-2.5">
+              <span aria-hidden="true" className="h-px w-8 bg-heritage/40 max-sm:w-6" />
+              <span>{servicesChapter.index} —</span>
+              {servicesChapter.eyebrow}
+            </p>
+          </SectionReveal>
+
+          <SectionReveal>
+            <h2 className="type-serif type-h2 mt-6 max-w-[18ch] text-balance">
+              {servicesChapter.title}
+            </h2>
+          </SectionReveal>
+
+          <SectionReveal delay={revealDelay.support} kind="support">
+            {/* Mesmo tratamento do apoio da faixa Espresso, para os dois
+                capitulos terem a mesma voz no celular. */}
+            <p className="type-body-lg mt-6 max-w-xl text-espresso-muted max-sm:mt-[3.5rem] max-sm:max-w-[20rem] max-sm:text-sm max-sm:leading-[1.8]">
+              {servicesChapter.body}
+            </p>
+          </SectionReveal>
+        </div>
+
+        {enabledServices.map((service, index) => {
+          const imageFirst = index % 2 === 0;
+
+          return (
+            <article
+              key={service.id}
+              className="border-b border-line last:border-b-0"
+            >
+              <div className={[
+                "container-macleny grid items-center lg:grid-cols-12 lg:gap-14",
+                service.id === "alongamentos"
+                  ? "gap-10 py-20 lg:py-24"
+                  : "gap-8 py-14 lg:py-20",
+              ].join(" ")}>
+                <SectionReveal
+                  kind="media"
+                  className={[
+                    "lg:col-span-5",
+                    imageFirst ? "" : "lg:order-2 lg:col-start-8",
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
+                >
+                  <figure className="media-frame aspect-[4/3] w-full rounded-[1.5rem] bg-ivory-deep">
+                    <Image
+                      src={service.image}
+                      alt={service.imageAlt}
+                      fill
+                      loading="lazy"
+                      sizes="(max-width: 1023px) 100vw, 40vw"
+                      className="object-cover object-center"
+                    />
+                    {/*
+                      Veu e legenda so existem quando ha texto. Sem essa guarda,
+                      um card de legenda vazia ainda ganhava a faixa escura na
+                      base da foto, sem nada para justificar.
+                    */}
+                    {service.imageCaption ? (
+                      <>
+                        {/*
+                          Veu escuro na base: mantem a legenda legivel sobre
+                          qualquer fotografia, clara ou escura.
+                        */}
+                        <span
+                          aria-hidden="true"
+                          className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-espresso/70 to-transparent"
+                        />
+                        <figcaption className="absolute bottom-5 left-5 right-5">
+                          {/*
+                            Sem largura maxima artificial: a legenda ocupa a
+                            linha inteira e so quebra quando precisa. `balance`
+                            distribui as linhas por igual em vez de deixar uma
+                            palavra orfa na ultima.
+                          */}
+                          <span className="eyebrow block text-balance text-ivory">
+                            {service.imageCaption}
+                          </span>
+                        </figcaption>
+                      </>
+                    ) : null}
+                  </figure>
+                </SectionReveal>
+
+                {/*
+                  Tres niveis de entrada, nao um bloco so: o fio e o titulo
+                  abrem, o corpo do texto vem logo atras e o CTA fecha. E o
+                  que faz o olho descer na ordem certa sem que a sequencia
+                  chegue a ser percebida como sequencia.
+                */}
+                <div
+                  className={[
+                    "lg:col-span-6",
+                    imageFirst ? "lg:col-start-7" : "lg:order-1 lg:col-start-1",
+                  ].join(" ")}
+                >
+                  {/*
+                    A numeracao 01..04 saiu a pedido da cliente, que vai
+                    redefinir o criterio. O dado continua em `content.ts`
+                    (`Service.index`), so nao e mais exibido — apagar o
+                    numero e apagar o campo sao coisas diferentes, e o
+                    segundo perderia a informacao.
+
+                    O fio de 1px ficou: ele nao era suporte do numero, e a
+                    marca que abre o bloco de texto e mantem o ritmo vertical
+                    do card. Sem ele o titulo encostaria na fotografia.
+                  */}
+                  <SectionReveal kind="quiet">
+                    <p aria-hidden="true" className="eyebrow flex items-center text-espresso-muted">
+                      <span className="h-px w-8 bg-line" />
+                    </p>
+                  </SectionReveal>
+
+                  <SectionReveal>
+                    <h3 className="type-serif mt-4 text-[clamp(1.875rem,3.2vw,2.75rem)] leading-[1.05]">
+                      {service.title}
+                    </h3>
+                    <p className="type-serif mt-3 text-[clamp(1.0625rem,1.6vw,1.375rem)] leading-snug text-espresso-soft">
+                      {service.lead}
+                    </p>
+                  </SectionReveal>
+
+                  <SectionReveal delay={revealDelay.support} kind="support">
+                    {service.description.map((paragraph) => (
+                      <p
+                        key={paragraph.slice(0, 32)}
+                        className="mt-4 max-w-2xl text-espresso-soft"
+                      >
+                        {paragraph}
+                      </p>
+                    ))}
+                  </SectionReveal>
+
+                  <SectionReveal delay={revealDelay.detail} kind="quiet">
+                    {/*
+                      As tecnicas eram chips com borda. Oito pilulas seguidas
+                      pesavam como uma segunda barra de botoes e disputavam a
+                      atencao com o CTA — que e a unica acao que o card
+                      realmente pede. Agora sao links de texto sob um rotulo,
+                      com o mesmo realce de 1px do menu no hover.
+
+                      O que NAO mudou: cada tecnica continua sendo um CTA
+                      proprio de WhatsApp, com mensagem personalizada e
+                      rastreio por `service_item`. A cliente chega ao WhatsApp
+                      ja dizendo o que procura, e do lado de ca sabe-se qual
+                      tecnica gerou o contato.
+
+                      A frase em italico que vinha aqui saiu: ela repetia
+                      beneficios ja ditos no card e ocupava justamente o
+                      espaco que valoriza a acao principal.
+                    */}
+                    <p className="eyebrow mt-8 text-espresso-muted">
+                      {servicesSection.includesLabel}
+                    </p>
+
+                    <ul className="mt-3 flex flex-wrap gap-x-5">
+                      {service.includes.map((item) => (
+                        <li key={item}>
+                          <WhatsAppButton
+                            location="service_item"
+                            service={service.id}
+                            variant="bare"
+                            showGlyph={false}
+                            message={serviceItemMessage(item)}
+                            className="link-underline technique-link text-[0.9375rem] text-espresso-soft transition-colors duration-[var(--dur-micro)] ease-[var(--ease-macleny)] hover:text-espresso"
+                          >
+                            {item}
+                          </WhatsAppButton>
+                        </li>
+                      ))}
+                    </ul>
+                  </SectionReveal>
+
+                  <SectionReveal delay={revealDelay.cta} kind="support">
+                    <WhatsAppButton
+                      location="services"
+                      service={service.id}
+                      variant="primary"
+                      className="mt-7"
+                      message={service.whatsappMessage}
+                    >
+                      {service.cta}
+                    </WhatsAppButton>
+                  </SectionReveal>
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+
+      {/* Faixa de assinatura e orientacao */}
+      <div className="border-t border-line bg-ivory-warm">
+        <div className="container-macleny py-10">
+          <SectionReveal kind="support">
+            <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+              <div className="max-w-xl">
+                <h3 className="type-serif type-h3">{servicesSection.helperTitle}</h3>
+                <p className="mt-2 text-espresso-soft">{servicesSection.helperBody}</p>
+              </div>
+              <WhatsAppButton
+                location="services_helper"
+                variant="secondary"
+                className="shrink-0"
+              >
+                {servicesSection.helperCta}
+              </WhatsAppButton>
+            </div>
+
+            <hr className="rule my-8" />
+
+            <p className="flex flex-col gap-2 text-[0.6875rem] uppercase tracking-[0.22em] text-espresso-muted sm:flex-row sm:items-center sm:justify-between">
+              <span>{siteConfig.brand.name}</span>
+              <span>Beleza real em cada detalhe</span>
+              <span>
+                {siteConfig.brand.city} — {siteConfig.brand.state}
+              </span>
+            </p>
+          </SectionReveal>
+        </div>
+      </div>
+    </section>
+  );
+}

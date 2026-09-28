@@ -1,0 +1,1014 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   STUDIO MACLENY NAILS — TOKENS
+   Cores preliminares do dossie v1.2. Ver docs/design-system.md para o status
+   de cada valor (nenhum deles deve ser tratado como brand book final).
+   ========================================================================== */
+
+@theme {
+  /* Paleta preliminar */
+  --color-ivory: #f4efe8;
+  --color-espresso: #1a1411;
+  --color-heritage: #7a401f;
+  --color-champagne: #c7b17e;
+  --color-taupe: #b8a597;
+
+  /* Derivados de implementacao digital (nao constam do dossie) */
+  /*
+   * Espresso um ponto mais claro e mais quente, para o CTA no celular. O
+   * Espresso cheio, num bloco solido do tamanho de um botao, pesa demais ao
+   * lado de uma paleta delicada — le como preto puro. Mesma familia de
+   * matiz, so que respirando.
+   */
+  --color-espresso-warm: #211a16;
+  --color-ivory-deep: #eae2d7;
+  --color-ivory-warm: #fbf8f4;
+  --color-espresso-soft: #3b312a;
+  --color-espresso-muted: #6a5c53;
+  --color-line: #d9cec1;
+
+  /* Tipografia */
+  --type-serif: var(--font-instrument-serif), ui-serif, Georgia, serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+
+  /* ==========================================================================
+     MOTION — linguagem unica de movimento
+     Uma curva de saida, uma curva de ida-e-volta e tres duracoes para o site
+     inteiro. Nada de easing avulso em componente: se um movimento precisar de
+     outro tempo, ele sai daqui. Ver docs/design-system.md secao B.7.
+     ========================================================================== */
+
+  /*
+   * Saida longa (easeOutQuint). Acelera cedo e assenta muito devagar: a maior
+   * parte da transicao acontece com o elemento praticamente parado. E dai que
+   * vem a sensacao de calma — o olho nao consegue cronometrar o fim.
+   */
+  --ease-macleny: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Para estados que vao e voltam: hover, header, acordeao, menu. */
+  --ease-macleny-inout: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --dur-micro: 320ms; /* resposta imediata a uma acao do usuario */
+  --dur-state: 440ms; /* mudanca de estado: acordeao, header, menu */
+  --dur-enter: 860ms; /* entrada de conteudo no viewport */
+  --dur-media: 1200ms; /* fotografia: assenta depois do texto */
+}
+
+@layer base {
+  /* ==========================================================================
+     BASE
+     ========================================================================== */
+
+  :root {
+    color-scheme: light;
+    --header-height: 4.5rem;
+
+    /*
+     * Deslocamentos do reveal. Sao pequenos de proposito: o movimento deve ser
+     * percebido como o conteudo se assentando, nao como algo subindo na tela.
+     */
+    /*
+     * RITMO DO HERO
+     *
+     * O espaco aqui nao e decorativo, ele CODIFICA O AGRUPAMENTO. Antes os
+     * quatro intervalos eram praticamente iguais (16/16/22/16px no celular),
+     * e espaco uniforme comunica que tudo tem a mesma importancia — por isso
+     * nada se destacava.
+     *
+     * A escada e: rotulo colado na headline (sao uma unidade so), respiro
+     * maior antes do apoio, e o MAIOR respiro antes da acao, para o CTA ser
+     * lido como consequencia da leitura e nao como mais uma linha. A
+     * assinatura fecha destacada, sem competir.
+     */
+    --hero-gap-label: 0.75rem; /* eyebrow -> headline */
+    --hero-gap-support: 1.5rem; /* headline -> texto de apoio */
+    --hero-gap-action: 2.25rem; /* apoio -> CTA (o maior) */
+    --hero-gap-footnote: 1.75rem; /* CTA -> assinatura */
+
+    --reveal-distance: 1.25rem; /* conteudo principal */
+    --reveal-distance-support: 0.625rem; /* apoio: entra menos que o titulo */
+    --media-zoom: 1.035; /* aproximacao de camera da fotografia */
+  }
+
+  /*
+   * Em tela grande o ritmo do hero cresce junto com a tipografia: os mesmos
+   * intervalos proporcionais, em valores maiores.
+   */
+  @media (min-width: 1024px) {
+    :root {
+      --hero-gap-label: 1rem;
+      --hero-gap-support: 2rem;
+      --hero-gap-action: 3rem;
+      --hero-gap-footnote: 2.25rem;
+    }
+  }
+
+  @media (max-width: 639px) {
+    :root {
+      /*
+       * 4rem, e nao 3,5rem: a marca estava perto demais da borda superior.
+       * O hero comeca a partir desta altura, entao o ganho vale para os dois.
+       */
+      --header-height: 4rem;
+
+      /*
+       * Mais respiro entre o identificador e a headline. O intervalo sozinho
+       * ja e um degrau de hierarquia: afastar o rotulo faz o titulo parecer
+       * mais importante sem mudar um corpo de fonte sequer.
+       */
+      --hero-gap-label: 1.125rem;
+    }
+  }
+
+  /*
+   * No mobile tudo encolhe: tela menor, scroll mais rapido e o mesmo
+   * deslocamento passa a parecer salto. Distancias e zoom caem pela metade.
+   */
+  @media (max-width: 767px) {
+    :root {
+      --reveal-distance: 0.6875rem;
+      --reveal-distance-support: 0.375rem;
+      --media-zoom: 1.018;
+    }
+  }
+
+  * {
+    min-width: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Compensa o header fixo ao navegar por ancoras. */
+    scroll-padding-top: calc(var(--header-height) + 1.5rem);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-espresso);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    letter-spacing: 0.005em;
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-espresso);
+    color: var(--color-ivory);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-heritage);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Inversao de foco em superficies escuras. */
+  .on-espresso :focus-visible {
+    outline-color: var(--color-champagne);
+  }
+}
+
+@layer components {
+  /* ==========================================================================
+     LAYOUT
+     ========================================================================== */
+
+  /*
+   * A margem lateral abaixo de 768px e 1,5rem, e nao 1,25rem, para dar ao
+   * conjunto a folga de papel editorial que a marca pede. Ela vive aqui, e
+   * nao so no header, porque o logo precisa continuar alinhado a headline do
+   * hero — mover so a marca quebraria a coluna.
+   */
+  .container-macleny {
+    width: 100%;
+    max-width: 80rem; /* 1280px */
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .container-macleny {
+      padding-inline: 2rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .container-macleny {
+      padding-inline: 3rem;
+    }
+  }
+
+  .section-space {
+    padding-block: clamp(4.5rem, 9vw, 9rem);
+  }
+
+  /* ==========================================================================
+     TIPOGRAFIA
+     ========================================================================== */
+
+  .type-serif {
+    font-family: var(--type-serif);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    line-height: 1.02;
+  }
+
+  .type-display {
+    font-size: clamp(2.75rem, 7vw, 6.25rem);
+  }
+
+  .type-h1 {
+    font-size: clamp(2.375rem, 5vw, 4.25rem);
+  }
+
+  .type-h2 {
+    font-size: clamp(2rem, 4.2vw, 3.75rem);
+  }
+
+  .type-h3 {
+    font-size: clamp(1.25rem, 2vw, 1.75rem);
+    line-height: 1.2;
+  }
+
+  .type-body-lg {
+    font-size: clamp(1.0625rem, 1.3vw, 1.1875rem);
+    line-height: 1.7;
+  }
+
+  .eyebrow {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+
+  /* ==========================================================================
+     COMPONENTES
+     ========================================================================== */
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    min-height: 3rem;
+    padding: 0.875rem 1.75rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+    text-align: center;
+    cursor: pointer;
+    transition:
+      transform var(--dur-micro) var(--ease-macleny),
+      background-color var(--dur-micro) var(--ease-macleny),
+      border-color var(--dur-micro) var(--ease-macleny),
+      color var(--dur-micro) var(--ease-macleny),
+      box-shadow var(--dur-micro) var(--ease-macleny);
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+
+  /*
+   * O clique responde mais rapido do que o hover. Um botao que demora a
+   * afundar parece travado — aqui a ida e imediata e a volta e que e suave.
+   */
+  .btn:active {
+    transform: translateY(0);
+    transition-duration: 110ms;
+  }
+
+  .btn-primary {
+    background-color: var(--color-espresso);
+    color: var(--color-ivory);
+  }
+
+  /*
+   * A sombra faz o trabalho que um scale faria, sem mexer no tamanho do botao:
+   * o elemento parece se descolar da pagina em vez de crescer.
+   */
+  .btn-primary:hover {
+    background-color: var(--color-heritage);
+    box-shadow: 0 14px 30px -18px color-mix(in srgb, var(--color-espresso) 70%, transparent);
+  }
+
+  .btn-secondary {
+    background-color: transparent;
+    border-color: var(--color-line);
+    color: var(--color-espresso);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--color-espresso);
+    background-color: color-mix(in srgb, var(--color-taupe) 18%, transparent);
+  }
+
+  .btn-on-dark {
+    background-color: var(--color-champagne);
+    color: var(--color-espresso);
+  }
+
+  .btn-on-dark:hover {
+    background-color: var(--color-ivory);
+    box-shadow: 0 14px 30px -18px color-mix(in srgb, var(--color-champagne) 55%, transparent);
+  }
+
+  .btn-ghost-light {
+    background-color: transparent;
+    border-color: color-mix(in srgb, var(--color-champagne) 45%, transparent);
+    color: var(--color-ivory);
+  }
+
+  .btn-ghost-light:hover {
+    border-color: var(--color-champagne);
+  }
+
+  /*
+   * Botao "Menu".
+   *
+   * A geometria vive aqui e NAO em utilities do JSX. Com as duas fontes, as
+   * utilities do Tailwind venceriam estas regras (a camada utilities ganha de
+   * components) e o ajuste do celular nao teria efeito — o mesmo erro que ja
+   * havia ancorado a fotografia do hero no topo.
+   *
+   * Os valores base reproduzem exatamente o que existia antes
+   * (min-h-11 px-4 py-2 text-sm), para que de 640px para cima nada mude.
+   */
+  .menu-toggle {
+    min-height: 2.75rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  .rule {
+    height: 1px;
+    background-color: var(--color-line);
+    border: 0;
+  }
+
+  .link-underline {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+  }
+
+  .link-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 1px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    /*
+     * A origem troca entre os dois estados: o traco CRESCE da esquerda no
+     * hover e RECOLHE para a direita ao sair. Some no mesmo sentido da
+     * leitura, em vez de voltar por onde veio — e o detalhe que separa um
+     * underline animado de um underline bem feito.
+     */
+    transform-origin: right;
+    transition: transform var(--dur-state) var(--ease-macleny);
+  }
+
+  .link-underline:hover::after,
+  .link-underline:focus-visible::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  /*
+   * Tecnicas de cada servico. Sao links de texto, mas continuam sendo alvos
+   * de toque: o padding vertical leva a altura de ~22px para ~34px, acima do
+   * minimo de 24px da WCAG 2.2.
+   *
+   * O traco precisa subir junto. `.link-underline` o ancora em `bottom: -2px`
+   * da caixa de padding — com o padding novo ele ficaria 8px abaixo do texto,
+   * solto. Aqui ele volta para rente a letra.
+   */
+  .technique-link {
+    padding-block: 0.375rem;
+  }
+
+  .technique-link::after {
+    bottom: 0.25rem;
+  }
+
+  /* Arco/elipse herdado do simbolo — elemento grafico proprietario. */
+  .arc {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid color-mix(in srgb, var(--color-heritage) 24%, transparent);
+    pointer-events: none;
+  }
+
+  .arc-champagne {
+    border-color: color-mix(in srgb, var(--color-champagne) 55%, transparent);
+  }
+
+  .arc-light {
+    border-color: color-mix(in srgb, var(--color-champagne) 30%, transparent);
+  }
+
+  /* ==========================================================================
+     MOTION
+     ========================================================================== */
+
+  /*
+   * O estado inicial escondido so e aplicado quando ha JavaScript (a classe `js`
+   * e adicionada ao <html> antes da pintura). Sem JS, o conteudo aparece normal.
+   */
+  .js [data-reveal="hidden"] {
+    opacity: 0;
+    transform: translate3d(0, var(--reveal-distance), 0);
+  }
+
+  .js [data-reveal] {
+    transition:
+      opacity var(--dur-enter) var(--ease-macleny),
+      transform var(--dur-enter) var(--ease-macleny);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  /*
+   * HIERARQUIA PELO MOVIMENTO
+   *
+   * Nem tudo entra com a mesma intensidade — e isso que faz o olho entender a
+   * ordem de leitura sem que ninguem perceba uma animacao. O titulo percorre a
+   * distancia cheia, o apoio percorre metade, e o que e pequeno demais para
+   * suportar deslocamento (numeracao, chips, rodape) so aparece.
+   */
+  [data-reveal-kind="support"] {
+    --reveal-distance: var(--reveal-distance-support);
+  }
+
+  [data-reveal-kind="quiet"] {
+    --reveal-distance: 0rem;
+  }
+
+  /* ==========================================================================
+     HERO — hierarquia
+     ========================================================================== */
+
+  /*
+   * A hierarquia do hero e construida com as cinco ferramentas, nesta ordem
+   * de peso: ESPACO (a escada de --hero-gap-*), TAMANHO (a headline e ~2,4x
+   * o texto de apoio), CONTRASTE (headline em Espresso cheio, apoio em
+   * Espresso-muted, assinatura mais clara ainda), POSICAO (tudo alinhado a
+   * uma so margem, criando uma coluna de leitura) e PESO.
+   *
+   * As margens moram AQUI e nao em utilities no JSX. Com `mt-*` no componente
+   * e estas regras no CSS, as duas fontes brigavam pela mesma propriedade e a
+   * escada nao sobrevivia a nenhum ajuste.
+   */
+  .hero-title {
+    margin-top: var(--hero-gap-label);
+  }
+
+  .hero-body {
+    margin-top: var(--hero-gap-support);
+    color: var(--color-espresso-muted);
+  }
+
+  .hero-actions {
+    margin-top: var(--hero-gap-action);
+    /*
+     * `flex-start` e o que impede os botoes de esticarem ate a largura toda
+     * no celular. Um bloco preto de borda a borda vira a mancha mais pesada
+     * da tela e disputa atencao com a headline — exatamente o que a direcao
+     * pede para evitar. Dimensionados pelo conteudo, eles continuam sendo a
+     * acao evidente, sem dominar.
+     */
+    align-items: flex-start;
+  }
+
+  /*
+   * A seta so existe no celular, onde este CTA e um link. De 640px para cima
+   * ele volta a ser botao e a seta desaparece — declarada apenas dentro do
+   * media query ela vazava para o desktop, porque `display` nao tinha valor
+   * base nenhum para voltar.
+   */
+  .hero-secondary-arrow {
+    display: none;
+  }
+
+  .hero-signature {
+    margin-top: var(--hero-gap-footnote);
+    /*
+     * Reproduz o que antes vinha de `text-sm italic` no JSX. O line-height
+     * entra explicito porque `text-sm` tambem o definia (1,25rem): sem ele a
+     * linha herdava o 1,65 do body e o hero do desktop crescia 3px.
+     */
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-style: italic;
+  }
+
+  /*
+   * Medida de leitura do apoio. Mais estreita que a headline de proposito: a
+   * diferenca de largura e por si so um degrau de hierarquia, alem de manter
+   * a linha num comprimento confortavel.
+   */
+  @media (min-width: 1024px) {
+    .hero-body {
+      max-width: 30rem;
+    }
+  }
+
+  /* ---- Celular ---------------------------------------------------------- */
+
+  @media (max-width: 639px) {
+    /*
+     * Mais altura para a fotografia ter espaco negativo em volta em vez de
+     * ficar espremida contra o bloco de texto. Com `cover`, altura maior
+     * tambem faz o recorte crescer, entao a mao e as unhas ganham presenca
+     * sem que o arquivo mude.
+     */
+    .hero {
+      min-height: 46rem;
+    }
+
+    /* Os arcos ficam para o desktop: no celular a fotografia ja da o peso. */
+    .hero .hero-arcs {
+      display: none;
+    }
+
+    .hero .eyebrow {
+      font-size: 0.65625rem;
+      letter-spacing: 0.19em;
+    }
+
+    .hero .type-h1 {
+      font-size: clamp(2rem, 10vw, 3.25rem);
+      line-height: 0.97;
+    }
+
+    .hero .hero-body {
+      font-size: 1rem;
+      line-height: 1.45;
+      /* Medida curta: o apoio nao deve alcancar a largura da headline. */
+      max-width: 19rem;
+    }
+
+    .hero .hero-actions {
+      gap: 0.25rem;
+    }
+
+    /* ---- CTA unico e dominante ------------------------------------------
+     * So o primario tem forma de botao. O segundo CTA vira link, logo abaixo:
+     * dois blocos do mesmo tamanho disputavam a mesma decisao e nenhum dos
+     * dois lia como A acao.
+     */
+    .hero .hero-actions .btn-primary {
+      /*
+       * Preto quente no lugar do Espresso cheio, altura e peso menores e o
+       * icone reduzido. O conjunto tira do botao a cara de "WhatsApp
+       * comercial" e o aproxima de um agendamento de concierge.
+       *
+       * 2,75rem = 44px: e o menor alvo de toque confortavel para o polegar,
+       * entao a altura para de cair aqui.
+       */
+      background-color: var(--color-espresso-warm);
+      min-height: 2.75rem;
+      padding: 0.6875rem 1.5rem;
+      font-size: 0.90625rem;
+      font-weight: 500;
+      letter-spacing: 0.012em;
+      gap: 0.5rem;
+    }
+
+    .hero .hero-actions .btn-primary svg {
+      width: 1rem;
+      height: 1rem;
+    }
+
+    /* ---- CTA secundario: link, nao botao --------------------------------- */
+    .hero .hero-actions .hero-secondary {
+      min-height: 2.75rem; /* alvo de toque preservado, sem moldura visivel */
+      padding: 0 0.25rem;
+      border: 0;
+      border-radius: 0;
+      background-color: transparent;
+      justify-content: flex-start;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-espresso-soft);
+    }
+
+    .hero .hero-actions .hero-secondary:hover {
+      transform: none;
+      background-color: transparent;
+      color: var(--color-espresso);
+    }
+
+    .hero-secondary-arrow {
+      display: inline-block;
+      font-size: 0.875rem;
+      line-height: 1;
+      transition: transform var(--dur-micro) var(--ease-macleny);
+    }
+
+    .hero .hero-actions .hero-secondary:hover .hero-secondary-arrow {
+      transform: translateX(3px);
+    }
+
+    /* ---- Assinatura ------------------------------------------------------
+     * Sem italico: ali ele lia como assinatura de campanha. Em versalete com
+     * tracking largo a linha vira legenda editorial.
+     *
+     * O fio de 1px acima e o unico elemento novo do conjunto. Ele nao decora:
+     * separa a acao do fecho, que e o trabalho que o italico vinha tentando
+     * fazer pelo desenho da letra.
+     */
+    .hero .hero-signature {
+      font-size: 0.625rem;
+      font-style: normal;
+      font-weight: 600;
+      /*
+       * 0,12em e o maior tracking que ainda deixa a linha inteira caber em
+       * 390px. Acima disso ela quebra e "INDIVIDUAL" fica sozinha na segunda
+       * linha. Abaixo de 360px a quebra e inevitavel, e por isso o `balance`:
+       * as duas linhas saem do mesmo tamanho em vez de uma orfa.
+       */
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      line-height: 1.6;
+      text-wrap: balance;
+    }
+
+    .hero .hero-signature::before {
+      content: "";
+      display: block;
+      width: 1.75rem;
+      height: 1px;
+      margin-bottom: 0.875rem;
+      background-color: var(--color-line);
+    }
+
+    /* ---- Menu mais discreto ----------------------------------------------
+     * O contorno passa a ser um fio, e nao uma borda: a navegacao nao deve
+     * competir com a marca ao lado. Em area, o botao encolhe ~18%.
+     */
+    .menu-toggle {
+      min-height: 2.25rem;
+      padding: 0.375rem 0.875rem;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      border-color: color-mix(in srgb, var(--color-line) 62%, transparent);
+    }
+  }
+
+  /*
+   * De 640 a 1023 a fotografia passa por tras do CTA secundario, entao ele
+   * precisa de fundo cheio para o texto nao cair sobre a imagem. Isso morava
+   * em utilities no JSX (`bg-ivory lg:bg-transparent`); mudou de lugar porque
+   * abaixo de 640 o elemento deixa de ser botao.
+   */
+  @media (min-width: 640px) and (max-width: 1023px) {
+    .hero-secondary {
+      background-color: var(--color-ivory);
+    }
+  }
+
+  /* ---- Fotografia do hero ----------------------------------------------
+     Tres enquadramentos, um por faixa de tela. Tudo em CSS de proposito: com
+     metade em utilities do JSX e metade aqui, as duas fontes disputavam as
+     mesmas propriedades e o resultado dependia da ordem das camadas.
+     ---------------------------------------------------------------------- */
+
+  .hero-photo {
+    position: absolute;
+  }
+
+  .hero-photo img {
+    object-fit: contain;
+    object-position: right bottom;
+  }
+
+  /* Ate 639: a fotografia E o fundo do hero. */
+  @media (max-width: 639px) {
+    .hero-photo {
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-photo img {
+      object-fit: cover;
+    }
+  }
+
+  /* 640 a 1023: bloco ancorado na base, com o halo que funde na pagina. */
+  @media (min-width: 640px) and (max-width: 1023px) {
+    .hero-photo {
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 19rem;
+      background: radial-gradient(
+        135% 115% at 100% 100%,
+        rgba(233, 224, 211, 0.92) 0%,
+        rgba(243, 237, 229, 0.5) 42%,
+        rgba(244, 239, 232, 0) 70%
+      );
+    }
+  }
+
+  /* 1024+: painel sangrado na direita da viewport. */
+  @media (min-width: 1024px) {
+    .hero-photo {
+      inset-block: 0;
+      right: 0;
+      width: 50%;
+      max-width: 46rem;
+    }
+
+    .hero-photo img {
+      object-fit: cover;
+      object-position: top;
+    }
+  }
+
+  /* ==========================================================================
+     FOTOGRAFIA
+     ========================================================================== */
+
+  /*
+   * Moldura de fotografia. Recorta a imagem e concentra a linguagem de zoom
+   * num lugar so. O container entra como qualquer outro bloco; o que muda e a
+   * imagem DENTRO dele, que assenta de `--media-zoom` para 1 mais devagar que
+   * o texto. Como a moldura nao se mexe, o que se ve e uma aproximacao de
+   * camera — nao um card crescendo.
+   */
+  .media-frame {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .media-frame img {
+    /*
+     * `transform` e do reveal; `scale` e do hover. Sao propriedades separadas
+     * de proposito: o Tailwind 4 emite `scale:` para as utilities de escala,
+     * entao os dois convivem sem um sobrescrever o outro.
+     */
+    transition:
+      transform var(--dur-media) var(--ease-macleny),
+      scale 820ms var(--ease-macleny);
+    transition-delay: var(--reveal-delay, 0ms), 0ms;
+  }
+
+  .js [data-reveal-kind="media"][data-reveal="hidden"] .media-frame img {
+    transform: scale(var(--media-zoom));
+  }
+
+  /* ==========================================================================
+     ACORDEAO
+     ========================================================================== */
+
+  /*
+   * Abertura por grid-template-rows 0fr -> 1fr: e a unica forma de animar
+   * "ate a altura do conteudo" sem medir nada em JavaScript e sem altura
+   * magica que quebra quando o texto muda.
+   */
+  .accordion-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition:
+      grid-template-rows var(--dur-state) var(--ease-macleny-inout),
+      opacity var(--dur-state) var(--ease-macleny-inout);
+  }
+
+  .accordion-panel > * {
+    overflow: hidden;
+  }
+
+  .accordion-panel[data-open="true"] {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+
+  /*
+   * Glifo + / −: duas barras cruzadas. Ao abrir, a barra vertical recolhe e
+   * sobra o traco horizontal. Troca de sinal sem troca de caractere, o que
+   * evita o pulo de layout que um `+` virando `−` provoca.
+   */
+  .accordion-glyph {
+    position: relative;
+    display: grid;
+    place-items: center;
+  }
+
+  .accordion-glyph::before,
+  .accordion-glyph::after {
+    content: "";
+    position: absolute;
+    width: 0.625rem;
+    height: 1px;
+    background-color: currentColor;
+    transition: transform var(--dur-state) var(--ease-macleny-inout);
+  }
+
+  .accordion-glyph::after {
+    transform: rotate(90deg);
+  }
+
+  .accordion-trigger[aria-expanded="true"] .accordion-glyph::after {
+    transform: rotate(90deg) scaleX(0);
+  }
+
+  /* ==========================================================================
+     HEADER
+     ========================================================================== */
+
+  /*
+   * O header trocava de fundo instantaneamente porque so `transition-colors`
+   * estava declarado — borda, sombra e blur mudavam de um frame para o outro.
+   * Aqui todas as propriedades do estado "rolado" viajam juntas.
+   */
+  .site-header {
+    transition:
+      background-color var(--dur-state) var(--ease-macleny-inout),
+      border-color var(--dur-state) var(--ease-macleny-inout),
+      box-shadow var(--dur-state) var(--ease-macleny-inout),
+      backdrop-filter var(--dur-state) var(--ease-macleny-inout);
+  }
+
+  /* Menu mobile: mesma tecnica do acordeao, mesma linguagem. */
+  .menu-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition:
+      grid-template-rows var(--dur-state) var(--ease-macleny-inout),
+      opacity var(--dur-state) var(--ease-macleny-inout);
+  }
+
+  .menu-panel > * {
+    overflow: hidden;
+  }
+
+  .menu-panel[data-open="true"] {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+
+  /*
+   * Itens do menu entram com um stagger curtissimo. O atraso serve para o
+   * olho pousar no primeiro item, nao para exibir a sequencia.
+   */
+  .menu-item {
+    opacity: 0;
+    transform: translate3d(0, 0.375rem, 0);
+    transition:
+      opacity var(--dur-state) var(--ease-macleny),
+      transform var(--dur-state) var(--ease-macleny);
+    transition-delay: var(--menu-delay, 0ms);
+  }
+
+  .menu-panel[data-open="true"] .menu-item {
+    opacity: 1;
+    transform: none;
+  }
+
+  /*
+   * Reveal de entrada para o conteudo acima da dobra.
+   *
+   * Diferente do reveal por scroll acima, este NAO depende de JavaScript: a
+   * animacao comeca na primeira pintura. E o que mantem o LCP baixo — com o
+   * reveal por IntersectionObserver o texto do hero so aparecia depois da
+   * hidratacao. Por isso tambem nao ha o gate `.js`: sem JS a animacao roda
+   * igual e termina visivel (`both`).
+   */
+  [data-reveal="onload"] {
+    animation: macleny-reveal 640ms var(--ease-macleny) var(--reveal-delay, 0ms) both;
+  }
+
+  @keyframes macleny-reveal {
+    from {
+      opacity: 0;
+      transform: translateY(var(--reveal-distance));
+    }
+
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /*
+   * Micro-parallax. `will-change` fica so aqui, no unico elemento que de fato
+   * se move a cada frame de scroll — espalhar essa dica pelo site custa
+   * memoria de GPU sem devolver nada.
+   */
+  .parallax-media {
+    will-change: transform;
+    transition: transform 140ms linear;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+
+    .js [data-reveal] {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    /*
+     * `animation-duration` ja e zerado no bloco global acima, mas o DELAY nao:
+     * com fill-mode `both` o elemento ficaria invisivel durante o atraso.
+     */
+    [data-reveal="onload"] {
+      animation: none !important;
+    }
+
+    /* A fotografia nao entra ampliada nem se aproxima no hover. */
+    .media-frame img {
+      transform: none !important;
+      scale: 1 !important;
+    }
+
+    /*
+     * Acordeao e menu continuam ABRINDO — o que se remove e a interpolacao,
+     * nao a funcao. Sem o `1fr` explicito eles ficariam com altura zero.
+     */
+    .accordion-panel[data-open="true"],
+    .menu-panel[data-open="true"] {
+      grid-template-rows: 1fr;
+    }
+
+    .menu-item {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    .parallax-media {
+      transform: none !important;
+      will-change: auto;
+    }
+
+    .btn:hover {
+      transform: none;
+    }
+  }
+
+  /* ==========================================================================
+     ACESSIBILIDADE
+     ========================================================================== */
+
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: 0.75rem;
+    z-index: 100;
+    transform: translateY(-160%);
+    background-color: var(--color-espresso);
+    color: var(--color-ivory);
+    padding: 0.75rem 1.25rem;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: transform 200ms var(--ease-macleny);
+  }
+
+  .skip-link:focus-visible {
+    transform: translateY(0);
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+}
