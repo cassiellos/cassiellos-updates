@@ -337,8 +337,39 @@
 </main>
 
 <footer>
-  <div class="wrap">
-    <span>© <span id="year"></span> Macleny. Todos os direitos reservados.</span>
+  <style>
+    .ft{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px;text-align:left;align-items:start}
+    .ft h4{margin:0 0 20px;font-size:11.5px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--mcl-muted)}
+    .ft p,.ft a{font-size:15px;line-height:1.6;color:var(--mcl-ink,#2e2b20);margin:0}
+    .ft .ft-links{display:flex;flex-direction:column;gap:14px}
+    .ft a{text-decoration:none}.ft a:hover{opacity:.7}
+    .ft .ft-priv{display:inline-block;margin-top:14px;text-decoration:underline;text-underline-offset:4px}
+    .ft-bottom{margin-top:48px;padding-top:28px;border-top:1px solid var(--mcl-line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;font-size:13px;color:var(--mcl-muted);text-align:left}
+    @media(max-width:760px){.ft{grid-template-columns:1fr;gap:32px}.ft-bottom{flex-direction:column}}
+  </style>
+  <div class="wrap" style="display:block;text-align:left">
+    <div class="ft">
+      <div>
+        <img src="img/logo.png" alt="Studio Macleny Nails" style="height:46px;width:auto;display:block;margin-bottom:28px">
+        <p style="max-width:420px">Studio especializado em unhas em Belo Horizonte/MG, com atendimento individual, técnica e cuidado.</p>
+      </div>
+      <div>
+        <h4>Contato</h4>
+        <div class="ft-links">
+          <a href="https://www.instagram.com/maclenynails/" target="_blank" rel="noopener noreferrer">Instagram @maclenynails</a>
+          <a href="#contato">WhatsApp</a>
+        </div>
+      </div>
+      <div>
+        <h4>Studio</h4>
+        <p>R. Faria Lobato, 393 — Jardim Atlântico,<br>Belo Horizonte/MG — CEP 31555-050</p>
+        <a class="ft-priv" href="#">Política de Privacidade</a>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span>© <span id="year"></span> Studio Macleny Nails. Todos os direitos reservados.</span>
+      <span>CNPJ 36.819.882/0001-69</span>
+    </div>
   </div>
 </footer>
 
